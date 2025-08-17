@@ -168,9 +168,9 @@ const JoinForm = () => {
     }
 
     // Phone number validation (assuming a simple 10-digit number for now based on your UI)
-    const phoneRegex = /^\+?[1-9]\d{9,14}$/;
-    if (!phoneRegex.test(formData.phone)) {
-      alert('Please enter a valid phone number, including the country code (e.g., +919876543210).');
+    const phoneRegex = /^(?:\+91\d{10}|\d{10})$/;
+    if (!phoneRegex.test(formData.whatsappNumber)) {
+      alert('Please enter a valid phone number (either 10 digits or +91 followed by 10 digits).');
       return false;
     }
 
@@ -226,13 +226,15 @@ const JoinForm = () => {
 
       // Construct the FormData object for the multipart request
       const data = new FormData();
-      data.append('photo', formData.photo);
+      if (formData.photo) {
+        data.append('photo', formData.photo);
+      }
 
       // Create a JSON blob for the 'request' part of the payload
       const registrationRequest = {
         fullName: formData.fullName,
         age: parseInt(formData.age, 10),
-        phone: formData.phone,
+        phone: formData.whatsappNumber,
         email: formData.email,
         whatsappNumber: formData.whatsappNumber, // Backend field name mapping
         villageTownCity: formData.district,

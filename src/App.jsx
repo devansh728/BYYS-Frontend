@@ -9,8 +9,8 @@ import Contact from './pages/Contact/Contact';
 import Donate from './pages/Donate/Donate';
 import Leaderboard from './pages/Leaderboard/Leaderboard';
 import Login from './pages/Login/Login';
-import AdminDashboard from './pages/AdminDashboard/AdminDashboard';
-import UserDashboard from './pages/UserDashboard/UserDashboard'; // ✅ NEW USER DASHBOARD IMPORT
+import AdminDashboard from './pages/AdminDashBoard/AdminDashBoard';
+import UserDashboard from './pages/UserDashBoard/UserDashBoard'; // ✅ NEW USER DASHBOARD IMPORT
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';

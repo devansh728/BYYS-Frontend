@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './AdminDashboard.css';
+import './AdminDashBoard.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';

@@ -251,7 +251,7 @@ const JoinForm = () => {
       });
       data.append('request', registrationRequestBlob);
       try {
-        const response = await fetch('http://localhost:8080/auth/otp', {
+        const response = await fetch('https://byys-backend.onrender.com/auth/otp', {
           method: 'POST',
           body: data
         });

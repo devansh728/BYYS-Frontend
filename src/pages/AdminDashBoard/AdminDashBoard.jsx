@@ -31,7 +31,7 @@ const AdminDashboard = () => {
   const fetchProfileData = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:8080/auth/otp/me', {
+      const response = await fetch('https://byys-backend.onrender.com/auth/otp/me', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       // Fetch applications
-      const appsResponse = await fetch('http://localhost:8080/api/admin/office-bearer-applications?approved=false', {
+      const appsResponse = await fetch('https://byys-backend.onrender.com/api/admin/office-bearer-applications?approved=false', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
 
   const approveApplication = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/office-bearer-applications/${id}/approve`, {
+      const response = await fetch(`https://byys-backend.onrender.com/api/admin/office-bearer-applications/${id}/approve`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -102,7 +102,7 @@ const AdminDashboard = () => {
 
   const createTask = async (taskData) => {
     try {
-      const response = await fetch('http://localhost:8080/api/admin/tasks', {
+      const response = await fetch('https://byys-backend.onrender.com/api/admin/tasks', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,

@@ -1,0 +1,18 @@
+/* Home.css - Ensure full width layout */
+.home {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+.header-spacer {
+    height: 25px;
+    background-color:rgba(139, 0, 0, 1);
+}
+/* Ensure all child elements take full width */
+.home > * {
+    width: 100%;
+    margin: 0;
+}

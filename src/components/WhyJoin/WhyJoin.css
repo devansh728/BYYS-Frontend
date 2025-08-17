@@ -1,0 +1,121 @@
+/* Why Join BYVS Section - Fixed Layout: 3 boxes per row */
+.why-join {
+    padding: 100px 0;
+    background: white;
+}
+
+.why-join-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Force exactly 3 columns */
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+}
+
+.join-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--saffron);
+    height: auto;
+    min-height: 300px; /* Ensure consistent height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.join-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.card-icon:hover {
+    transform: rotate(360deg);
+}
+
+.card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: var(--maroon);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.card-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+/* Mobile Responsive - 2 columns on tablet, 1 column on mobile */
+@media (max-width: 992px) {
+    .why-join-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .why-join-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .join-card {
+        min-height: 250px;
+        padding: 1.5rem;
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+    }
+    
+    .card-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .why-join {
+        padding: 60px 0;
+    }
+    
+    .why-join-grid {
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .join-card {
+        min-height: 220px;
+        padding: 1.2rem;
+    }
+    
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}

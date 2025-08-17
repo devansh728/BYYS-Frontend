@@ -1,0 +1,192 @@
+/* Global styles and CSS variables with layout fixes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --saffron: #FF9933;
+    --maroon: #8B0000;
+    --cream: #FFF8DC;
+    --dark-maroon: #5C0000;
+    --light-saffron: #FFB366;
+    --gold: #DAA520;
+}
+
+/* Fixed body and html for proper layout */
+html, body, #root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: var(--cream);
+     /* Prevent horizontal scroll */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* App container fix */
+.App {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Fixed global container utility */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+
+/* Ensure all sections take full width */
+section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fix for main content sections */
+.hero,
+.what-is-byvs,
+.mission-vision,
+.why-join,
+.footer {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    max-width: 100vw;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    text-align: center;
+    color: var(--maroon);
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--saffron);
+}
+
+.highlight {
+    color: var(--saffron);
+    font-weight: 600;
+}
+
+.fade-in {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.observe {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease;
+}
+
+.observe.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ensure no elements go beyond viewport */
+main, section, article, div {
+    box-sizing: border-box;
+}
+
+/* Fix for any potential left margin issues */
+.home > * {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Global animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Temporary debug fix - remove if layout is fixed */
+.home {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}

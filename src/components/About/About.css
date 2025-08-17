@@ -1,0 +1,291 @@
+/* WHAT IS BYVS SECTION */
+.what-is-byvs {
+  padding: 100px 0;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
+  color: var(--maroon);
+  margin-bottom: 3rem;
+}
+
+.byvs-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+/* LOGO BLOCK */
+.byvs-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+  border-radius: 15px;
+  border: 3px solid var(--gold);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  height: 500px;
+  transition: transform 0.3s ease;
+}
+
+.byvs-image:hover {
+  transform: translateY(-8px);
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Actual BYVS logo image */
+.byvs-logo {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.byvs-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Registration number below logo */
+.reg-number {
+  font-size: 1rem;
+  color: #bf8d8d;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* BYVS text */
+.byvs-name {
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: var(--maroon);
+  margin-top: 5px;
+  letter-spacing: 2px;
+}
+
+/* TEXT BLOCK */
+.byvs-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.byvs-text h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  color: var(--maroon);
+  margin-bottom: 1rem;
+}
+
+.byvs-text p {
+  margin-bottom: 1.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .byvs-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .byvs-image {
+    height: auto;
+    padding: 2rem 0;
+  }
+}
+/* Leadership Section */
+.leadership-section {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.leader-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  border-left: 4px solid var(--saffron);
+}
+
+.leader-info h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  color: var(--maroon);
+  margin-bottom: 0.5rem;
+}
+
+.leader-title {
+  color: var(--saffron);
+  font-weight: 600;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.leader-info p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+/* Our Works and Milestones Section */
+.our-works-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.our-works-section .section-title {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
+  color: var(--maroon);
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.our-works-section .section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  border-radius: 2px;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.work-category {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid var(--saffron);
+}
+
+.work-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--cream);
+}
+
+.category-header i {
+  font-size: 2rem;
+  color: var(--saffron);
+}
+
+.category-header h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--maroon);
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.work-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.work-list li {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.work-list li::before {
+  content: '•';
+  color: var(--saffron);
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Animation classes */
+.observe {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.observe.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .works-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .work-category {
+    padding: 1.5rem;
+  }
+  
+  .category-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .category-header i {
+    font-size: 1.5rem;
+  }
+  
+  .category-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .our-works-section .section-title {
+    font-size: 2rem;
+  }
+  
+  .leadership-section {
+    margin-top: 2rem;
+  }
+  
+  .leader-card {
+    padding: 1.5rem;
+  }
+}

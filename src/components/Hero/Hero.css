@@ -1,0 +1,552 @@
+/* Hero Section - Fixed to work with scrolling header */
+.hero {
+    position: relative;
+    /* overflow: hidden; */
+    margin-top: 400px; /* Space for full header (180px + 20px buffer) */
+    height: calc(100vh);
+    width: 100%;
+    left: 0;
+    right: 0;
+    transition: margin-top 0.5s ease;
+}
+
+/* Adjust for scrolled header - matches your header.scrolled min-height of 90px */
+.header.scrolled ~ * .hero,
+body.scrolled .hero {
+    margin-top: 110px; /* Space for scrolled header (90px + 20px buffer) */
+    height: calc(100vh);
+}
+
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Enhanced Slide Backgrounds */
+.slide1 {
+    background: 
+        linear-gradient(rgba(139, 0, 0, 0.7), rgba(92, 0, 0, 0.7)),
+        radial-gradient(circle at 20% 80%, rgba(255, 153, 51, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(218, 165, 32, 0.3) 0%, transparent 50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+.slide2 {
+    background: 
+        linear-gradient(rgba(218, 165, 32, 0.7), rgba(139, 0, 0, 0.7)),
+        radial-gradient(circle at 30% 30%, rgba(255, 153, 51, 0.4) 0%, transparent 60%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+.slide3 {
+    background: 
+        linear-gradient(rgba(92, 0, 0, 0.8), rgba(139, 0, 0, 0.8)),
+        radial-gradient(ellipse at center, rgba(255, 153, 51, 0.2) 0%, transparent 70%);
+}
+
+.slide4 {
+    background: 
+        linear-gradient(rgba(139, 0, 0, 0.7), rgba(218, 165, 32, 0.7)),
+        radial-gradient(circle at 10% 90%, rgba(255, 153, 51, 0.3) 0%, transparent 50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+/* Photo slide overlay for better text readability */
+.photo-slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(139, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Enhanced Slide Content Styles */
+.slide-content {
+    max-width: 900px;
+    z-index: 2;
+    animation: slideInFromLeft 1s ease-out;
+}
+
+.slide-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+    line-height: 1.2;
+    color: var(--cream);
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.slide-title-english {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    line-height: 1.2;
+    color: var(--light-saffron);
+    animation: fadeInUp 1.3s ease-out;
+}
+
+.slide-subtitle {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    color: var(--cream);
+    animation: fadeInUp 1.4s ease-out;
+}
+
+.slide-description {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.85;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    color: var(--cream);
+    animation: fadeInUp 1.5s ease-out;
+    line-height: 1.4;
+}
+
+.slide-description-english {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    color: var(--light-saffron);
+    animation: fadeInUp 1.6s ease-out;
+    line-height: 1.4;
+}
+
+.slide-quote {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    color: var(--cream);
+    animation: fadeInUp 1s ease-out;
+    line-height: 1.4;
+}
+
+.slide-quote-english {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    color: var(--light-saffron);
+    animation: fadeInUp 1.2s ease-out;
+    line-height: 1.4;
+}
+
+.quote-attribution {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    color: var(--cream);
+    animation: fadeInUp 1.4s ease-out;
+}
+
+.quote-attribution-english {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    color: var(--light-saffron);
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.youth-image, .cultural-image {
+    width: 350px;
+    height: 350px;
+    background: var(--cream);
+    border-radius: 15px;
+    border: 5px solid var(--gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--maroon);
+    animation: slideInFromRight 1s ease-out;
+}
+
+.youth-placeholder, .cultural-placeholder {
+    text-align: center;
+    padding: 2rem;
+}
+
+.youth-placeholder i, .cultural-placeholder i {
+    font-size: 80px;
+    margin-bottom: 20px;
+    color: var(--saffron);
+    animation: pulse 2s infinite;
+}
+
+.youth-placeholder h4, .cultural-placeholder h4 {
+    font-size: 16px;
+    color: var(--gold);
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.founder-image {
+    width: 250px;
+    height: 250px;
+    background: var(--cream);
+    border-radius: 15px;
+    border: 5px solid var(--gold);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--maroon);
+    animation: slideInFromRight 1s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.founder-placeholder {
+    text-align: center;
+    padding: 2rem;
+}
+
+.founder-placeholder i {
+    font-size: 80px;
+    margin-bottom: 20px;
+    color: var(--saffron);
+    animation: pulse 2s infinite;
+}
+
+.founder-placeholder h4 {
+    font-size: 16px;
+    color: var(--gold);
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.founder-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.founder-description-box {
+    width: 250px;
+    background: var(--cream);
+    border: 5px solid var(--gold);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    margin-top: 20px;
+    text-align: center;
+    min-height: 120px;
+}
+
+.founder-description-box h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    color: var(--maroon);
+    margin-bottom: 5px;
+}
+
+.founder-description-box p {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.cta-button {
+    background: var(--saffron);
+    color: var(--maroon);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeInUp 1.8s ease-out;
+}
+
+.cta-button:hover {
+    background: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    color: var(--maroon);
+    text-decoration: none;
+}
+
+/* Slider Navigation Controls */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 153, 51, 0.8);
+    color: var(--maroon);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.slider-btn:hover {
+    background: var(--saffron);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 30px;
+}
+
+.next-btn {
+    right: 30px;
+}
+
+/* Slider Navigation Dots */
+.slider-nav {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background: var(--saffron);
+    transform: scale(1.2);
+}
+
+.slider-dot:hover {
+    background: var(--gold);
+    transform: scale(1.1);
+}
+
+/* Slide Counter */
+.slide-counter {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--cream);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Mobile Responsive - Matching your header breakpoints */
+@media (max-width: 768px) {
+    .hero {
+        margin-top: 160px; /* Space for mobile header (140px + 20px buffer) */
+        height: calc(100vh - 160px);
+    }
+
+    .header.scrolled ~ * .hero,
+    body.scrolled .hero {
+        margin-top: 105px; /* Space for scrolled mobile header (85px + 20px buffer) */
+        height: calc(100vh - 105px);
+    }
+
+    .slide1, .slide2, .slide4 {
+        flex-direction: column;
+        padding: 2rem;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .slide-title {
+        font-size: 2.2rem;
+    }
+
+    .slide-title-english {
+        font-size: 1.8rem;
+    }
+
+    .slide-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .slide-description, .slide-description-english {
+        font-size: 0.95rem;
+    }
+
+    .slide-quote {
+        font-size: 1.3rem;
+    }
+
+    .slide-quote-english {
+        font-size: 1.1rem;
+    }
+
+    .founder-image, .youth-image, .cultural-image {
+        width: 300px;
+        height: 300px;
+    }
+
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .prev-btn {
+        left: 15px;
+    }
+
+    .next-btn {
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        margin-top: 120px; /* Space for small mobile header (100px + 20px buffer) */
+        height: calc(100vh - 120px);
+    }
+
+    .header.scrolled ~ * .hero,
+    body.scrolled .hero {
+        margin-top: 90px; /* Space for scrolled small mobile header (70px + 20px buffer) */
+        height: calc(100vh - 90px);
+    }
+
+    .slide1, .slide2, .slide4 {
+        padding: 1.5rem 1rem;
+    }
+
+    .slide-title {
+        font-size: 1.8rem;
+    }
+
+    .slide-title-english {
+        font-size: 1.4rem;
+    }
+
+    .founder-image, .youth-image, .cultural-image {
+        width: 250px;
+        height: 250px;
+    }
+}
+/* Bottom caption block */
+.slide-caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(121, 11, 11, 0.55);
+  padding: 12px 20px;
+  text-align: center;
+  box-shadow: 0 -4px 10px rgba(128, 0, 0, 0.8); /* maroon shadow on top edge */
+  z-index: 5; /* Ensure above slide content but below controls */
+}
+
+.slide-caption .slide-title-english {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+/* Move slider dots above caption */
+.slider-nav {
+  position: absolute;
+  bottom: 55px; /* was maybe 30px; increased so it's above caption */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 6; /* above caption */
+}
+
+/* Keep dots styles */
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+  background: var(--saffron);
+  transform: scale(1.2);
+}
+
+.slider-dot:hover {
+  background: var(--gold);
+  transform: scale(1.1);
+}
+
+/* Responsive caption font size */
+@media (max-width: 768px) {
+  .slide-caption .slide-title-english {
+    font-size: 1.3rem;
+  }
+}
+

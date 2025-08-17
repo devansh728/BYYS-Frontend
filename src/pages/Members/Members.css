@@ -1,0 +1,25 @@
+/* Members Page Styles */
+.members-page {
+  min-height: 100vh;
+  background-color: var(--cream);
+}
+
+.main-content {
+  min-height: calc(100vh - 280px);
+  padding: 5rem 0 2rem;
+  /* margin-top: 200px; Space for header */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 3rem 0 2rem;
+    margin-top: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    margin-top: 120px;
+  }
+}

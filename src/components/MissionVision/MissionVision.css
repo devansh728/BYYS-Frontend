@@ -1,0 +1,58 @@
+/* Mission Vision Section */
+.mission-vision {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--cream), #FFF5E6);
+}
+
+.mission-vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.mission-card, .vision-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    border-top: 4px solid var(--saffron);
+}
+
+.mission-card:hover, .vision-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.card-icon:hover {
+    transform: rotate(360deg);
+}
+
+.card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--maroon);
+    margin-bottom: 1.5rem;
+}
+
+.card-description {
+    color: #666;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}

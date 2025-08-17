@@ -224,13 +224,13 @@ const JoinForm = () => {
             return;
         }
 
-        // Correctly construct the FormData object for the multipart request
+        // Construct the FormData object with individual fields for the multipart request
         const data = new FormData();
 
-        // Append individual data fields
+        // Append each data field as a separate part
         data.append('fullName', formData.fullName);
         data.append('age', parseInt(formData.age, 10));
-        data.append('phone', formData.phone); // Use formData.phone as per the backend
+        data.append('phone', formData.phone);
         data.append('email', formData.email);
         data.append('whatsappNumber', formData.whatsappNumber);
         data.append('villageTownCity', formData.villageTownCity);
@@ -250,11 +250,9 @@ const JoinForm = () => {
         }
 
         try {
-            // Note: Your fetch URL is to a different endpoint '/auth/otp' than the original `/register`
-            // Assuming this is the correct endpoint for the form submission.
-            const response = await fetch('https://byys-backend.onrender.com/auth/otp', { // Changed URL to /register for clarity
+            const response = await fetch('https://byys-backend.onrender.com/auth/otp', {
                 method: 'POST',
-                body: data // The FormData object automatically sets the correct Content-Type
+                body: data // The FormData object automatically sets the correct Content-Type header
             });
 
             if (!response.ok) {

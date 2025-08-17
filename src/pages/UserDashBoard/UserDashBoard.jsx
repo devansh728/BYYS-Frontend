@@ -73,7 +73,7 @@ const UserDashboard = () => {
   const fetchUserData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/auth/otp/me', {
+      const response = await fetch('https://byys-backend.onrender.com/auth/otp/me', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ const UserDashboard = () => {
   const fetchApplicationStatus = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/api/office-bearer/status', {
+      const response = await fetch('https://byys-backend.onrender.com/api/office-bearer/status', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ const UserDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/office-bearer/get-tasks', {
+      const response = await fetch('https://byys-backend.onrender.com/api/office-bearer/get-tasks', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -143,7 +143,7 @@ const UserDashboard = () => {
     setIsSubmitting(true);
     setFormError(null);
     try {
-      const response = await fetch('http://localhost:8080/api/office-bearer/apply', {
+      const response = await fetch('https://byys-backend.onrender.com/api/office-bearer/apply', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -167,7 +167,7 @@ const UserDashboard = () => {
   const fetchUserStats = async () => {
     setLoading(true);
     try {
-      const ShareResponse = await fetch('http://localhost:8080/referrals/userStats', {
+      const ShareResponse = await fetch('https://byys-backend.onrender.com/referrals/userStats', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'

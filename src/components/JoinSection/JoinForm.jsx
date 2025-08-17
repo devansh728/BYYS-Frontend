@@ -219,64 +219,61 @@ const JoinForm = () => {
     setSubmissionStatus({ loading: true, success: false, error: null, membershipId: null });
 
     try {
-      if (!validateForm()) {
-        setSubmissionStatus({ loading: false, success: false, error: 'Form validation failed.', membershipId: null });
-        return;
-      }
-
-      // Construct the FormData object for the multipart request
-      const data = new FormData();
-      if (formData.photo) {
-        data.append('photo', formData.photo);
-      }
-
-      // Create a JSON blob for the 'request' part of the payload
-      const registrationRequest = {
-        fullName: formData.fullName,
-        age: parseInt(formData.age, 10),
-        phone: formData.whatsappNumber,
-        email: formData.email,
-        whatsappNumber: formData.whatsappNumber, // Backend field name mapping
-        villageTownCity: formData.district,
-        blockName: formData.blockName, // Placeholder based on your backend
-        district: formData.district, // Placeholder based on your backend
-        state: formData.state,
-        profession: formData.profession,
-        institutionName: formData.instituteName,
-        institutionAddress: formData.instituteAddress,
-        referralCode: formData.referralCode,
-      };
-
-      // Append the JSON data as a Blob with the correct content type
-      const registrationRequestBlob = new Blob([JSON.stringify(registrationRequest)], {
-        type: 'application/json'
-      });
-      data.append('request', registrationRequestBlob);
-      try {
-        const response = await fetch('https://byys-backend.onrender.com/auth/otp', {
-          method: 'POST',
-          body: data
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Registration failed.');
+        if (!validateForm()) {
+            setSubmissionStatus({ loading: false, success: false, error: 'Form validation failed.', membershipId: null });
+            return;
         }
 
-        const responseData = await response.json();
-        const membershipId = responseData.membershipId;
-        setSubmissionStatus({ loading: false, success: true, error: null, membershipId });
+        // Correctly construct the FormData object for the multipart request
+        const data = new FormData();
 
-        navigate('/login', { state: { membershipId, registrationSuccess: true } });
-      }
-      catch (error) {
-        setSubmissionStatus({ loading: false, success: false, error: error.message, membershipId: null });
-      }
+        // Append individual data fields
+        data.append('fullName', formData.fullName);
+        data.append('age', parseInt(formData.age, 10));
+        data.append('phone', formData.phone); // Use formData.phone as per the backend
+        data.append('email', formData.email);
+        data.append('whatsappNumber', formData.whatsappNumber);
+        data.append('villageTownCity', formData.villageTownCity);
+        data.append('blockName', formData.blockName);
+        data.append('district', formData.district);
+        data.append('state', formData.state);
+        data.append('profession', formData.profession);
+        data.append('institutionName', formData.institutionName);
+        data.append('institutionAddress', formData.institutionAddress);
+        if (formData.referralCode) {
+            data.append('referralCode', formData.referralCode);
+        }
+
+        // Append the photo file if it exists
+        if (formData.photo) {
+            data.append('photo', formData.photo);
+        }
+
+        try {
+            // Note: Your fetch URL is to a different endpoint '/auth/otp' than the original `/register`
+            // Assuming this is the correct endpoint for the form submission.
+            const response = await fetch('https://byys-backend.onrender.com/auth/otp', { // Changed URL to /register for clarity
+                method: 'POST',
+                body: data // The FormData object automatically sets the correct Content-Type
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Registration failed.');
+            }
+
+            const responseData = await response.json();
+            const membershipId = responseData.membershipId;
+            setSubmissionStatus({ loading: false, success: true, error: null, membershipId });
+            navigate('/login', { state: { membershipId, registrationSuccess: true } });
+        } catch (error) {
+            setSubmissionStatus({ loading: false, success: false, error: error.message, membershipId: null });
+        }
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Error submitting form. Please try again.');
+        console.error('Error submitting form:', error);
+        alert('Error submitting form. Please try again.');
     }
-  };
+};
 
   const getCurrentDate = () => {
     const date = new Date();

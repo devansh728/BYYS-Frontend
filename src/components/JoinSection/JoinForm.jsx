@@ -228,33 +228,40 @@ const JoinForm = () => {
         // Construct the FormData object with individual fields for the multipart request
         const data = new FormData();
 
-        // Append each data field as a separate part
-        data.append('fullName', formData.fullName);
-        data.append('age', parseInt(formData.age, 10));
-        data.append('phone', formData.phone);
-        data.append('email', formData.email);
-        data.append('whatsappNumber', formData.whatsappNumber);
-        data.append('villageTownCity', formData.villageTownCity);
-        data.append('blockName', formData.block);
-        data.append('district', formData.district);
-        data.append('state', formData.state);
-        data.append('profession', formData.profession);
-        data.append('institutionName', formData.institutionName);
-        data.append('institutionAddress', formData.institutionAddress);
-        if (formData.referralCode) {
-            data.append('referralCode', formData.referralCode);
-        }
+        // // Append each data field as a separate part
+        // data.append('fullName', formData.fullName);
+        // data.append('age', parseInt(formData.age, 10));
+        // data.append('phone', formData.phone);
+        // data.append('email', formData.email);
+        // data.append('whatsappNumber', formData.whatsappNumber);
+        // data.append('villageTownCity', formData.villageTownCity);
+        // data.append('blockName', formData.block);
+        // data.append('district', formData.district);
+        // data.append('state', formData.state);
+        // data.append('profession', formData.profession);
+        // data.append('institutionName', formData.institutionName);
+        // data.append('institutionAddress', formData.institutionAddress);
+        // if (formData.referralCode) {
+        //     data.append('referralCode', formData.referralCode);
+        // }
 
-        // Append the photo file if it exists
+        // // Append the photo file if it exists
+        // 
+
+        const requestPayload = new Blob([JSON.stringify(formData)],{type:"application/json"});
+        data.append("request",requestPayload);
         if (formData.photo) {
-            data.append('photo', formData.photo);
+            data.append("photo", formData.photo);
         }
 
         try {
-            const response = await fetch('https://byys-backend.onrender.com/auth/otp', {
-                method: 'POST',
-                body: data // The FormData object automatically sets the correct Content-Type header
-            });
+            const response = await axios.post('https://byys-backend.onrender.com/auth/otp', data, 
+            {
+              headers: {
+                "Content-Type":"multipart/form-data",
+              }
+              
+            }
 
             if (!response.ok) {
                 const errorData = await response.json();

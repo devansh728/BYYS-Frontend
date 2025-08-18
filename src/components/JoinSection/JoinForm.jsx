@@ -435,8 +435,8 @@ const JoinForm = () => {
                   <label htmlFor="block">Village/Town/City *</label>
                   <input
                     type="text"
-                    id="block"
-                    name="block"
+                    id="villageTownCity"
+                    name="villageTownCity"
                     value={formData.villageTownCity}
                     onChange={handleInputChange}
                     placeholder="Enter your Town"

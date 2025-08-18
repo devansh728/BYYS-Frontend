@@ -360,6 +360,19 @@ const JoinForm = () => {
                 </div>
 
                 <div className="form-group">
+                  <label htmlFor="whatsappNumber">Phone Number *</label>
+                  <input
+                    type="tel"
+                    id="whatsappNumber"
+                    name="whatsappNumber"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="Enter Phone number"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
                   <label htmlFor="email">Email Address *</label>
                   <input
                     type="email"
@@ -414,6 +427,19 @@ const JoinForm = () => {
                     value={formData.block}
                     onChange={handleInputChange}
                     placeholder="Enter your block"
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="block">Village/Town/City *</label>
+                  <input
+                    type="text"
+                    id="block"
+                    name="block"
+                    value={formData.villageTownCity}
+                    onChange={handleInputChange}
+                    placeholder="Enter your Town"
                     required
                   />
                 </div>

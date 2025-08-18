@@ -255,12 +255,12 @@ const JoinForm = () => {
         }
 
         try {
-            const response = await axios.post('https://byys-backend.onrender.com/auth/otp', data, 
-            {
+            const response = await fetch('https://byys-backend.onrender.com/auth/otp', {
+              method: 'POST',
               headers: {
-                "Content-Type":"multipart/form-data",
-              }
-              
+                  "Content-Type": "multipart/form-data"
+              },
+              body: data, 
             });
 
             if (!response.ok) {

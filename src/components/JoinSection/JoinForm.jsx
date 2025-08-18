@@ -21,10 +21,10 @@ const JoinForm = () => {
     email: '',
     state: '',
     district: '', // Changed from city to district
-    block: '',    // New field added
+    blockName: '',    // New field added
     profession: '',
-    instituteName: '',
-    instituteAddress: '',
+    institutionName: '',
+    institutionAddress: '',
     referralCode: '',
     villageTownCity: '' // New field added
   });
@@ -404,9 +404,9 @@ const JoinForm = () => {
                   <label htmlFor="block">Block *</label>
                   <input
                     type="text"
-                    id="block"
-                    name="block"
-                    value={formData.block}
+                    id="blockName"
+                    name="blockName"
+                    value={formData.blockName}
                     onChange={handleInputChange}
                     placeholder="Enter your block"
                     required
@@ -455,9 +455,9 @@ const JoinForm = () => {
                   <label htmlFor="instituteName">School/College Name *</label>
                   <input
                     type="text"
-                    id="instituteName"
-                    name="instituteName"
-                    value={formData.instituteName}
+                    id="institutionName"
+                    name="institutionName"
+                    value={formData.institutionName}
                     onChange={handleInputChange}
                     placeholder="Enter your school or college name"
                     required
@@ -467,9 +467,9 @@ const JoinForm = () => {
                 <div className="form-group full-width">
                   <label htmlFor="instituteAddress">School/College Address *</label>
                   <textarea
-                    id="instituteAddress"
-                    name="instituteAddress"
-                    value={formData.instituteAddress}
+                    id="institutionAddress"
+                    name="institutionAddress"
+                    value={formData.institutionAddress}
                     onChange={handleInputChange}
                     placeholder="Enter complete school or college address"
                     rows="3"
@@ -527,7 +527,7 @@ const JoinForm = () => {
                   <p><strong>Member ID :</strong> {memberId}</p>
                   <p><strong>State :</strong> {formData.state}</p>
                   <p><strong>District :</strong> {formData.district}</p>
-                  <p><strong>Block :</strong> {formData.block}</p>
+                  <p><strong>Block :</strong> {formData.blockName}</p>
                   <p><strong>D.O.I :</strong> {getCurrentDate()}</p>
                 </div>
                 <div className="new-right">

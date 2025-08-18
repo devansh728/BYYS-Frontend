@@ -64,7 +64,7 @@ const AdminDashboard = () => {
       setApplications(appsData.content);
 
       // Fetch tasks (you'll need to implement this endpoint)
-      const tasksResponse = await fetch('http://localhost:8080/api/admin/all-tasks', {
+      const tasksResponse = await fetch('https://byys-backend.onrender.com/api/admin/all-tasks', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }

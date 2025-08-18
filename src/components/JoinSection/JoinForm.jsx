@@ -214,7 +214,7 @@ const JoinForm = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     setSubmissionStatus({ loading: true, success: false, error: null, membershipId: null });
@@ -225,42 +225,17 @@ const JoinForm = () => {
             return;
         }
 
-        // Construct the FormData object with individual fields for the multipart request
         const data = new FormData();
-
-        // // Append each data field as a separate part
-        // data.append('fullName', formData.fullName);
-        // data.append('age', parseInt(formData.age, 10));
-        // data.append('phone', formData.phone);
-        // data.append('email', formData.email);
-        // data.append('whatsappNumber', formData.whatsappNumber);
-        // data.append('villageTownCity', formData.villageTownCity);
-        // data.append('blockName', formData.block);
-        // data.append('district', formData.district);
-        // data.append('state', formData.state);
-        // data.append('profession', formData.profession);
-        // data.append('institutionName', formData.institutionName);
-        // data.append('institutionAddress', formData.institutionAddress);
-        // if (formData.referralCode) {
-        //     data.append('referralCode', formData.referralCode);
-        // }
-
-        // // Append the photo file if it exists
-        // 
-
         const requestPayload = new Blob([JSON.stringify(formData)],{type:"application/json"});
-        data.append("request",requestPayload);
+        data.append("request", requestPayload);
         if (formData.photo) {
             data.append("photo", formData.photo);
         }
 
         try {
             const response = await fetch('https://byys-backend.onrender.com/auth/otp', {
-              method: 'POST',
-              headers: {
-                  "Content-Type": "multipart/form-data"
-              },
-              body: data, 
+                method: 'POST',
+                body: data,  // No headers needed when sending FormData
             });
 
             if (!response.ok) {

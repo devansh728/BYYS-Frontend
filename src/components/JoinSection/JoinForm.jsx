@@ -25,7 +25,8 @@ const JoinForm = () => {
     profession: '',
     instituteName: '',
     instituteAddress: '',
-    referralCode: ''
+    referralCode: '',
+    villageTownCity: '' // New field added
   });
 
   const [photoPreview, setPhotoPreview] = useState(null);
@@ -234,7 +235,7 @@ const JoinForm = () => {
         data.append('email', formData.email);
         data.append('whatsappNumber', formData.whatsappNumber);
         data.append('villageTownCity', formData.villageTownCity);
-        data.append('blockName', formData.blockName);
+        data.append('blockName', formData.block);
         data.append('district', formData.district);
         data.append('state', formData.state);
         data.append('profession', formData.profession);
@@ -266,6 +267,8 @@ const JoinForm = () => {
             navigate('/login', { state: { membershipId, registrationSuccess: true } });
         } catch (error) {
             setSubmissionStatus({ loading: false, success: false, error: error.message, membershipId: null });
+            console.error('Error submitting form:', error);
+            alert('Error submitting form. Please try again.');
         }
     } catch (error) {
         console.error('Error submitting form:', error);

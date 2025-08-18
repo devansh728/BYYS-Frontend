@@ -261,7 +261,7 @@ const JoinForm = () => {
                 "Content-Type":"multipart/form-data",
               }
               
-            }
+            });
 
             if (!response.ok) {
                 const errorData = await response.json();

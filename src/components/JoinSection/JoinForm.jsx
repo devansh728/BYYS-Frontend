@@ -126,7 +126,7 @@ const JoinForm = () => {
         setFormData(prev => ({
           ...prev,
           district: '',
-          block: ''
+          blockName: ''
         }));
       }
     } catch (error) {
@@ -152,8 +152,8 @@ const JoinForm = () => {
   const validateForm = () => {
     const requiredFields = [
       'fullName', 'age', 'whatsappNumber',
-      'email', 'state', 'district', 'block', 'profession',
-      'instituteName', 'instituteAddress'
+      'email', 'state', 'district', 'blockName', 'profession',
+      'institutionName', 'institutionAddress'
     ];
 
     for (let field of requiredFields) {

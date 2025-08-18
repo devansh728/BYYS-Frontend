@@ -363,8 +363,8 @@ const JoinForm = () => {
                   <label htmlFor="whatsappNumber">Phone Number *</label>
                   <input
                     type="tel"
-                    id="whatsappNumber"
-                    name="whatsappNumber"
+                    id="phone"
+                    name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
                     placeholder="Enter Phone number"

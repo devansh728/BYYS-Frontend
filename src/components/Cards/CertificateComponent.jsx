@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CertificateComponent() {
+export default function CertificateComponent({data}) {
   return (
     <div className="w-[900px] h-[600px] bg-orange-300 border border-gray-400 rounded-xl shadow-lg relative overflow-hidden p-10">
       {/* Logo + Reg. No */}
@@ -26,16 +26,25 @@ export default function CertificateComponent() {
 
       {/* Body Content */}
       <div className="mt-12 text-lg leading-relaxed text-center">
+         <div className="dynamic-line-container">
+    <span className="dynamic-line-text">{data.fullName}</span>
         <p>
           _______________________________________________
         </p>
         <p className="mt-4">
+         <div className="dynamic-line-container">
+      <span className="dynamic-line-text">{data.position}</span>
           Is elected as _________________ of Bhartiya Yuva Vidyarthi Sangathan from
         </p>
         <p className="mt-2">
+          <div className="dynamic-line-container">
+      <span className="dynamic-line-text" style={{ left: '15%' }}>{data.block}</span>
+      <span className="dynamic-line-text" style={{ right: '15%' }}>{data.district}</span>
           ___________________ Block of ___________________
         </p>
         <p className="mt-2">
+          <div className="dynamic-line-container">
+      <span className="dynamic-line-text" style={{ left: '40%' }}>{data.state}</span>
           District of ___________________ State .
         </p>
         <p className="mt-6 font-medium">
@@ -47,6 +56,7 @@ export default function CertificateComponent() {
       {/* Date + Signature */}
       <div className="absolute bottom-16 left-10 text-lg font-semibold">
         <p>Date Of Issue:</p>
+        {data.date}
         <p className="mt-2">_</p>
       </div>
 

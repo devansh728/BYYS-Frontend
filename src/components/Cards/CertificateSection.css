@@ -198,3 +198,91 @@
     font-weight: 400;
     font-size: 16px;
 }
+/* Add these styles to your .css file */
+
+.dynamic-line-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.dynamic-line-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  padding: 0 10px; /* Adds a little space around the text */
+  background-color: #FFD700; /* Match this with the certificate background color */
+  z-index: 5; /* Ensure the text is above the line */
+}
+
+/* Specific styles for each dynamic text element */
+
+.full-name-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-width: 450px;
+}
+
+.full-name-line .full-name {
+  position: absolute;
+  font-family: 'Dancing Script', cursive; /* Optional: Use a script font for the name */
+  font-size: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFD700;
+  padding: 0 10px;
+  z-index: 5;
+}
+
+.position-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-width: 450px;
+}
+
+.position-line .position-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFD700;
+  padding: 0 10px;
+  z-index: 5;
+}
+
+.block-district-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-width: 280px;
+}
+
+.block-district-line .block-text,
+.block-district-line .district-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #FFD700;
+  padding: 0 10px;
+  z-index: 5;
+}
+
+.block-district-line .block-text {
+  left: 30%; /* Adjust as needed */
+  transform: translate(-50%, -50%);
+}
+
+.block-district-line .district-text {
+  left: 70%; /* Adjust as needed */
+  transform: translate(-50%, -50%);
+}

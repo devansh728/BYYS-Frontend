@@ -1,158 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@400;700&family=Dancing+Script:wght@400;700&display=swap');
+
+/* Main Certificate Container */
 .certificate {
-  width: 1100px;
-  height: 750px;
-  background: #FFB64D;
-  margin: 30px auto;
-  padding: 40px 80px;
-  box-sizing: border-box;
-  position: relative;
-  border: 2px solid #000;
-  text-align: center;
-  overflow: hidden;
-  font-weight: bold; /* Default bold everywhere */
+    width: 1100px;
+    height: 750px;
+    background: #FFD700; /* Updated to a brighter gold */
+    margin: 30px auto;
+    padding: 60px 100px; /* Increased padding for more breathing room */
+    box-sizing: border-box;
+    position: relative;
+    border: 4px solid #000;
+    text-align: center;
+    overflow: hidden;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Added a subtle shadow */
 }
 
-/* Watermark */
+/* Watermark (Self-contained and visually appealing) */
 .certificate::before {
-  content: "";
-  background: url("logo.png") no-repeat center;
-  background-size: 650px;
-  opacity: 0.25;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
+    content: "";
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0.1) 100%);
+    opacity: 0.8; /* Increased opacity for better visibility */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Top Left Logo */
 .top-logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 120px;
-  z-index: 3;
+    position: absolute;
+    top: 40px; /* Adjusted position */
+    left: 40px; /* Adjusted position */
+    max-width: 120px; /* Max width for any logo */
+    max-height: 120px; /* Max height for any logo */
+    z-index: 3;
+    overflow: hidden;
+    display: flex; /* Centers the image inside the container */
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #dc2626;
+    border-radius: 50%;
+}
+
+.top-logo img {
+    width: 100%; /* Image takes full width of its container */
+    height: auto; /* Maintains aspect ratio */
+    display: block; /* Removes any extra space */
 }
 
 /* Reg. No. */
 .reg-no {
-  position: absolute;
-  top: 150px;
-  left: 30px;
-  color: red;
-  font-size: 18px;
-  z-index: 3;
-  text-align: left;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
+    position: absolute;
+    top: 170px;
+    left: 50px;
+    color: #8B0000; /* Darker red for elegance */
+    font-size: 16px;
+    z-index: 3;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
 
 /* Main Heading */
 .certificate h1 {
-  font-size: 38px;
-  margin: 20px 0 10px 0;
-  position: relative;
-  z-index: 3;
-  font-family: "Arial Black", Impact, sans-serif;
-  font-weight: 900;
-  margin-left: 60px;
+    font-size: 44px; /* Slightly larger heading */
+    margin: 20px 0 10px 0;
+    position: relative;
+    z-index: 3;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #2c3e50; /* A dark, professional blue-gray */
 }
 
 /* Certificate of Honour */
 .certificate h2 {
-  font-size: 28px;
-  margin: 20px 0 15px 0;
-  position: relative;
-  z-index: 3;
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-weight: bold;
+    font-size: 32px; /* Adjusted size */
+    margin: 20px 0 15px 0;
+    position: relative;
+    z-index: 3;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: #c0392b; /* A prominent red */
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 /* Certify That */
 .certificate h3 {
-  font-size: 22px;
-  margin: 15px 0 25px 0;
-  position: relative;
-  z-index: 3;
-  font-family: "Times New Roman", serif;
-  font-style: italic;
-  font-weight: bold; /* changed from normal */
+    font-size: 24px;
+    margin: 15px 0 25px 0;
+    position: relative;
+    z-index: 3;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #34495e;
 }
 
 /* Certificate Text */
 .details {
-  font-size: 20px;
-  text-align: center;
-  line-height: 2.2;
-  position: relative;
-  z-index: 3;
-  margin-top: 20px;
-  font-family: Arial, Calibri, sans-serif;
-  font-weight: bold; /* now bold */
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.8; /* Better line height for readability */
+    position: relative;
+    z-index: 3;
+    margin-top: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #2c3e50;
+}
+
+.details p {
+    margin: 0 0 10px 0;
+}
+
+.details .line {
+    display: inline-block;
+    border-bottom: 2px solid #000;
+    min-width: 450px;
+}
+
+.details .small-line {
+    display: inline-block;
+    border-bottom: 2px solid #000;
+    min-width: 280px;
 }
 
 /* Footer */
 .footer {
-  position: absolute;
-  bottom: 50px;
-  left: 80px;
-  right: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-size: 18px;
-  z-index: 3;
-  font-weight: bold; /* all footer bold */
+    position: absolute;
+    bottom: 50px;
+    left: 100px;
+    right: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 18px;
+    z-index: 3;
+    font-weight: bold;
 }
 
 /* Date */
 .date {
-  text-align: left;
-  font-family: Arial, Calibri, sans-serif;
-  font-weight: bold;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #2c3e50;
 }
 
 .date label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
 }
 
 .date span {
-  display: block;
-  border-bottom: 1px solid #000;
-  width: 220px;
-  height: 25px;
+    display: block;
+    border-bottom: 1px solid #000;
+    width: 250px;
+    height: 25px;
 }
 
 /* Signature */
 .signature {
-  text-align: right;
-  font-weight: bold;
+    text-align: right;
+    font-weight: bold;
 }
 
-.signature img {
-  width: 220px;
-  background: transparent;
+.signature .actual-signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px; /* Larger signature for prominence */
+    color: #c0392b;
+    line-height: 1;
+    margin-bottom: 10px;
 }
 
 .signature p {
-  margin: 5px 0 0;
-  text-align: right;
+    margin: 5px 0 0;
+    text-align: right;
+    color: #2c3e50;
 }
 
 .signature .name {
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .signature .title {
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
 }

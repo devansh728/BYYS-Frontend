@@ -61,7 +61,7 @@ const ContactSection = () => {
     console.log('Form is valid. Submitting data:', formData);
 
     try {
-      const response = await fetch('http://localhost:8080/auth/otp/api/feedback', {
+      const response = await fetch('https://byys-backend.onrender.com/auth/otp/api/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

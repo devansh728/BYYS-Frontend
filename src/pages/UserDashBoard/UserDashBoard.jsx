@@ -23,6 +23,14 @@ const UserDashboard = () => {
     contactDetails: '',
     socialWorkDescription: ''
   });
+  const [certificateData, setCertificateData] = useState({
+    fullName: '',
+    position: '',
+    block: '',
+    district: '',
+    state: '',
+    dateOfIssue: '2025-08-19',
+  });
   const [formError, setFormError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -108,6 +116,18 @@ const UserDashboard = () => {
       setApplicationStatus(data.status);
       if (data.status === 'APPROVED') {
         fetchTasks();
+
+        if (userData) {
+        setCertificateData({
+          recipientName: userData.fullName,
+          position: 'Office-Bearer', // Assuming the API returns the position
+          block: 'Block-A',
+          district: userData.district,
+          state: userData.state,
+          regNo: '66/22', // This can be static or dynamic from API
+          dateOfIssue: '2025-08-19', // Set current date
+        });
+      }
       }
     } catch (error) {
       setError(error.message);
@@ -549,7 +569,7 @@ const UserDashboard = () => {
                     </h2>
                     <div ref={certificateRef} className="flex justify-center">
                       {/* You will need to create and import a Certificate component here */}
-                      <CertificateComponent />
+                      <CertificateComponent data={certificateData} />
                     </div>
                     <div className="mt-6 flex justify-center">
                       <button

@@ -1,6 +1,27 @@
 import React, { useState } from 'react';
 import './ContactSection.css';
 
+const validateForm = (formData) => {
+  const errors = {};
+
+  if (!formData.name.trim()) {
+    errors.name = 'Full Name is required.';
+  }
+  if (!formData.email.trim()) {
+    errors.email = 'Email Address is required.';
+  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    errors.email = 'Email is invalid.';
+  }
+  if (!formData.subject.trim()) {
+    errors.subject = 'Subject is required.';
+  }
+  if (!formData.message.trim()) {
+    errors.message = 'Message is required.';
+  }
+  
+  return errors;
+};
+
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -9,6 +30,9 @@ const ContactSection = () => {
     subject: '',
     message: ''
   });
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,39 +40,72 @@ const ContactSection = () => {
       ...prev,
       [name]: value
     }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will respond within 24 hours.');
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
+    setResponseMessage(''); 
+
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      console.log('Form has validation errors:', validationErrors);
+      return;
+    }
+
+    setIsLoading(true);
+    console.log('Form is valid. Submitting data:', formData);
+
+    try {
+      const response = await fetch('http://localhost:8080/auth/otp/api/feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok: ${response.status} - ${errorText}`);
+      }
+
+      setResponseMessage('Thank you for your message! We will get back to you soon.');
+      console.log('Feedback sent successfully.');
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+
+    } catch (error) {
+      console.error('Submission failed:', error);
+      setResponseMessage('Oops! Something went wrong. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="contact-us">
-      {/* Page Header */}
+ 
       <section className="contact-header">
         <h1>Contact Us</h1>
         <p>We're here to help and answer any questions you might have about our mission to empower youth and preserve cultural heritage</p>
       </section>
 
-      {/* Get In Touch Section */}
       <section className="get-in-touch">
         <h2>Get In Touch</h2>
         <p>Reach out to us through any of these convenient methods</p>
 
         <div className="contact-methods">
-          {/* Phone */}
           <div className="contact-method">
             <div className="method-header">
               <i className="fas fa-phone"></i>
@@ -58,7 +115,6 @@ const ContactSection = () => {
             <p className="timing">9:00 AM to 6:00 PM (All days)</p>
           </div>
 
-          {/* Email */}
           <div className="contact-method">
             <div className="method-header">
               <i className="fas fa-envelope"></i>
@@ -68,7 +124,6 @@ const ContactSection = () => {
             <p className="response-time">We'll respond within 24 hours</p>
           </div>
 
-          {/* Office Address */}
           <div className="contact-method">
             <div className="method-header">
               <i className="fas fa-map-marker-alt"></i>
@@ -80,8 +135,6 @@ const ContactSection = () => {
               Uttar Pradesh - 230135
             </address>
           </div>
-
-          {/* WhatsApp */}
           <div className="contact-method">
             <div className="method-header">
               <i className="fab fa-whatsapp"></i>
@@ -93,8 +146,6 @@ const ContactSection = () => {
           </div>
         </div>
       </section>
-
-      {/* Visit Us or Send a Message Section */}
       <section className="visit-message-section">
         <h2>Visit Us or Send a Message</h2>
         <p>Find our location on the map or fill out the form to get in touch</p>
@@ -136,7 +187,14 @@ const ContactSection = () => {
             <h3>Query/Suggestion/Feedback Form</h3>
             <p>Share your queries, suggestions, or feedback with us. We value your input and will respond promptly.</p>
 
-            <form onSubmit={handleSubmit} className="contact-form">
+            <form onSubmit={handleSubmit} className="contact-form" noValidate>
+              
+              {responseMessage && (
+                <div className={`form-message ${responseMessage.includes('Thank you') ? 'success' : 'error'}`}>
+                  {responseMessage}
+                </div>
+              )}
+              
               <div className="form-group">
                 <label htmlFor="name">Full Name *</label>
                 <input
@@ -148,6 +206,7 @@ const ContactSection = () => {
                   required
                   placeholder="Enter your full name"
                 />
+                {errors.name && <p className="error-message">{errors.name}</p>}
               </div>
 
               <div className="form-group">
@@ -161,6 +220,7 @@ const ContactSection = () => {
                   required
                   placeholder="Enter your email address"
                 />
+                {errors.email && <p className="error-message">{errors.email}</p>}
               </div>
 
               <div className="form-group">
@@ -173,6 +233,7 @@ const ContactSection = () => {
                   onChange={handleInputChange}
                   placeholder="Enter your phone number"
                 />
+                {errors.phone && <p className="error-message">{errors.phone}</p>}
               </div>
 
               <div className="form-group">
@@ -186,6 +247,7 @@ const ContactSection = () => {
                   required
                   placeholder="Enter the subject"
                 />
+                {errors.subject && <p className="error-message">{errors.subject}</p>}
               </div>
 
               <div className="form-group">
@@ -199,18 +261,22 @@ const ContactSection = () => {
                   placeholder="Enter your message, query, suggestion, or feedback"
                   rows="5"
                 ></textarea>
+                {errors.message && <p className="error-message">{errors.message}</p>}
               </div>
 
-              <button type="submit" className="submit-btn">
-                <i className="fas fa-paper-plane"></i>
-                Send Message
+              <button type="submit" className="submit-btn" disabled={isLoading}>
+                {isLoading ? 'Sending...' : (
+                  <>
+                    <i className="fas fa-paper-plane"></i>
+                    Send Message
+                  </>
+                )}
               </button>
             </form>
           </div>
         </div>
       </section>
 
-      {/* Office Hours & Connect With Us Section */}
       <section className="office-hours-social">
         <h2>Office Hours & Connect With Us</h2>
         <p>Stay connected with us through various channels</p>
@@ -292,5 +358,6 @@ const ContactSection = () => {
     </div>
   );
 };
+
 
 export default ContactSection;

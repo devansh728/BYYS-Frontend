@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CertificateComponent({data}) {
+export default function CertificateComponent({ data }) {
   return (
     <div className="w-[900px] h-[600px] bg-orange-300 border border-gray-400 rounded-xl shadow-lg relative overflow-hidden p-10">
       {/* Logo + Reg. No */}
@@ -26,27 +26,31 @@ export default function CertificateComponent({data}) {
 
       {/* Body Content */}
       <div className="mt-12 text-lg leading-relaxed text-center">
-         <div className="dynamic-line-container">
-    <span className="dynamic-line-text">{data.fullName}</span>
-        <p>
-          _______________________________________________
-        </p>
-        <p className="mt-4">
-         <div className="dynamic-line-container">
-      <span className="dynamic-line-text">{data.position}</span>
+        <div className="dynamic-line-container">
+          <span className="dynamic-line-text">{data.fullName}</span>
+          <p>
+            _______________________________________________
+          </p>
+        </div>
+        <div className="mt-4">
+          <div className="dynamic-line-container">
+            <span className="dynamic-line-text">{data.position}</span>
+          </div>
           Is elected as _________________ of Bhartiya Yuva Vidyarthi Sangathan from
-        </p>
-        <p className="mt-2">
+        </div>
+        <div className="mt-2">
           <div className="dynamic-line-container">
-      <span className="dynamic-line-text" style={{ left: '15%' }}>{data.block}</span>
-      <span className="dynamic-line-text" style={{ right: '15%' }}>{data.district}</span>
+            <span className="dynamic-line-text" style={{ left: '15%' }}>{data.block}</span>
+            <span className="dynamic-line-text" style={{ right: '15%' }}>{data.district}</span>
+          </div>
           ___________________ Block of ___________________
-        </p>
-        <p className="mt-2">
+        </div>
+        <div className="mt-2">
           <div className="dynamic-line-container">
-      <span className="dynamic-line-text" style={{ left: '40%' }}>{data.state}</span>
+            <span className="dynamic-line-text" style={{ left: '40%' }}>{data.state}</span>
+          </div>
           District of ___________________ State .
-        </p>
+        </div>
         <p className="mt-6 font-medium">
           This certificate is valid upto 1 year from the date of issue. <br />
           We wish you bright future.

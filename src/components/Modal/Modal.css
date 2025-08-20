@@ -49,10 +49,95 @@
 /* Video specific styles in modal */
 .modal-media[src$=".mp4"],
 .modal-media[src$=".mov"],
-.modal-media[src$=".avi"] {
+.modal-media[src$=".avi"],
+.modal-media[src$=".webm"],
+.modal-media[src$=".mkv"] {
   width: 100%;
   height: auto;
   min-height: 400px;
+}
+
+/* Video Container */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Play Prompt Overlay */
+.play-prompt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 15px;
+}
+
+.play-button {
+  background: var(--saffron);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 3px solid white;
+  cursor: pointer;
+}
+
+.play-button:hover {
+  background: var(--gold);
+  transform: scale(1.1);
+}
+
+.play-button i {
+  font-size: 1.5rem;
+}
+
+/* Loading Spinner */
+.modal-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid var(--saffron);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.modal-loading p {
+  color: white;
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0.9;
 }
 
 /* Modal Placeholder - Enhanced */
@@ -80,17 +165,75 @@
   font-size: 2rem;
   margin-bottom: 1rem;
   color: white;
+  font-family: 'Cinzel', serif;
 }
 
 .modal-placeholder p {
   font-size: 1.2rem;
   opacity: 0.9;
+  margin: 0.5rem 0;
+  line-height: 1.6;
 }
 
 .modal-placeholder .error-msg {
-  color: var(--saffron);
+  color: #ff6b6b;
   font-weight: 600;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+}
+
+/* Debug info */
+.debug-info {
+  font-size: 0.8rem;
+  color: #ccc;
+  word-break: break-all;
+  margin: 1rem 0;
+  font-family: monospace;
+  background: rgba(0,0,0,0.5);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+/* Retry Button */
+.retry-btn {
+  background: var(--saffron);
+  color: var(--maroon);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
   margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.retry-btn:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 153, 51, 0.3);
+}
+
+/* Troubleshoot Info */
+.troubleshoot-info {
+  margin-top: 1rem;
+  text-align: left;
+  background: rgba(255,255,255,0.1);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.troubleshoot-info ul {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+
+.troubleshoot-info li {
+  margin: 0.3rem 0;
+  font-size: 0.85rem;
 }
 
 .modal.show {
@@ -129,6 +272,11 @@
   background: rgba(0,0,0,0.8);
 }
 
+.close:focus {
+  outline: 2px solid var(--saffron);
+  outline-offset: 2px;
+}
+
 /* Navigation Buttons */
 .modal-nav {
   position: absolute;
@@ -156,6 +304,11 @@
   transform: translateY(-50%) scale(1.1);
 }
 
+.modal-nav:focus {
+  outline: 2px solid var(--saffron);
+  outline-offset: 2px;
+}
+
 .modal-prev {
   left: -80px;
 }
@@ -174,12 +327,14 @@
   margin-top: 25px;
   min-width: 400px;
   max-width: 700px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .modal-info h3 {
   margin: 0 0 15px 0;
   font-size: 1.6rem;
   font-family: 'Cinzel', serif;
+  color: white;
 }
 
 .modal-info p {
@@ -209,6 +364,7 @@
   font-size: 1rem;
   font-weight: 600;
   display: inline-block;
+  border: 1px solid rgba(255, 153, 51, 0.3);
 }
 
 .video-controls-info {
@@ -217,13 +373,155 @@
   font-size: 0.9rem;
 }
 
+.video-controls-info small {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* Mobile-specific enhancements */
+.mobile-play-prompt {
+  background: rgba(0,0,0,0.8);
+}
+
+.mobile-play-button {
+  padding: 1.2rem 2rem;
+  font-size: 1.1rem;
+  border-width: 2px;
+}
+
+.mobile-play-button i {
+  font-size: 1.3rem;
+}
+
+.mobile-placeholder {
+  padding: 2rem;
+  min-height: 250px;
+}
+
+.mobile-retry-btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.mobile-tips {
+  margin-top: 1rem;
+  text-align: left;
+  background: rgba(255,255,255,0.1);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.mobile-tips ul {
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+}
+
+.mobile-tips li {
+  margin: 0.3rem 0;
+  font-size: 0.85rem;
+}
+
+.mobile-modal-info {
+  padding: 1.5rem;
+}
+
+.mobile-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.mobile-nav-btn {
+  background: var(--saffron);
+  color: var(--maroon);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.mobile-nav-btn:hover:not(:disabled) {
+  background: var(--gold);
+  transform: translateY(-2px);
+}
+
+.mobile-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Fade in animation */
 @keyframes fadeIn {
   from { 
-    opacity: 0; 
+    opacity: 0;
+    transform: scale(0.9);
   }
   to { 
-    opacity: 1; 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Accessibility Improvements */
+.modal-nav:focus-visible,
+.close:focus-visible {
+  outline: 3px solid var(--saffron);
+  outline-offset: 3px;
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .modal-nav,
+  .close {
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
+  }
+  
+  .modal-prev {
+    left: -85px;
+  }
+  
+  .modal-next {
+    right: -85px;
+  }
+  
+  .close {
+    top: -80px;
+  }
+  
+  .play-button {
+    padding: 1.2rem 1.8rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+  .modal-content {
+    max-width: 92vw;
+    max-height: 80vh;
+  }
+  
+  .modal-media {
+    max-width: 92vw;
+    max-height: 80vh;
+  }
+  
+  .modal-prev {
+    left: -70px;
+  }
+  
+  .modal-next {
+    right: -70px;
   }
 }
 
@@ -242,11 +540,14 @@
   .modal-media {
     max-width: 95vw;
     max-height: 75vh;
+    border-radius: 10px;
   }
 
   .modal-media[src$=".mp4"],
   .modal-media[src$=".mov"],
-  .modal-media[src$=".avi"] {
+  .modal-media[src$=".avi"],
+  .modal-media[src$=".webm"],
+  .modal-media[src$=".mkv"] {
     min-height: 250px;
   }
 
@@ -254,6 +555,19 @@
     min-width: 300px;
     min-height: 250px;
     padding: 3rem 2rem;
+  }
+
+  .modal-placeholder i {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-placeholder h3 {
+    font-size: 1.6rem;
+  }
+
+  .modal-placeholder p {
+    font-size: 1rem;
   }
 
   .close {
@@ -268,6 +582,7 @@
     font-size: 24px;
     width: 50px;
     height: 50px;
+    padding: 10px;
   }
 
   .modal-prev {
@@ -291,11 +606,57 @@
   .modal-info p {
     font-size: 1rem;
   }
+
+  .video-controls-info small {
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 3px;
+  }
+
+  .modal-loading p {
+    font-size: 1rem;
+  }
+
+  .play-button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .play-button i {
+    font-size: 1.2rem;
+  }
+
+  .debug-info {
+    font-size: 0.7rem;
+    padding: 0.4rem;
+  }
+  
+  .video-container {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-nav {
+    display: none; /* Hide navigation arrows on very small screens */
+  }
+  
+  .modal-info {
+    min-width: 280px;
+    padding: 18px;
+  }
 }
 
 @media (max-width: 480px) {
   .modal-content {
     max-height: 65vh;
+    border-radius: 10px;
   }
 
   .modal-media {
@@ -304,7 +665,9 @@
 
   .modal-media[src$=".mp4"],
   .modal-media[src$=".mov"],
-  .modal-media[src$=".avi"] {
+  .modal-media[src$=".avi"],
+  .modal-media[src$=".webm"],
+  .modal-media[src$=".mkv"] {
     min-height: 200px;
   }
 
@@ -315,28 +678,24 @@
   }
 
   .modal-placeholder i {
-    font-size: 4rem;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
   }
 
   .modal-placeholder h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 
   .modal-placeholder p {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .close {
     top: -50px;
     right: 5px;
-  }
-
-  .modal-prev {
-    left: -45px;
-  }
-
-  .modal-next {
-    right: -45px;
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
   }
 
   .modal-info {
@@ -346,15 +705,262 @@
 
   .modal-info h3 {
     font-size: 1.2rem;
+    margin-bottom: 12px;
   }
 
   .modal-info p {
     font-size: 0.9rem;
+    margin-bottom: 12px;
   }
 
   .modal-info .source,
   .modal-info .date {
     font-size: 0.8rem;
     padding: 4px 12px;
+    margin: 5px;
+  }
+
+  .modal-counter {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    margin-top: 15px;
+  }
+
+  .video-controls-info {
+    margin-top: 12px;
+  }
+
+  .video-controls-info small {
+    font-size: 0.75rem;
+  }
+
+  .retry-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .loading-spinner {
+    width: 35px;
+    height: 35px;
+    border-width: 3px;
+  }
+
+  .modal-loading p {
+    font-size: 0.9rem;
+  }
+
+  .play-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+    gap: 0.6rem;
+  }
+
+  .play-button i {
+    font-size: 1rem;
+  }
+
+  .debug-info {
+    font-size: 0.65rem;
+    padding: 0.3rem;
+  }
+
+  .mobile-navigation {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .mobile-nav-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal-content {
+    max-height: 60vh;
+  }
+
+  .modal-media {
+    max-height: 60vh;
+  }
+
+  .modal-placeholder {
+    min-width: 200px;
+    min-height: 180px;
+    padding: 1.5rem 1rem;
+  }
+
+  .modal-placeholder i {
+    font-size: 3rem;
+  }
+
+  .modal-placeholder h3 {
+    font-size: 1.2rem;
+  }
+
+  .modal-placeholder p {
+    font-size: 0.85rem;
+  }
+
+  .close {
+    top: -45px;
+    right: 2px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .modal-info {
+    min-width: 200px;
+    padding: 12px;
+  }
+
+  .modal-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .modal-info p {
+    font-size: 0.85rem;
+  }
+
+  .modal-counter {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .retry-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .play-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    gap: 0.4rem;
+  }
+
+  .play-button i {
+    font-size: 0.9rem;
+  }
+
+  .debug-info {
+    font-size: 0.6rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .modal {
+    background-color: rgba(0,0,0,0.98);
+  }
+  
+  .modal-nav,
+  .close {
+    background: rgba(0,0,0,0.9);
+    border: 2px solid white;
+  }
+  
+  .modal-info {
+    border: 2px solid white;
+  }
+  
+  .play-button {
+    border-color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .modal {
+    animation: none;
+  }
+  
+  .loading-spinner {
+    animation: none;
+    border: 4px solid var(--saffron);
+  }
+  
+  .modal-nav:hover,
+  .close:hover,
+  .retry-btn:hover,
+  .play-button:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .modal {
+    display: none;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .modal-placeholder {
+    background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  }
+  
+  .modal-info {
+    background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal-content {
+    max-height: 90vh;
+  }
+  
+  .modal-media {
+    max-height: 90vh;
+  }
+  
+  .modal-info {
+    margin-top: 15px;
+    padding: 15px;
+  }
+  
+  .close {
+    top: -50px;
+  }
+  
+  .play-button {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Video specific modal enhancements */
+.modal-media[src$=".mp4"],
+.modal-media[src$=".mov"],
+.modal-media[src$=".avi"],
+.modal-media[src$=".webm"],
+.modal-media[src$=".mkv"] {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  max-height: 80vh;
+}
+
+/* Ensure proper video aspect ratio */
+@media (max-width: 768px) {
+  .modal-media[src$=".mp4"],
+  .modal-media[src$=".mov"],
+  .modal-media[src$=".avi"],
+  .modal-media[src$=".webm"],
+  .modal-media[src$=".mkv"] {
+    min-height: 200px;
+    max-height: 70vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-media[src$=".mp4"],
+  .modal-media[src$=".mov"],
+  .modal-media[src$=".avi"],
+  .modal-media[src$=".webm"],
+  .modal-media[src$=".mkv"] {
+    min-height: 180px;
+    max-height: 60vh;
   }
 }

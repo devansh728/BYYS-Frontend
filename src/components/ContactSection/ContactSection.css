@@ -429,6 +429,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 3rem;
+  align-items: start;
 }
 
 /* Office Hours - Enhanced */
@@ -440,6 +441,9 @@
   text-align: center;
   border-top: 5px solid var(--saffron);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
 }
 
 .office-hours:hover {
@@ -475,6 +479,9 @@
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   border-top: 5px solid var(--saffron);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
 }
 
 .social-media:hover {
@@ -501,8 +508,8 @@
 .social-links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;         /* Wider gap */
-  width: 100%;       /* Make grid expand */
+  gap: 2rem;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -512,17 +519,19 @@
   align-items: center;
   justify-content: center;
   aspect-ratio: 1 / 1;
-  width: 100%;       /* Fill grid column */
+  width: 100%;
   border-radius: 20px;
   border-width: 3px;
   border-style: solid;
   background: #fff;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   overflow: hidden;
-  padding: 0;        /* Remove extra padding */
+  padding: 1rem;
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
 }
-
 
 .social-link::before {
   content: '';
@@ -533,6 +542,7 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.5s;
+  z-index: -1;
 }
 
 .social-link:hover::before {
@@ -560,6 +570,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
 .social-link.facebook {
@@ -623,6 +634,16 @@
 }
 
 /* Responsive Design - Enhanced */
+@media (max-width: 1200px) {
+  .contact-us {
+    padding: 0 1.5rem;
+  }
+  
+  .social-links {
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 992px) {
   .contact-methods {
     grid-template-columns: 1fr;
@@ -643,6 +664,15 @@
   .social-links {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .get-in-touch h2,
+  .visit-message-section h2,
+  .office-hours-social h2 {
+    font-size: 2.2rem;
   }
 }
 
@@ -651,8 +681,14 @@
     padding: 0 1rem;
   }
 
+  .contact-header {
+    padding: 2rem 1rem;
+    margin-bottom: 3rem;
+  }
+
   .contact-header h1 {
     font-size: 2.5rem;
+    line-height: 1.2;
   }
 
   .contact-header p {
@@ -667,27 +703,46 @@
     font-size: 3rem;
   }
 
-  .social-links {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-header {
-    padding: 2rem 1rem;
+  .method-header h3 {
+    font-size: 1.4rem;
   }
 
-  .contact-header h1 {
+  .get-in-touch,
+  .visit-message-section,
+  .office-hours-social {
+    margin-bottom: 3rem;
+  }
+
+  .get-in-touch h2,
+  .visit-message-section h2,
+  .office-hours-social h2 {
     font-size: 2rem;
   }
 
-  .contact-method {
-    padding: 1.5rem;
+  /* Mobile Social Icons - Significantly Reduced */
+  .social-links {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 500px;
   }
 
-  .method-header h3 {
-    font-size: 1.4rem;
+  .social-link {
+    min-height: 80px;
+    max-height: 100px;
+    padding: 0.5rem;
+    border-radius: 15px;
+    border-width: 2px;
+  }
+
+  .social-link i {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .social-link span {
+    font-size: 0.7rem;
+    letter-spacing: 0.3px;
   }
 
   .our-location,
@@ -695,5 +750,186 @@
   .office-hours,
   .social-media {
     padding: 2rem;
+  }
+
+  .office-hours h3,
+  .social-media h3 {
+    font-size: 1.6rem;
+  }
+
+  .hours-info .timing {
+    font-size: 1.5rem;
+  }
+
+  .hours-info .days {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-methods {
+    gap: 1.5rem;
+  }
+
+  /* Even Smaller Social Icons for Small Mobile */
+  .social-links {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.8rem;
+    max-width: 400px;
+  }
+
+  .social-link {
+    min-height: 70px;
+    max-height: 85px;
+    padding: 0.4rem;
+    border-radius: 12px;
+  }
+
+  .social-link i {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .social-link span {
+    font-size: 0.6rem;
+    letter-spacing: 0.2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header {
+    padding: 1.5rem 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-header h1 {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .contact-header p {
+    font-size: 0.9rem;
+  }
+
+  .contact-method {
+    padding: 1.5rem;
+  }
+
+  .method-header i {
+    font-size: 2.5rem;
+  }
+
+  .method-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .get-in-touch h2,
+  .visit-message-section h2,
+  .office-hours-social h2 {
+    font-size: 1.8rem;
+  }
+
+  .our-location,
+  .contact-form-section,
+  .office-hours,
+  .social-media {
+    padding: 1.5rem;
+  }
+
+  .our-location h3,
+  .contact-form-section h3,
+  .office-hours h3,
+  .social-media h3 {
+    font-size: 1.4rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 12px 15px;
+  }
+
+  .submit-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
+  /* Very Small Social Icons for Small Mobile */
+  .social-links {
+    max-width: 320px;
+    gap: 0.6rem;
+  }
+
+  .social-link {
+    min-height: 60px;
+    max-height: 75px;
+    padding: 0.3rem;
+    border-radius: 10px;
+  }
+
+  .social-link i {
+    font-size: 1rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .social-link span {
+    font-size: 0.55rem;
+    letter-spacing: 0.1px;
+  }
+
+  .hours-info .timing {
+    font-size: 1.3rem;
+  }
+
+  .hours-info .days {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .contact-us {
+    padding: 0 0.5rem;
+  }
+
+  .contact-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .get-in-touch h2,
+  .visit-message-section h2,
+  .office-hours-social h2 {
+    font-size: 1.6rem;
+  }
+
+  .contact-method {
+    padding: 1rem;
+  }
+
+  /* Ultra Small Social Icons for Very Small Mobile */
+  .social-links {
+    max-width: 280px;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    min-height: 50px;
+    max-height: 65px;
+    padding: 0.25rem;
+    border-radius: 8px;
+    border-width: 1px;
+  }
+
+  .social-link i {
+    font-size: 0.9rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .social-link span {
+    font-size: 0.5rem;
+    letter-spacing: 0px;
+  }
+
+  .social-link:hover {
+    transform: translateY(-4px);
   }
 }

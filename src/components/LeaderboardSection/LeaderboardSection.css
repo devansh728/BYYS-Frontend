@@ -1,19 +1,31 @@
-/* Leaderboard Styles - Enhanced */
+/* Leaderboard Styles - Enhanced & Perfectly Centered */
 .leaderboard {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Leaderboard Header */
+/* Leaderboard Header - FIXED for mobile */
 .leaderboard-header {
   text-align: center;
-  margin-bottom: 4rem;
-  padding: 3rem 0;
+  margin: 0 auto 3rem auto;
+  padding: 3rem 2rem;
   background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%);
   color: white;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(255, 153, 51, 0.3);
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+  /* KEEP HEADER CENTERED ON ALL DEVICES */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .leaderboard-header h1 {
@@ -26,7 +38,7 @@
 .leaderboard-header p {
   font-size: 1.2rem;
   opacity: 0.9;
-  max-width: 800px;
+  max-width: 100%;
   margin: 0 auto;
   line-height: 1.6;
 }
@@ -35,17 +47,28 @@
 .leaderboard-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: start;
+  box-sizing: border-box;
 }
 
-/* Leaderboard Section - Enhanced */
+/* Leaderboard Section - ONLY sections get left margin, NOT header */
 .leaderboard-section {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  padding: 2.5rem;
+  padding: 2rem;
   border-top: 5px solid var(--saffron);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  /* Apply left margin ONLY to sections, not header */
+  margin-left: 200px;
 }
 
 .leaderboard-section:hover {
@@ -54,9 +77,9 @@
 }
 
 .leaderboard-section h2 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: var(--maroon);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-family: 'Cinzel', serif;
   text-align: center;
   position: relative;
@@ -78,9 +101,11 @@
 .top-three {
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin: 0 auto 2rem auto;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .champion {
@@ -92,6 +117,10 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  min-width: 160px;
+  flex: 1;
+  max-width: 200px;
+  margin: 0 auto;
 }
 
 .champion::before {
@@ -114,7 +143,7 @@
 }
 
 .first-place {
-  transform: scale(1.1);
+  transform: scale(1.05);
   border: 3px solid #ffd700;
   background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
   color: #333;
@@ -131,7 +160,7 @@
 }
 
 .champion-rank {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 700;
   width: 40px;
   height: 40px;
@@ -146,11 +175,11 @@
 
 .first-place .champion-rank {
   background: #ff6b35;
-  font-size: 2.2rem;
+  font-size: 2rem;
 }
 
 .champion-info h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-family: 'Cinzel', serif;
@@ -160,6 +189,7 @@
   color: #666;
   font-weight: 500;
   margin: 0;
+  font-size: 0.9rem;
 }
 
 /* Leaderboard Table - Enhanced */
@@ -168,22 +198,25 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  width: 100%;
+  margin: 0 auto;
 }
 
 .table-header {
   display: grid;
   grid-template-columns: 60px 1fr 80px 80px;
-  gap: 1rem;
+  gap: 0.5rem;
   background: linear-gradient(135deg, var(--maroon) 0%, var(--dark-maroon) 100%);
   color: white;
   padding: 1rem;
   font-weight: 600;
+  align-items: center;
 }
 
 .table-row {
   display: grid;
   grid-template-columns: 60px 1fr 80px 80px;
-  gap: 1rem;
+  gap: 0.5rem;
   padding: 1rem;
   border-bottom: 1px solid #f0f0f0;
   transition: all 0.3s ease;
@@ -202,59 +235,218 @@
 .rank {
   font-weight: 700;
   color: var(--maroon);
-  font-size: 1.1rem;
+  font-size: 1rem;
+  text-align: center;
 }
+
+.rank.gold { color: #ffd700; }
+.rank.silver { color: #c0c0c0; }
+.rank.bronze { color: #cd7f32; }
 
 .member-name {
   font-weight: 600;
   color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.shares {
+.avatar {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+}
+
+.shares,
+.referrals {
   font-weight: 600;
   color: var(--saffron);
+  text-align: center;
 }
 
 .trend {
   font-weight: 600;
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
-.trend.positive {
+.trend.positive,
+.change.up {
   background: #d4edda;
   color: #155724;
 }
 
-.trend.negative {
+.trend.negative,
+.change.down {
   background: #f8d7da;
   color: #721c24;
 }
 
-.trend.neutral {
+.trend.neutral,
+.change.same {
   background: #e2e3e5;
   color: #383d41;
 }
 
-/* Profile Section - Enhanced */
+/* Network Error */
+.network-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #f5c6cb;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem 0;
+}
+
+.pagination button {
+  background: #343a40;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #495057;
+  transform: translateY(-2px);
+}
+
+.pagination button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pagination .page-info {
+  font-weight: 600;
+  color: #495057;
+  margin: 0 1rem;
+}
+
+/* Tabs - KEEP CENTERED */
+.leaderboard-tabs {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  width: 100%;
+  margin: 0 auto 2rem auto;
+  max-width: 800px;
+  box-sizing: border-box;
+  /* KEEP TABS CENTERED */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tabs button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  background: #f0f0f0;
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.tabs button.active {
+  background: linear-gradient(135deg, var(--saffron), var(--gold));
+  color: white;
+}
+
+.tabs button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* General Layout */
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Leaderboard Block Styling */
+.leaderboard-block {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.leaderboard-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.leaderboard-title {
+  font-size: 1.8rem;
+  color: var(--maroon);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Cinzel', serif;
+  border-bottom: 3px solid var(--saffron);
+  padding-bottom: 0.5rem;
+}
+
+/* Profile, Downloads, Achievements Sections */
 .profile-section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.profile-card {
+.profile-card,
+.downloads-section,
+.achievements-section {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  padding: 2.5rem;
+  padding: 2rem;
   border-top: 5px solid var(--saffron);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-.profile-card:hover {
+.profile-card:hover,
+.downloads-section:hover,
+.achievements-section:hover {
   transform: translateY(-5px);
   box-shadow: 0 25px 50px rgba(0,0,0,0.18);
 }
@@ -265,7 +457,7 @@
 }
 
 .profile-avatar i {
-  font-size: 5rem;
+  font-size: 4rem;
   color: var(--saffron);
 }
 
@@ -275,7 +467,7 @@
 }
 
 .profile-info h3 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--maroon);
   margin-bottom: 1rem;
   font-family: 'Cinzel', serif;
@@ -294,7 +486,8 @@
 .profile-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .stat-item {
@@ -310,13 +503,9 @@
   transform: scale(1.05);
 }
 
-.stat-item.large {
-  grid-column: span 1;
-}
-
 .stat-number {
   display: block;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -328,23 +517,9 @@
   letter-spacing: 0.5px;
 }
 
-/* Downloads Section - Enhanced */
-.downloads-section {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  padding: 2.5rem;
-  border-top: 5px solid var(--saffron);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.downloads-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-}
-
-.downloads-section h3 {
-  font-size: 1.8rem;
+.downloads-section h3,
+.achievements-section h3 {
+  font-size: 1.6rem;
   color: var(--maroon);
   margin-bottom: 1.5rem;
   font-family: 'Cinzel', serif;
@@ -360,7 +535,7 @@
 .download-item {
   display: flex;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
@@ -374,8 +549,8 @@
 }
 
 .download-icon {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--saffron), var(--gold));
   display: flex;
@@ -386,7 +561,7 @@
 }
 
 .download-icon i {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: white;
 }
 
@@ -395,7 +570,7 @@
 }
 
 .download-content h4 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--maroon);
   margin-bottom: 0.3rem;
   font-weight: 600;
@@ -403,7 +578,7 @@
 
 .download-content p {
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   margin: 0;
   line-height: 1.4;
 }
@@ -412,11 +587,11 @@
   background: linear-gradient(135deg, var(--maroon), var(--dark-maroon));
   color: white;
   border: none;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .download-btn:hover {
@@ -424,33 +599,11 @@
   transform: scale(1.05);
 }
 
-/* Achievements Section - Enhanced */
-.achievements-section {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-  padding: 2.5rem;
-  border-top: 5px solid var(--saffron);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.achievements-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-}
-
-.achievements-section h3 {
-  font-size: 1.8rem;
-  color: var(--maroon);
-  margin-bottom: 1.5rem;
-  font-family: 'Cinzel', serif;
-  text-align: center;
-}
-
 .achievements-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  justify-content: center;
 }
 
 .achievement-item {
@@ -480,8 +633,8 @@
 }
 
 .achievement-icon {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -501,7 +654,7 @@
 }
 
 .achievement-icon i {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .achievement-content {
@@ -509,7 +662,7 @@
 }
 
 .achievement-content h4 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-bottom: 0.2rem;
   font-weight: 600;
 }
@@ -523,7 +676,7 @@
 }
 
 .achievement-content p {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   margin: 0;
   line-height: 1.3;
 }
@@ -540,45 +693,129 @@
   position: absolute;
   top: -5px;
   right: -5px;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: #28a745;
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 
-/* Responsive Design - Enhanced */
-@media (max-width: 1200px) {
+/* RESPONSIVE DESIGN - MOBILE RESPONSIVE */
+
+/* Large Desktop (1400px and above) - Keep 200px margin for sections only */
+@media (min-width: 1400px) {
+  .leaderboard {
+    max-width: 1300px;
+  }
+  
+  .leaderboard-content {
+    max-width: 1200px;
+  }
+  
+  .leaderboard-header {
+    max-width: 900px;
+  }
+  
+  .leaderboard-section {
+    margin-left: 200px;
+  }
+}
+
+/* Desktop/Laptop (1200px to 1399px) - Keep 200px margin for sections only */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .leaderboard-section {
+    margin-left: 200px;
+  }
+}
+
+/* Large Tablet/Small Desktop (1025px to 1199px) - Reduce margin for sections only */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .leaderboard-section {
+    margin-left: 100px;
+  }
+}
+
+/* Tablet Responsive (769px to 1024px) - Remove left margin for sections only */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .leaderboard {
+    padding: 1.5rem 1rem;
+    max-width: 95vw;
+  }
+  
   .leaderboard-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+    max-width: 600px;
   }
 
   .profile-stats {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .leaderboard-section {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  
+  /* Header stays centered */
+  .leaderboard-header {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Tabs stay centered */
+  .leaderboard-tabs {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-@media (max-width: 768px) {
+/* Mobile Large (481px to 768px) - Remove left margin for sections only */
+@media (min-width: 481px) and (max-width: 768px) {
   .leaderboard {
-    padding: 0 1rem;
+    padding: 1rem 0.5rem;
+    max-width: 98vw;
+  }
+
+  .leaderboard-header {
+    padding: 2rem 1rem;
+    margin: 0 auto 2rem auto;
+    max-width: 95vw;
   }
 
   .leaderboard-header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .leaderboard-header p {
     font-size: 1rem;
   }
 
+  .leaderboard-content {
+    max-width: 95vw;
+    grid-template-columns: 1fr;
+  }
+
+  .leaderboard-section {
+    padding: 1.5rem;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .leaderboard-section h2 {
+    font-size: 1.6rem;
+  }
+
   .top-three {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    max-width: 300px;
+    margin: 0 auto 2rem auto;
   }
 
   .first-place {
@@ -594,11 +831,27 @@
     order: 3;
   }
 
+  .champion {
+    max-width: 280px;
+    width: 100%;
+  }
+
   .table-header,
   .table-row {
-    grid-template-columns: 50px 1fr 60px 60px;
+    grid-template-columns: 50px 1fr 70px 60px;
+    gap: 0.3rem;
+    padding: 0.8rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .tabs {
     gap: 0.5rem;
-    padding: 0.8rem;
+    justify-content: center;
+  }
+
+  .tabs button {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
   }
 
   .profile-stats {
@@ -608,227 +861,238 @@
   .achievements-grid {
     grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 480px) {
-  .leaderboard-header {
-    padding: 2rem 1rem;
-  }
-
-  .leaderboard-header h1 {
-    font-size: 2rem;
-  }
-
-  .leaderboard-section,
   .profile-card,
   .downloads-section,
   .achievements-section {
     padding: 1.5rem;
   }
 
+  .leaderboard-tabs {
+    max-width: 95vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .pagination button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Mobile Small (361px to 480px) - Remove left margin for sections only */
+@media (min-width: 361px) and (max-width: 480px) {
+  .leaderboard {
+    padding: 0.5rem 0.25rem;
+    max-width: 100vw;
+  }
+
+  .leaderboard-header {
+    padding: 1.5rem 0.75rem;
+    margin: 0 auto 1.5rem auto;
+    max-width: 98vw;
+  }
+
+  .leaderboard-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .leaderboard-header p {
+    font-size: 0.9rem;
+  }
+
+  .leaderboard-content {
+    max-width: 98vw;
+    grid-template-columns: 1fr;
+  }
+
+  .leaderboard-section {
+    padding: 1rem;
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .leaderboard-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .top-three {
+    max-width: 250px;
+  }
+
   .champion {
     padding: 1rem;
+    max-width: 250px;
+  }
+
+  .champion-rank {
+    width: 35px;
+    height: 35px;
+    font-size: 1.4rem;
+  }
+
+  .champion-info h3 {
+    font-size: 1rem;
+  }
+
+  .champion-info p {
+    font-size: 0.8rem;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 40px 1fr 60px 50px;
+    padding: 0.6rem 0.3rem;
+    font-size: 0.8rem;
+  }
+
+  .avatar {
+    width: 25px;
+    height: 25px;
   }
 
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.6rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
   }
 
   .download-item {
-    padding: 1rem;
+    padding: 0.8rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
   }
 
   .download-icon {
     width: 40px;
     height: 40px;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
   }
 
   .download-icon i {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  .profile-card,
+  .downloads-section,
+  .achievements-section {
+    padding: 1rem;
+  }
+
+  .tabs {
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .tabs button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .leaderboard-tabs {
+    max-width: 98vw;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
-/* Tabs */
-.leaderboard-tabs {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-}
 
-.tabs {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  gap: 1rem;
-}
+/* Mobile Extra Small (up to 360px) - Remove left margin for sections only */
+@media (max-width: 360px) {
+  .leaderboard {
+    max-width: 100vw;
+  }
 
-.tabs button {
-  padding: 0.6rem 1.5rem;
-  border: none;
-  background: #f0f0f0;
-  cursor: pointer;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: 0.3s;
-}
+  .leaderboard-header {
+    max-width: 100vw;
+  }
 
-.tabs button.active {
-  background: linear-gradient(135deg, var(--saffron), var(--gold));
-  color: white;
-}
+  .leaderboard-header h1 {
+    font-size: 1.4rem;
+  }
 
-.tabs button:hover {
-  transform: translateY(-2px);
-}
+  .leaderboard-header p {
+    font-size: 0.85rem;
+  }
 
-/* Leaderboard Table */
-.leaderboard-table {
-  border-radius: 10px;
-  overflow: hidden;
-}
+  .leaderboard-content {
+    max-width: 100vw;
+    grid-template-columns: 1fr;
+  }
 
-.table-header,
-.table-row {
-  display: grid;
-  grid-template-columns: 80px 1fr 100px 80px;
-  padding: 0.8rem 1rem;
-  align-items: center;
-}
+  .leaderboard-section {
+    margin-left: 0;
+  }
 
-.table-header {
-  background: var(--maroon);
-  color: white;
-  font-weight: bold;
-}
-
-.table-row {
-  border-bottom: 1px solid #f0f0f0;
-  transition: 0.3s;
-}
-
-.table-row:hover {
-  background: #fafafa;
-}
-
-/* Rank styles */
-.rank {
-  font-weight: bold;
-  text-align: center;
-}
-.rank.gold { color: gold; }
-.rank.silver { color: silver; }
-.rank.bronze { color: #cd7f32; }
-
-.avatar {
-  border-radius: 50%;
-  margin-right: 0.6rem;
-}
-
-/* Change indicator */
-.change.up { color: green; font-weight: bold; }
-.change.down { color: red; font-weight: bold; }
-.change.same { color: gray; font-weight: bold; }
-
-/* Referrals */
-.referrals {
-  color: var(--saffron);
-  font-weight: bold;
-}
-/* General Layout */
-.leaderboard-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-}
-
-/* Leaderboard Block Styling */
-.leaderboard-block {
-  background: white;
-  border-radius: 15px;
-  padding: 2rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-}
-
-.leaderboard-block:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-}
-
-.leaderboard-title {
-  font-size: 1.8rem;
-  color: var(--maroon);
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-family: 'Cinzel', serif;
-  border-bottom: 3px solid var(--saffron);
-  padding-bottom: .5rem;
-}
-
-/* Table Layout */
-.leaderboard-table {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.table-header,
-.table-row {
-  display: grid;
-  grid-template-columns: 70px 1fr 100px 80px;
-  align-items: center;
-  padding: 0.8rem 1rem;
-}
-
-.table-header {
-  background: var(--maroon);
-  color: white;
-  font-weight: 600;
-}
-
-.table-row {
-  border-bottom: 1px solid #f0f0f0;
-  transition: 0.3s;
-}
-
-.table-row:hover {
-  background: #fafafa;
-}
-
-/* Rank highlights */
-.rank {
-  font-weight: bold;
-  text-align: center;
-}
-.rank.gold { color: gold; }
-.rank.silver { color: silver; }
-.rank.bronze { color: #cd7f32; }
-
-/* Avatar & Names */
-.member-name {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-weight: 500;
-}
-.avatar {
-  border-radius: 50%;
-}
-
-/* Referrals count */
-.referrals {
-  color: var(--saffron);
-  font-weight: bold;
-}
-
-/* Rank Change Colors */
-.change.up { color: green; font-weight: bold; }
-.change.down { color: red; font-weight: bold; }
-.change.same { color: gray; font-weight: bold; }
-
-/* Responsive */
-@media (max-width: 600px) {
   .table-header,
   .table-row {
-    grid-template-columns: 50px 1fr 70px 60px;
+    grid-template-columns: 35px 1fr 50px 45px;
+    font-size: 0.75rem;
+  }
+
+  .top-three {
+    max-width: 200px;
+  }
+
+  .champion {
+    max-width: 200px;
+    padding: 0.8rem;
+  }
+
+  .champion-rank {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .leaderboard-tabs {
+    max-width: 100vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Landscape orientation for mobile - Remove left margin for sections only */
+@media (max-height: 500px) and (orientation: landscape) {
+  .leaderboard-section {
+    margin-left: 0;
+  }
+
+  .leaderboard-header {
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .leaderboard-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .top-three {
+    flex-direction: row;
+    justify-content: center;
+    max-width: 600px;
+  }
+
+  .champion {
+    max-width: 150px;
+    padding: 0.8rem;
+  }
+  
+  .leaderboard-tabs {
+    margin-left: auto;
+    margin-right: auto;
   }
 }

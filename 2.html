@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Honour</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Meow+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Styles and Layout */
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .certificate {
+            width: 1100px;
+            height: 750px;
+            background: #FFB64D;
+            padding: 40px 80px;
+            box-sizing: border-box;
+            position: relative;
+            border: 2px solid #000;
+            text-align: center;
+            overflow: hidden;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Watermark */
+        .certificate::before {
+            content: "";
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white' stroke='%23dc2626' stroke-width='2'/%3E%3Ctext x='50' y='55' font-family='Arial' font-size='20' text-anchor='middle' fill='%23000'%3EBYVS%3C/text%3E%3C/svg%3E") no-repeat center;
+            background-size: 650px;
+            opacity: 0.25;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Top Left Logo Container (Adjusted for flexible resizing) */
+        .top-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            max-width: 120px; 
+            z-index: 3;
+            border: 2px solid #dc2626; 
+            border-radius: 50%;
+            overflow: hidden;
+            width: 100%;
+            height: auto;
+        }
+        
+        /* Logo Image inside the container */
+        .top-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Reg. No. */
+        .reg-no {
+            position: absolute;
+            top: 150px;
+            left: 30px;
+            color: #dc2626; 
+            font-size: 18px;
+            z-index: 3;
+            text-align: left;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        /* Main Heading */
+        .certificate h1 {
+            font-size: 38px;
+            margin: 20px 0 10px 0;
+            position: relative;
+            z-index: 3;
+            font-family: "Arial Black", Impact, sans-serif;
+            font-weight: 900;
+            margin-left: 60px;
+            line-height: 1.2;
+        }
+
+        /* Certificate of Honour */
+        .certificate h2 {
+            font-size: 28px;
+            margin: 20px 0 15px 0;
+            position: relative;
+            z-index: 3;
+            font-family: Georgia, "Times New Roman", serif;
+            font-style: italic;
+            font-weight: bold;
+        }
+        
+        .certificate .certify-that {
+            font-size: 22px;
+            margin: 15px 0 25px 0;
+            position: relative;
+            z-index: 3;
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* Certificate Text */
+        .details {
+            font-size: 20px;
+            text-align: center;
+            line-height: 2.2;
+            position: relative;
+            z-index: 3;
+            margin-top: 20px;
+            font-family: Arial, Calibri, sans-serif;
+            font-weight: bold;
+        }
+        
+        .details p {
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .details .line {
+            display: inline-block;
+            border-bottom: 2px solid #000;
+            min-width: 400px;
+        }
+        
+        .details .small-line {
+            display: inline-block;
+            border-bottom: 2px solid #000;
+            min-width: 250px;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 50px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 18px;
+            z-index: 3;
+            font-weight: bold;
+        }
+
+        /* Date */
+        .date {
+            text-align: left;
+            font-family: Arial, Calibri, sans-serif;
+            font-weight: bold;
+        }
+
+        .date label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .date .line {
+            border-bottom: 1px solid #000;
+            width: 220px;
+            height: 25px;
+            display: block;
+        }
+
+        /* Signature */
+        .signature {
+            text-align: right;
+            font-weight: bold;
+        }
+        
+        /* New stylish signature class */
+        .actual-signature {
+            font-family: 'Meow Script', cursive;
+            font-size: 55px;
+            color: #1f2937; /* A dark gray color */
+            line-height: 1;
+            padding-right: 20px;
+        }
+
+        .signature p {
+            margin: 5px 0 0;
+            text-align: right;
+        }
+
+        .signature .name {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .signature .title {
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="certificate">
+    <div class="top-logo">
+        <img src="path/to/your/byvs_logo.png" alt="BYVS Logo">
+    </div>
+
+    <p class="reg-no">Reg no: 66/22</p>
+
+    <div class="title-section">
+        <h1>BHARTIYA YUVA VIDYARTHI <br> SANGATHAN (BYVS)</h1>
+        <h2>CERTIFICATE OF HONOUR</h2>
+        <h3 class="certify-that">THIS IS TO CERTIFY THAT</h3>
+    </div>
+
+    <div class="details">
+        <p><span class="line"></span></p>
+        <p>Is elected as <span class="small-line"></span> of Bhartiya Yuva Vidyarthi Sangathan from</p>
+        <p><span class="line"></span> Block of <span class="line"></span></p>
+        <p>District of <span class="line"></span> State.</p>
+        <p style="margin-top: 30px;">
+            This certificate is valid upto 1 year from the date of issue. <br>
+            We wish you a bright future.
+        </p>
+    </div>
+
+    <div class="footer">
+        <div class="date">
+            <label>Date Of Issue:</label>
+            <span class="line"></span>
+        </div>
+        <div class="signature">
+            <p class="actual-signature">Saksham</p>
+            <p class="name">RAJA SAKSHAM SINGH YOGI</p>
+            <p class="title">FOUNDER & NATIONAL PRESIDENT</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

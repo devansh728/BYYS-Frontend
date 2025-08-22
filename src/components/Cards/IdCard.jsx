@@ -1,68 +1,82 @@
 import React from "react";
+ 
 
-export default function IdCard({ user }) {
+ export default function IdCard({ user }) {
   return (
-    <div className="w-[650px] h-[350px] rounded-xl shadow-lg overflow-hidden border border-gray-300">
-      {/* Top Section */}
-      <div className="bg-orange-400 h-[120px] flex items-center px-6 relative">
-        {/* Logo */}
-        <div className="absolute left-6 top-6">
-          <div className="w-[80px] h-[80px] rounded-full overflow-hidden border border-red-600 flex items-center justify-center bg-white">
-            <img
-              src="../../../public/assests/logo.jpg"
-              alt="Logo"
-              className="object-contain w-[70px] h-[70px]"
-            />
-          </div>
-          <p className="text-[12px] text-white font-bold mt-1">REG. NO. : 66/22</p>
-        </div>
+  <div className="w-full max-w-md aspect-[1.586/1] rounded-xl shadow-lg overflow-hidden border border-gray-200 bg-orange-100">
+  {/* Top Section (Orange) */}
+  <div className="bg-orange-200 h-1/3 flex items-center px-4 relative">
+  {/* Logo */}
+  <div className="absolute left-4 top-4 w-16 h-16 rounded-full overflow-hidden border-2 border-red-400 bg-white flex items-center justify-center">
+  <img
+  src="../../../public/assests/logo.jpg"
+  alt="Logo"
+  className="object-contain w-full h-full p-1"
+  />
+  </div>
+  <p className="absolute left-4 bottom-2 text-[0.6rem] text-orange-800 font-bold">REG. NO. : 66/22</p>
+ 
 
-        {/* Title */}
-        <div className="flex flex-col text-center w-full">
-          <h1 className="text-white font-extrabold text-2xl tracking-wide">
-            BHARATIYA YUVA <br />
-            VIDYARTHI SANGATHAN (BYVS)
-          </h1>
-          <p className="text-sm italic text-white mt-1">
-            “FOR YOU , WITH YOU , FROM YOU”
-          </p>
-        </div>
-      </div>
+  {/* Title */}
+  <div className="flex-grow flex flex-col items-center text-center py-2">
+  <h1 className="text-orange-800 font-extrabold text-sm sm:text-lg tracking-wide leading-tight">
+  BHARATIYA YUVA <br />
+  VIDYARTHI SANGATHAN (BYVS)
+  </h1>
+  <p className="text-[0.5rem] sm:text-xs italic text-orange-800 mt-0.5 leading-none">
+  “FOR YOU , WITH YOU , FROM YOU”
+  </p>
+  </div>
+  </div>
+ 
 
-      {/* Bottom Section */}
-      <div className="bg-white h-[230px] px-6 py-4 relative">
-        {/* Membership ID Card Title */}
-        <h2 className="text-center font-bold underline mb-4 text-lg">
-          MEMBERSHIP ID CARD
-        </h2>
+  {/* Bottom Section (White) */}
+  <div className="bg-white h-2/3 px-4 py-2 relative flex flex-col justify-between">
+  {/* Membership ID Card Title */}
+  <h2 className="text-center font-bold underline text-sm sm:text-base text-orange-600 mb-1">
+  MEMBERSHIP ID CARD
+  </h2>
+ 
 
-        {/* Details */}
-        <div className="grid grid-cols-2 gap-y-2 text-[15px] font-semibold text-blue-900">
-          <p>Name : {user.fullName}</p>
-          <p className="border-b border-gray-300 w-[250px]"></p>
+  {/* Details */}
+  <div className="grid grid-cols-2 gap-y-0.5 text-[0.7rem] sm:text-sm font-semibold text-blue-800">
+  <p className="text-left">Name</p>
+  <p className="text-left">: {user.fullName}</p>
+ 
 
-          <p>Member ID : generateMemberId</p>
-          <p className="border-b border-gray-300 w-[250px]"></p>
+  <p className="text-left">Member ID</p>
+  <p className="text-left">: generateMemberId</p>
+ 
 
-          <p>District : Bangalore</p>
-          <p className="border-b border-gray-300 w-[250px]"></p>
+  <p className="text-left">District</p>
+  <p className="text-left">: Bangalore</p>
+ 
 
-          <p>State : {user.state}</p>
-          <p className="border-b border-gray-300 w-[250px]"></p>
+  <p className="text-left">State</p>
+  <p className="text-left">: {user.state}</p>
+ 
 
-          <p>D.O.I. : hello</p>
-          <p className="border-b border-gray-300 w-[250px]"></p>
-        </div>
+  <p className="text-left">D.O.I.</p>
+  <p className="text-left">: hello</p>
+  </div>
+ 
 
-        {/* Photo placeholder */}
-        <div className="absolute right-8 top-[95px] w-[100px] h-[120px] bg-orange-300 rounded-lg"></div>
+  {/* Photo placeholder */}
+  <div className="absolute right-4 top-1/4 transform -translate-y-1/2 w-20 h-24 sm:w-24 sm:h-28 bg-orange-200 rounded-md flex items-center justify-center text-orange-800 font-bold text-center">
+  {user.photo ? (
+  <img src={user.photo} alt="User" className="object-cover w-full h-full rounded-md" />
+  ) : (
+  "Photo"
+  )}
+  </div>
+ 
 
-        {/* Signature */}
-        <div className="absolute bottom-4 right-12 text-center">
-          <p className="italic text-black text-sm">[Signature]</p>
-          <p className="text-sm font-bold">Founder & National President</p>
-        </div>
-      </div>
-    </div>
+  {/* Signature */}
+  <div className="absolute bottom-2 right-4 text-right">
+  <p className="italic text-black text-xs">[Signature]</p>
+  <p className="text-xs font-bold text-gray-800 leading-none">Founder & National President</p>
+  </div>
+  </div>
+  </div>
   );
-}
+ }

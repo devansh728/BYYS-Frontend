@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Honour</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@400;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Main Certificate Container */
+        .certificate {
+            width: 1100px;
+            height: 750px;
+            background: #FFB64D;; /* Bright gold background */
+            margin: 30px auto;
+            padding: 60px 100px; /* Increased padding */
+            box-sizing: border-box;
+            position: relative;
+            border: 4px solid #000;
+            text-align: center;
+            overflow: hidden;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Watermark (Self-contained) */
+        .certificate::before {
+            content: "";
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0.1) 100%);
+            opacity: 0.8;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Top Left Logo */
+        .top-logo {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            max-width: 120px;
+            max-height: 120px;
+            z-index: 3;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #dc2626;
+            border-radius: 50%;
+        }
+
+        .top-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Reg. No. */
+        .reg-no {
+            position: absolute;
+            top: 170px;
+            left: 50px;
+            color: #8B0000;
+            font-size: 16px;
+            z-index: 3;
+            text-align: left;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Main Heading */
+        .certificate h1 {
+            font-size: 44px;
+            margin: 20px 0 10px 0;
+            position: relative;
+            z-index: 3;
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            line-height: 1.1;
+            color: #2c3e50;
+        }
+
+        /* Certificate of Honour */
+        .certificate h2 {
+            font-size: 32px;
+            margin: 20px 0 15px 0;
+            position: relative;
+            z-index: 3;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            color: #c0392b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Certify That */
+        .certificate .certify-that {
+            font-size: 24px;
+            margin: 15px 0 25px 0;
+            position: relative;
+            z-index: 3;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 400;
+            color: #34495e;
+        }
+
+        /* Certificate Text */
+        .details {
+            font-size: 20px;
+            text-align: center;
+            line-height: 1.8;
+            position: relative;
+            z-index: 3;
+            margin-top: 40px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            color: #2c3e50;
+        }
+
+        .details p {
+            margin: 0 0 10px 0;
+        }
+
+        .details .line {
+            display: inline-block;
+            border-bottom: 2px solid #000;
+            min-width: 450px;
+        }
+
+        .details .small-line {
+            display: inline-block;
+            border-bottom: 2px solid #000;
+            min-width: 280px;
+        }
+
+        .details .body-message {
+            margin-top: 30px;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 50px;
+            left: 100px;
+            right: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 18px;
+            z-index: 3;
+            font-weight: bold;
+        }
+
+        /* Date */
+        .date {
+            text-align: left;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .date label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .date span {
+            display: block;
+            border-bottom: 1px solid #000;
+            width: 250px;
+            height: 25px;
+        }
+
+        /* Signature */
+        .signature {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .signature .actual-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 60px;
+            color: #c0392b;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .signature p {
+            margin: 5px 0 0;
+            text-align: right;
+            color: #2c3e50;
+        }
+
+        .signature .name {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .signature .title {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate">
+        <div class="top-logo">
+            <img src="path/to/your/byvs_logo.png" alt="BYVS Logo" />
+        </div>
+
+        <p class="reg-no">Reg no: 66/22</p>
+
+        <div class="title-section">
+            <h1>BHARTIYA YUVA VIDYARTHI <br /> SANGATHAN (BYVS)</h1>
+            <h2>CERTIFICATE OF HONOUR</h2>
+            <h3 class="certify-that">THIS IS TO CERTIFY THAT</h3>
+        </div>
+
+        <div class="details">
+            <p><span class="line"></span></p>
+            <p>Is elected as <span class="small-line"></span> of Bhartiya Yuva Vidyarthi Sangathan from</p>
+            <p><span class="line"></span> Block of <span class="line"></span></p>
+            <p>District of <span class="line"></span> State.</p>
+            <p class="body-message">
+                This certificate is valid up to 1 year from the date of issue. <br />
+                We wish you a bright future.
+            </p>
+        </div>
+
+        <div class="footer">
+            <div class="date">
+                <label>Date Of Issue:</label>
+                <span class="line"></span>
+            </div>
+            <div class="signature">
+                <p class="actual-signature">Saksham</p>
+                <p class="name">RAJA SAKSHAM SINGH YOGI</p>
+                <p class="title">FOUNDER & NATIONAL PRESIDENT</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

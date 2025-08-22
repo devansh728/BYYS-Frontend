@@ -1,0 +1,183 @@
+/* IdCard.css */
+
+.id-card-container {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1.586 / 1;
+  border-radius: 0.75rem; /* 12px */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background-color: #fef3c7; /* light orange */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Section */
+.id-card-top-section {
+  background-color: #fde68a; /* darker orange */
+  height: 33.333%;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+}
+
+.id-card-logo-container {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 4rem; /* 64px */
+  height: 4rem;
+  border-radius: 9999px; /* full circle */
+  overflow: hidden;
+  border: 2px solid #f87171; /* red */
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.id-card-logo {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  padding: 0.25rem;
+}
+
+.id-card-reg-no {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.5rem;
+  font-size: 0.6rem;
+  color: #c2410c; /* dark orange */
+  font-weight: bold;
+}
+
+.id-card-title-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+.id-card-title {
+  color: #c2410c;
+  font-weight: 800; /* extra-bold */
+  font-size: 0.875rem; /* sm */
+  letter-spacing: 0.05em; /* wide */
+  line-height: 1.25;
+}
+
+.id-card-slogan {
+  font-size: 0.5rem;
+  font-style: italic;
+  color: #c2410c;
+  margin-top: 0.125rem;
+  line-height: 1;
+}
+
+/* Bottom Section */
+.id-card-bottom-section {
+  background-color: #fff;
+  height: 66.666%;
+  padding: 0.5rem 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.id-card-main-title {
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 0.875rem;
+  color: #ea580c; /* dark orange */
+  margin-bottom: 0.25rem;
+}
+
+/* Details Grid */
+.id-card-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.125rem 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #1e3a8a; /* dark blue */
+}
+
+.id-card-label {
+  text-align: left;
+}
+
+.id-card-value {
+  text-align: left;
+}
+
+/* Photo Placeholder */
+.id-card-photo-placeholder {
+  position: absolute;
+  right: 1rem;
+  top: 25%;
+  transform: translateY(-50%);
+  width: 5rem; /* 80px */
+  height: 6rem; /* 96px */
+  background-color: #fde68a;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bold;
+  color: #c2410c;
+}
+
+.id-card-photo {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+}
+
+/* Signature */
+.id-card-signature {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  text-align: right;
+}
+
+.id-card-signature-text {
+  font-style: italic;
+  color: #000;
+  font-size: 0.75rem;
+}
+
+.id-card-signature-name {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #4b5563; /* gray */
+  line-height: 1;
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 640px) {
+  .id-card-title {
+    font-size: 1.125rem; /* lg */
+  }
+
+  .id-card-slogan {
+    font-size: 0.75rem; /* xs */
+  }
+
+  .id-card-main-title {
+    font-size: 1rem; /* base */
+  }
+
+  .id-card-details-grid {
+    font-size: 0.9375rem; /* 15px */
+  }
+}

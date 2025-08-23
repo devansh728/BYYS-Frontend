@@ -1,4 +1,5 @@
 import React from "react";
+import "./Certificate.css";
 
 export default function CertificateComponent({ data }) {
   return (

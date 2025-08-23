@@ -1,143 +1,151 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@400;700&family=Dancing+Script:wght@400;700&display=swap');
+/* General Styles and Layout */
+body {
+    background-color: #f0f0f0;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
-/* Main Certificate Container */
 .certificate {
     width: 1100px;
     height: 750px;
-    background: #FFD700; /* Updated to a brighter gold */
-    margin: 30px auto;
-    padding: 60px 100px; /* Increased padding for more breathing room */
+    background: #FFB64D;
+    padding: 40px 80px;
     box-sizing: border-box;
     position: relative;
-    border: 4px solid #000;
+    border: 2px solid #000;
     text-align: center;
     overflow: hidden;
     font-weight: bold;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Added a subtle shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Watermark (Self-contained and visually appealing) */
+/* Watermark */
 .certificate::before {
     content: "";
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, rgba(255, 215, 0, 0.1) 100%);
-    opacity: 0.8; /* Increased opacity for better visibility */
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='white' stroke='%23dc2626' stroke-width='2'/%3E%3Ctext x='50' y='55' font-family='Arial' font-size='20' text-anchor='middle' fill='%23000'%3EBYVS%3C/text%3E%3C/svg%3E") no-repeat center;
+    background-size: 650px;
+    opacity: 0.25;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 1;
 }
 
-/* Top Left Logo */
+/* Top Left Logo Container (Adjusted for flexible resizing) */
 .top-logo {
     position: absolute;
-    top: 40px; /* Adjusted position */
-    left: 40px; /* Adjusted position */
-    max-width: 120px; /* Max width for any logo */
-    max-height: 120px; /* Max height for any logo */
+    top: 20px;
+    left: 20px;
+    max-width: 120px;
     z-index: 3;
-    overflow: hidden;
-    display: flex; /* Centers the image inside the container */
-    align-items: center;
-    justify-content: center;
     border: 2px solid #dc2626;
     border-radius: 50%;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
 }
 
+/* Logo Image inside the container */
 .top-logo img {
-    width: 100%; /* Image takes full width of its container */
-    height: auto; /* Maintains aspect ratio */
-    display: block; /* Removes any extra space */
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Reg. No. */
 .reg-no {
     position: absolute;
-    top: 170px;
-    left: 50px;
-    color: #8B0000; /* Darker red for elegance */
-    font-size: 16px;
+    top: 150px;
+    left: 30px;
+    color: #dc2626;
+    font-size: 18px;
     z-index: 3;
     text-align: left;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
 }
 
 /* Main Heading */
 .certificate h1 {
-    font-size: 44px; /* Slightly larger heading */
+    font-size: 38px;
     margin: 20px 0 10px 0;
     position: relative;
     z-index: 3;
-    font-family: 'Playfair Display', serif;
+    font-family: "Arial Black", Impact, sans-serif;
     font-weight: 900;
-    line-height: 1.1;
-    color: #2c3e50; /* A dark, professional blue-gray */
+    margin-left: 60px;
+    line-height: 1.2;
 }
 
 /* Certificate of Honour */
 .certificate h2 {
-    font-size: 32px; /* Adjusted size */
+    font-size: 28px;
     margin: 20px 0 15px 0;
     position: relative;
     z-index: 3;
-    font-family: 'Playfair Display', serif;
+    font-family: Georgia, "Times New Roman", serif;
     font-style: italic;
-    font-weight: 700;
-    color: #c0392b; /* A prominent red */
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-weight: bold;
 }
 
-/* Certify That */
-.certificate h3 {
-    font-size: 24px;
+.certificate .certify-that {
+    font-size: 22px;
     margin: 15px 0 25px 0;
     position: relative;
     z-index: 3;
-    font-family: 'Playfair Display', serif;
+    font-family: "Times New Roman", serif;
     font-style: italic;
-    font-weight: 400;
-    color: #34495e;
+    font-weight: bold;
 }
 
 /* Certificate Text */
 .details {
     font-size: 20px;
     text-align: center;
-    line-height: 1.8; /* Better line height for readability */
+    line-height: 2.2;
     position: relative;
     z-index: 3;
-    margin-top: 40px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    color: #2c3e50;
+    margin-top: 20px;
+    font-family: Arial, Calibri, sans-serif;
+    font-weight: bold;
 }
 
 .details p {
-    margin: 0 0 10px 0;
+    margin: 0;
+    line-height: 1.5;
 }
 
 .details .line {
     display: inline-block;
     border-bottom: 2px solid #000;
-    min-width: 450px;
+    min-width: 400px;
 }
 
 .details .small-line {
     display: inline-block;
     border-bottom: 2px solid #000;
-    min-width: 280px;
+    min-width: 250px;
 }
 
 /* Footer */
 .footer {
     position: absolute;
     bottom: 50px;
-    left: 100px;
-    right: 100px;
+    left: 80px;
+    right: 80px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -149,22 +157,21 @@
 /* Date */
 .date {
     text-align: left;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    color: #2c3e50;
+    font-family: Arial, Calibri, sans-serif;
+    font-weight: bold;
 }
 
 .date label {
     display: block;
     margin-bottom: 5px;
-    font-weight: 700;
+    font-weight: bold;
 }
 
-.date span {
-    display: block;
+.date .line {
     border-bottom: 1px solid #000;
-    width: 250px;
+    width: 220px;
     height: 25px;
+    display: block;
 }
 
 /* Signature */
@@ -173,116 +180,114 @@
     font-weight: bold;
 }
 
-.signature .actual-signature {
-    font-family: 'Dancing Script', cursive;
-    font-size: 60px; /* Larger signature for prominence */
-    color: #c0392b;
+/* New stylish signature class */
+.actual-signature {
+    font-family: 'Meow Script', cursive;
+    font-size: 55px;
+    color: #1f2937; /* A dark gray color */
     line-height: 1;
-    margin-bottom: 10px;
+    padding-right: 20px;
 }
 
 .signature p {
     margin: 5px 0 0;
     text-align: right;
-    color: #2c3e50;
 }
 
 .signature .name {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
     font-size: 18px;
 }
 
 .signature .title {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
     font-size: 16px;
 }
-/* Add these styles to your .css file */
+/* Add these new rules to your existing Certificate.css file */
 
-.dynamic-line-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
+.certificate-container {
+    max-width: 1100px;
+    /* Adjust this value based on your desired max width */
+    width: 100%;
+    margin: 0 auto;
+    /* Center the container */
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-.dynamic-line-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  white-space: nowrap; /* Prevents text from wrapping to the next line */
-  padding: 0 10px; /* Adds a little space around the text */
-  background-color: #FFD700; /* Match this with the certificate background color */
-  z-index: 5; /* Ensure the text is above the line */
+.certificate {
+    /* Keep existing styles, but override width/height */
+    /* width: 1100px; */
+    /* height: 750px; */
+    width: 100%;
+    height: auto;
+    /* ... rest of your certificate styles ... */
 }
 
-/* Specific styles for each dynamic text element */
-
-.full-name-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  min-width: 450px;
+/* Base scaling for the certificate */
+.certificate-preview-scaled {
+    transform-origin: top center;
+    /* Scale from the top-center */
+    transform: scale(0.6);
+    /* Default scale factor, adjust as needed */
+    width: 1100px;
+    /* Retain original dimensions to allow scaling */
+    height: 750px;
 }
 
-.full-name-line .full-name {
-  position: absolute;
-  font-family: 'Dancing Script', cursive; /* Optional: Use a script font for the name */
-  font-size: 28px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #FFD700;
-  padding: 0 10px;
-  z-index: 5;
+/* Media Queries for Responsiveness */
+
+/* For smaller screens (e.g., tablets) */
+@media (max-width: 1200px) {
+    .certificate-preview-scaled {
+        transform: scale(0.5);
+    }
 }
 
-.position-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  min-width: 450px;
-}
-
-.position-line .position-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #FFD700;
-  padding: 0 10px;
-  z-index: 5;
-}
-
-.block-district-line {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  min-width: 280px;
-}
-
-.block-district-line .block-text,
-.block-district-line .district-text {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #FFD700;
-  padding: 0 10px;
-  z-index: 5;
-}
-
-.block-district-line .block-text {
-  left: 30%; /* Adjust as needed */
-  transform: translate(-50%, -50%);
-}
-
-.block-district-line .district-text {
-  left: 70%; /* Adjust as needed */
-  transform: translate(-50%, -50%);
+/* For even smaller screens (e.g., mobile phones) */
+@media (max-width: 768px) {
+    .certificate-preview-scaled {
+        transform: scale(0.35);
+    }
+    .certificate {
+        padding: 20px 40px;
+        /* Reduce padding on smaller screens */
+    }
+    .top-logo {
+        max-width: 80px;
+    }
+    .certificate h1 {
+        font-size: 24px;
+    }
+    .certificate h2 {
+        font-size: 20px;
+    }
+    .details {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+    .details .line {
+        min-width: 150px;
+    }
+    .details .small-line {
+        min-width: 100px;
+    }
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        font-size: 14px;
+    }
+    .date,
+    .signature {
+        text-align: center;
+        width: 100%;
+    }
+    .signature {
+        margin-top: 10px;
+    }
 }

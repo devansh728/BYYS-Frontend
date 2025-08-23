@@ -9,7 +9,7 @@ export default function IdCard({ user }) {
         {/* Logo */}
         <div className="id-card-logo-container">
           <img
-            src="../../public/assests/logo.jpg"
+            src="/assests/logo.jpg"
             alt="Logo"
             className="id-card-logo"
           />

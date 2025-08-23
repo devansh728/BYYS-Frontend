@@ -1,5 +1,5 @@
 import React from 'react';
-import './CertificateSection.css'; // Assuming you save the CSS in a file named Certificate.css
+import './Certificate.css'; // Assuming you save the CSS in a file named Certificate.css
 
 const CertificateComponent = () => {
     return (

@@ -118,16 +118,16 @@ const UserDashboard = () => {
         fetchTasks();
 
         if (userData) {
-          setCertificateData({
-            recipientName: userData.fullName,
-            position: 'Office-Bearer', // Assuming the API returns the position
-            block: 'Block-A',
-            district: userData.district,
-            state: userData.state,
-            regNo: '66/22', // This can be static or dynamic from API
-            dateOfIssue: '2025-08-19', // Set current date
-          });
-        }
+        setCertificateData({
+          recipientName: userData.fullName,
+          position: 'Office-Bearer', // Assuming the API returns the position
+          block: 'Block-A',
+          district: userData.district,
+          state: userData.state,
+          regNo: '66/22', // This can be static or dynamic from API
+          dateOfIssue: '2025-08-19', // Set current date
+        });
+      }
       }
     } catch (error) {
       setError(error.message);
@@ -567,11 +567,9 @@ const UserDashboard = () => {
                     <h2 className="text-xl font-bold mb-4 text-center">
                       Certificate Preview
                     </h2>
-                    <div ref={certificateRef} className="flex justify-center overflow-auto">
-                      {/* Apply the new scaling class here */}
-                      <div className="certificate-preview-scaled">
-                        <CertificateComponent data={certificateData} />
-                      </div>
+                    <div ref={certificateRef} className="flex justify-center">
+                      {/* You will need to create and import a Certificate component here */}
+                      <CertificateComponent data={certificateData} />
                     </div>
                     <div className="mt-6 flex justify-center">
                       <button

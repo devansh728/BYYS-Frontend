@@ -1,1 +1,670 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@400;700&family=Dancing+Script:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+.certificate {
+  width: 1100px;
+  height: 750px;
+  background: #FFB64D;
+  margin: 30px auto;
+  padding: 40px 80px;
+  box-sizing: border-box;
+  position: relative;
+  border: 2px solid #000;
+  border-radius: 12px;
+  text-align: center;
+  overflow: hidden;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+/* Watermark */
+.certificate::before {
+  content: "";
+  background-image: url("/assests/logo.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 700px 700px;
+  opacity: 0.12;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Top Left Logo */
+.certificate .top-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+  height: 120px;
+  z-index: 3;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #000;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.certificate .top-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Reg. No. */
+.certificate .reg-no {
+  position: absolute;
+  top: 150px;
+  left: 30px;
+  color: #000;
+  font-size: 18px;
+  z-index: 3;
+  text-align: left;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+/* Main Heading */
+.certificate h1 {
+  font-size: 38px;
+  margin: 20px 0 10px 0;
+  position: relative;
+  z-index: 3;
+  font-family: "Arial Black", Impact, sans-serif;
+  font-weight: 900;
+  margin-left: 60px;
+  color: #000;
+}
+
+/* Certificate of Honour */
+.certificate h2 {
+  font-size: 28px;
+  margin: 20px 0 15px 0;
+  position: relative;
+  z-index: 3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Certify That */
+.certificate h3 {
+  font-size: 22px;
+  margin: 15px 0 25px 0;
+  position: relative;
+  z-index: 3;
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Certificate Text */
+.certificate .details {
+  font-size: 20px;
+  text-align: center;
+  line-height: 2.2;
+  position: relative;
+  z-index: 3;
+  margin-top: 20px;
+  font-family: Arial, Calibri, sans-serif;
+  font-weight: bold;
+  color: #000;
+}
+
+.certificate .details p {
+  margin: 8px 0;
+}
+
+/* Name Section */
+.name-section {
+  position: relative;
+  display: inline-block;
+  margin: 15px 0;
+}
+
+.name-underline {
+  border-bottom: 1px solid #000;
+  width: 500px;
+  height: 2px;
+  display: inline-block;
+}
+
+.recipient-name {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* background: #FFB64D; */
+  padding: 0 15px;
+  font-size: 32px;
+  font-family: "Dancing Script", cursive;
+  color: #8B0000;
+  z-index: 4;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* Single line inputs */
+.position-text {
+  /* background: #FFB64D; */
+  padding: 0 5px;
+  color: #8B0000;
+  font-weight: bold;
+  font-size: 20px;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+
+.block-text {
+  /* background: #FFB64D; */
+  padding: 0 5px;
+  color: #8B0000;
+  font-weight: bold;
+  font-size: 20px;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+}
+
+.district-text {
+  /* background: #FFB64D; */
+  padding: 0 5px;
+  color: #8B0000;
+  font-weight: bold;
+  font-size: 20px;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  min-width: 120px;
+  text-align: center;
+}
+
+.state-text {
+  /* background: #FFB64D; */
+  padding: 0 5px;
+  color: #8B0000;
+  font-weight: bold;
+  font-size: 20px;
+  border-bottom: 1px solid #000;
+  display: inline-block;
+  min-width: 150px;
+  text-align: center;
+}
+
+/* Footer */
+.certificate .footer {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  right: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 16px;
+  z-index: 3;
+  font-weight: bold;
+  color: #000;
+  background: transparent;
+  width: calc(100% - 80px);
+  height: 80px;
+}
+
+/* Date section */
+.certificate .footer .date {
+  text-align: left;
+  font-family: Arial, Calibri, sans-serif;
+  font-weight: bold;
+  flex: 1;
+  align-self: flex-end;
+}
+
+.certificate .footer .date label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #000;
+}
+
+.certificate .footer .date .date-line {
+  border-bottom: 1px solid #000;
+  width: 180px;
+  height: 20px;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 2px;
+  background: transparent;
+  color: #000;
+}
+
+/* Signature */
+.certificate .footer .signature {
+  text-align: right;
+  font-weight: bold;
+  flex: 1;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background: transparent;
+}
+
+.certificate .footer .signature .signature-img {
+  width: 280px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+  margin-bottom: 5px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  margin-left: auto;
+  display: block;
+}
+
+.certificate .footer .signature .name {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 2px 0;
+  color: #000;
+  line-height: 1.1;
+  text-align: right;
+}
+
+.certificate .footer .signature .title {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  margin: 2px 0;
+  color: #000;
+  line-height: 1.1;
+  text-align: right;
+}
+
+/* Responsive Design - Desktop and Tablet */
+@media (max-width: 1200px) {
+  .certificate {
+    width: 95vw;
+    max-width: 1100px;
+    height: auto;
+    min-height: 750px;
+    padding: 30px 40px;
+  }
+  
+  .certificate::before {
+    background-size: 600px 600px;
+    width: 600px;
+    height: 600px;
+  }
+  
+  .certificate h1 {
+    font-size: 32px;
+    margin-left: 20px;
+  }
+  
+  .certificate h2 {
+    font-size: 24px;
+  }
+  
+  .certificate .details {
+    font-size: 18px;
+    line-height: 2;
+  }
+  
+  .certificate .top-logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .name-underline {
+    width: 400px;
+  }
+  
+  .recipient-name {
+    font-size: 28px;
+  }
+  
+  .certificate .footer {
+    left: 30px;
+    right: 30px;
+    width: calc(100% - 60px);
+    height: 70px;
+  }
+  
+  .certificate .footer .signature .signature-img {
+    width: 240px;
+    max-height: 70px;
+  }
+}
+
+/* Tablet View */
+@media (max-width: 900px) {
+  .certificate {
+    width: 95vw;
+    padding: 20px 15px;
+    height: auto;
+    margin: 20px auto;
+    min-height: 600px;
+    border-radius: 8px;
+  }
+  
+  .certificate::before {
+    background-size: 400px 400px;
+    width: 400px;
+    height: 400px;
+  }
+  
+  .certificate h1 {
+    font-size: 24px;
+    margin-left: 0;
+    line-height: 1.2;
+  }
+  
+  .certificate h2 {
+    font-size: 20px;
+  }
+  
+  .certificate h3 {
+    font-size: 18px;
+  }
+  
+  .certificate .details {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  
+  .certificate .top-logo {
+    width: 70px;
+    height: 70px;
+    top: 15px;
+    left: 15px;
+  }
+  
+  .certificate .reg-no {
+    top: 90px;
+    left: 15px;
+    font-size: 14px;
+  }
+  
+  .name-underline {
+    width: 280px;
+  }
+  
+  .recipient-name {
+    font-size: 20px;
+  }
+  
+  .position-text,
+  .block-text,
+  .district-text,
+  .state-text {
+    font-size: 16px;
+    min-width: 80px;
+  }
+  
+  .certificate .footer {
+    position: static;
+    margin-top: 30px;
+    display: block;
+    text-align: center;
+    height: auto;
+    width: 100%;
+    left: auto;
+    right: auto;
+  }
+  
+  .certificate .footer .date {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .certificate .footer .signature {
+    text-align: center;
+    max-width: none;
+    align-items: center;
+    margin: 0 auto;
+  }
+  
+  .certificate .footer .signature .signature-img {
+    width: 200px;
+    max-height: 60px;
+    margin: 0 auto 5px auto;
+  }
+  
+  .certificate .footer .signature .name {
+    font-size: 12px;
+    text-align: center;
+    margin: 3px 0;
+  }
+  
+  .certificate .footer .signature .title {
+    font-size: 10px;
+    text-align: center;
+    margin: 2px 0;
+  }
+}
+
+/* MOBILE VIEW - SQUARE SHAPE */
+@media (max-width: 600px) {
+  .certificate {
+    width: 90vw;
+    height: 90vw;
+    min-height: 400px;
+    max-height: 500px;
+    padding: 15px;
+    border-radius: 0;
+    margin: 10px auto;
+    position: relative;
+    overflow: visible;
+  }
+  
+  .certificate::before {
+    background-size: 250px 250px;
+    width: 250px;
+    height: 250px;
+    opacity: 0.08;
+  }
+  
+  .certificate .top-logo {
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    left: 10px;
+    border-width: 2px;
+  }
+  
+  .certificate .reg-no {
+    top: 65px;
+    left: 10px;
+    font-size: 10px;
+  }
+  
+  .certificate h1 {
+    font-size: 16px;
+    margin: 5px 0;
+    margin-left: 0;
+    line-height: 1;
+  }
+  
+  .certificate h2 {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  
+  .certificate h3 {
+    font-size: 12px;
+    margin: 5px 0 10px 0;
+  }
+  
+  .certificate .details {
+    font-size: 10px;
+    line-height: 1.4;
+    margin-top: 10px;
+  }
+  
+  .certificate .details p {
+    margin: 4px 0;
+  }
+  
+  .name-underline {
+    width: 200px;
+    height: 1px;
+  }
+  
+  .recipient-name {
+    font-size: 14px;
+    top: -15px;
+    padding: 0 8px;
+  }
+  
+  .position-text,
+  .block-text,
+  .district-text,
+  .state-text {
+    font-size: 10px;
+    min-width: 50px;
+    padding: 0 3px;
+  }
+  
+  .certificate .footer {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 0;
+  }
+  
+  .certificate .footer .date {
+    text-align: left;
+    font-size: 10px;
+    flex: 1;
+  }
+  
+  .certificate .footer .date label {
+    margin-bottom: 3px;
+  }
+  
+  .certificate .footer .date .date-line {
+    width: 80px;
+    height: 15px;
+    font-size: 9px;
+    padding-top: 1px;
+  }
+  
+  .certificate .footer .signature {
+    text-align: right;
+    max-width: 120px;
+    align-items: flex-end;
+  }
+  
+  .certificate .footer .signature .signature-img {
+    width: 100px;
+    height: auto;
+    max-height: 30px;
+    margin: 0 0 2px 0;
+  }
+  
+  .certificate .footer .signature .name {
+    font-size: 8px;
+    line-height: 1;
+    margin: 1px 0;
+    text-align: right;
+  }
+  
+  .certificate .footer .signature .title {
+    font-size: 7px;
+    line-height: 1;
+    margin: 1px 0;
+    text-align: right;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 400px) {
+  .certificate {
+    width: 95vw;
+    height: 95vw;
+    max-height: 380px;
+    padding: 12px;
+  }
+  
+  .certificate h1 {
+    font-size: 14px;
+  }
+  
+  .certificate h2 {
+    font-size: 12px;
+  }
+  
+  .certificate .details {
+    font-size: 9px;
+  }
+  
+  .name-underline {
+    width: 160px;
+  }
+  
+  .recipient-name {
+    font-size: 12px;
+  }
+  
+  .certificate .footer .signature .signature-img {
+    width: 80px;
+    max-height: 25px;
+  }
+  
+  .certificate .footer .signature .name {
+    font-size: 7px;
+  }
+  
+  .certificate .footer .signature .title {
+    font-size: 6px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: white !important;
+  }
+  
+  .certificate {
+    box-shadow: none;
+    border: 2px solid #000;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+    border-radius: 12px;
+  }
+  
+  .certificate::before {
+    background-size: 600px 600px;
+  }
+}

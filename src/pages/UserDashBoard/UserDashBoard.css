@@ -142,6 +142,7 @@
   color: #666;
   margin: 0.5rem 0;
   font-size: 1rem;
+  margin-top: 20px;
 }
 
 .profile-location i,
@@ -357,35 +358,36 @@
   font-size: 0.9rem;
 }
 
-/* Achievements Section - FIXED */
+/* COMPACT ACHIEVEMENTS SECTION - FIXED FOR MOBILE */
 .achievements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.2rem;
+  padding: 1.5rem 0;
+  justify-items: center;
 }
 
 .achievement-badge {
+  width: 140px;
+  min-height: 120px;
+  padding: 1rem 0.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, var(--cream), #f8f4e6);
-  border-radius: 15px;
-  border: 3px solid var(--gold);
-  text-align: center;
-  transition: all 0.3s ease;
-  min-height: 140px;
-  box-sizing: border-box;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 15px rgba(255, 153, 51, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .achievement-badge:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 153, 51, 0.2), 0 4px 15px rgba(0, 0, 0, 0.1);
   border-color: var(--saffron);
 }
 
@@ -396,8 +398,8 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, var(--saffron), var(--gold), var(--saffron));
-  border-radius: 15px;
+  background: linear-gradient(135deg, var(--saffron), var(--gold), var(--saffron));
+  border-radius: 18px;
   z-index: -1;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -408,19 +410,46 @@
 }
 
 .achievement-badge i {
-  font-size: 2rem;
+  font-size: 2.2rem;
   color: var(--saffron);
-  margin-bottom: 0.5rem;
-  display: block;
+  margin-bottom: 0.6rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 8px rgba(255, 153, 51, 0.2);
+}
+
+.achievement-badge:hover i {
+  transform: scale(1.1);
+  color: var(--gold);
 }
 
 .achievement-badge span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--maroon);
-  font-size: 0.95rem;
-  line-height: 1.3;
+  text-align: center;
+  line-height: 1.2;
   word-wrap: break-word;
   max-width: 100%;
+  transition: all 0.3s ease;
+}
+
+.achievement-badge:hover span {
+  color: var(--dark-maroon);
+  transform: translateY(-2px);
+}
+
+/* Special badge backgrounds */
+.achievement-badge:nth-child(1) {
+  background: linear-gradient(145deg, #fff7e0 0%, #ffeaa7 100%);
+}
+
+.achievement-badge:nth-child(5) {
+  background: linear-gradient(145deg, #fff0e6 0%, #ffd79a 100%);
+}
+
+.achievement-badge:nth-child(8) {
+  background: linear-gradient(145deg, #f3eaff 0%, #d1a3ff 100%);
 }
 
 /* Office Bearer Forms */
@@ -710,7 +739,7 @@
   margin-bottom: 1rem;
 }
 
-/* Responsive Design */
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .profile-page {
     padding: 1rem 0;
@@ -756,23 +785,26 @@
     grid-template-columns: 1fr;
   }
   
-  /* FIXED: Achievements grid for mobile */
+  /* MOBILE ACHIEVEMENTS - 2 COLUMNS */
   .achievements-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
   }
   
   .achievement-badge {
-    min-height: 120px;
-    padding: 1rem;
+    width: 100%;
+    min-height: 110px;
+    padding: 0.8rem 0.5rem;
   }
   
   .achievement-badge i {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
   
   .achievement-badge span {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
   
   .tasks-grid {
@@ -802,23 +834,25 @@
     font-size: 1.5rem;
   }
   
-  /* FIXED: Single column achievements for very small screens */
+  /* SINGLE COLUMN FOR VERY SMALL SCREENS */
   .achievements-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    max-width: 250px;
+    gap: 0.8rem;
   }
   
   .achievement-badge {
+    width: 100%;
     min-height: 100px;
-    padding: 1rem;
+    padding: 0.8rem;
   }
   
   .achievement-badge i {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
   }
   
   .achievement-badge span {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   
   .info-section {
@@ -830,22 +864,42 @@
   }
 }
 
-/* Extra small screens */
 @media (max-width: 360px) {
   .achievements-grid {
-    grid-template-columns: 1fr;
+    max-width: 200px;
   }
   
   .achievement-badge {
     min-height: 90px;
-    padding: 0.8rem;
+    padding: 0.6rem;
   }
   
   .achievement-badge i {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
   
   .achievement-badge span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* LARGE SCREEN OPTIMIZATIONS */
+@media (min-width: 1200px) {
+  .achievements-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .achievement-badge {
+    width: 160px;
+    min-height: 130px;
+  }
+  
+  .achievement-badge i {
+    font-size: 2.4rem;
+  }
+  
+  .achievement-badge span {
+    font-size: 1rem;
   }
 }

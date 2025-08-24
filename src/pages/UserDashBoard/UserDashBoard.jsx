@@ -543,14 +543,14 @@ const UserDashboard = () => {
                       {/* The MembershipCard component will be rendered here and used for PDF */}
                       <IdCard user={userData} />
                     </div>
-                    <div className="mt-6 flex justify-center">
+                    {/* <div className="mt-6 flex justify-center">
                       <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         onClick={handleDownloadClick}
                       >
                         Download ID Card (PDF)
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}
@@ -571,14 +571,14 @@ const UserDashboard = () => {
                       {/* You will need to create and import a Certificate component here */}
                       <CertificateComponent data={certificateData} />
                     </div>
-                    <div className="mt-6 flex justify-center">
+                    {/* <div className="mt-6 flex justify-center">
                       <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         onClick={toCertificatePDF}
                       >
                         Download Certificate (PDF)
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}

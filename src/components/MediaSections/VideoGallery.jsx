@@ -13,6 +13,12 @@ const VideoGallery = ({ onOpenModal }) => {
 
   const [visibleCount, setVisibleCount] = useState(7);
 
+   const handleItemClick = (video, index) => {
+    console.log('Opening video:', video.video);
+    console.log('Video exists:', video);
+    onOpenModal(video, index, videos);
+  };
+
   const loadMore = () => {
     setVisibleCount(videos.length);
   };
@@ -37,7 +43,7 @@ const VideoGallery = ({ onOpenModal }) => {
           <div
             key={video.id}
             className="gallery-item video-item"
-            onClick={() => onOpenModal(video, index, videos)}
+            onClick={() => handleItemClick(video, index)}
             tabIndex={0}
             onKeyPress={(e) => { if (e.key === 'Enter') onOpenModal(video, index, videos); }}
             role="button"

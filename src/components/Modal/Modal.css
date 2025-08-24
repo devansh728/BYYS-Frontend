@@ -1,4 +1,7 @@
 /* Enhanced Modal Styles - Better Video Support */
+
+@import "tailwindcss";
+
 .modal {
   display: flex;
   position: fixed;

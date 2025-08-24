@@ -18,10 +18,14 @@ const MediaGallery = () => {
   }, []);
 
   const openModal = (item, index, items) => {
-    setModalData(item);
-    setCurrentIndex(index);
-    setAllItems(items);
-  };
+  console.log('Modal opening with:', item);
+  console.log('Video URL:', item.video);
+  console.log('Item type:', item.type);
+  
+  setModalData(item);
+  setCurrentIndex(index);
+  setAllItems(items);
+};
 
   const closeModal = () => {
     setModalData(null);

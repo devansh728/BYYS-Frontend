@@ -1,4 +1,7 @@
 /* Media Gallery Page Styles - Continuous Layout */
+
+@import "tailwindcss";
+
 .media-gallery-page {
   min-height: 100vh;
   background-color: var(--cream);

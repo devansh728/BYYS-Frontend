@@ -124,7 +124,7 @@ export default function CertificateComponent({ data, showDownloadButton = true }
             <div className="date-line">{data.dateOfIssue || data.date || "2025-08-19"}</div>
           </div>
           <div className="signature">
-            <img src="/assests/signature1.png" alt="Signature" className="signature-img" />
+            <img src="/assests/signature.png" alt="Signature" className="signature-img" />
             <div className="name">RAJA SAKSHAM SINGH YOGI</div>
             <div className="title">FOUNDER & NATIONAL PRESIDENT</div>
           </div>

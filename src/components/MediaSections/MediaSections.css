@@ -1,4 +1,6 @@
 /* Media Sections - Enhanced Video Support */
+@import "tailwindcss";
+
 .gallery-section {
   margin-bottom: 3rem;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef , useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import html2canvas from "html2canvas";
 import { useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
@@ -214,49 +214,53 @@ const JoinForm = () => {
     }
   };
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     setSubmissionStatus({ loading: true, success: false, error: null, membershipId: null });
 
     try {
-        if (!validateForm()) {
-            setSubmissionStatus({ loading: false, success: false, error: 'Form validation failed.', membershipId: null });
-            return;
+      if (!validateForm()) {
+        setSubmissionStatus({ loading: false, success: false, error: 'Form validation failed.', membershipId: null });
+        return;
+      }
+
+      const data = new FormData();
+      const registrationRequest = { ...formData }
+      if (registrationRequest.photo) {
+        delete registrationRequest.photo;
+      }
+      const requestPayload = new Blob([JSON.stringify(formData)], { type: "application/json" });
+      data.append("request", requestPayload);
+      if (formData.photo) {
+        data.append("photo", formData.photo);
+      }
+
+      try {
+        const response = await fetch('http://localhost:8080/auth/otp', {
+          method: 'POST',
+          body: data,  // No headers needed when sending FormData
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Registration failed.');
         }
 
-        const data = new FormData();
-        const requestPayload = new Blob([JSON.stringify(formData)],{type:"application/json"});
-        data.append("request", requestPayload);
-        if (formData.photo) {
-            data.append("photo", formData.photo);
-        }
-
-        try {
-            const response = await fetch('https://byys-backend.onrender.com/auth/otp', {
-                method: 'POST',
-                body: data,  // No headers needed when sending FormData
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Registration failed.');
-            }
-
-            const responseData = await response.json();
-            const membershipId = responseData.membershipId;
-            setSubmissionStatus({ loading: false, success: true, error: null, membershipId });
-            navigate('/login', { state: { membershipId, registrationSuccess: true } });
-        } catch (error) {
-            setSubmissionStatus({ loading: false, success: false, error: error.message, membershipId: null });
-            console.error('Error submitting form:', error);
-            alert('Error submitting form. Please try again.');
-        }
-    } catch (error) {
+        const responseData = await response.json();
+        const membershipId = responseData.membershipId;
+        setSubmissionStatus({ loading: false, success: true, error: null, membershipId });
+        navigate('/login', { state: { membershipId, registrationSuccess: true } });
+      } catch (error) {
+        setSubmissionStatus({ loading: false, success: false, error: error.message, membershipId: null });
         console.error('Error submitting form:', error);
         alert('Error submitting form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Error submitting form. Please try again.');
     }
-};
+  };
 
   const getCurrentDate = () => {
     const date = new Date();
@@ -483,13 +487,13 @@ const JoinForm = () => {
               </div>
 
               <button type="submit" className="submit-btn" disabled={submissionStatus.loading}>
-              {submissionStatus.loading ? (
-                <i className="fas fa-spinner fa-spin"></i>
-              ) : (
-                <i className="fas fa-paper-plane"></i>
-              )}
-              {submissionStatus.loading ? 'Submitting...' : 'Submit Registration'}
-            </button>
+                {submissionStatus.loading ? (
+                  <i className="fas fa-spinner fa-spin"></i>
+                ) : (
+                  <i className="fas fa-paper-plane"></i>
+                )}
+                {submissionStatus.loading ? 'Submitting...' : 'Submit Registration'}
+              </button>
             </form>
           </div>
         </div>

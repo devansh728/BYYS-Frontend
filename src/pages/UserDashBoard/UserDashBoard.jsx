@@ -8,6 +8,7 @@ import IdCard from "../../components/Cards/IdCard";
 import CertificateComponent from "../../components/Cards/CertificateComponent";
 
 const UserDashboard = () => {
+  const [photoData, setPhotoData] = useState(null);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userStats, setUserStats] = useState([]);
@@ -59,6 +60,8 @@ const UserDashboard = () => {
     }
   };
 
+
+
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     const role = localStorage.getItem('X-User-Role');
@@ -81,7 +84,7 @@ const UserDashboard = () => {
   const fetchUserData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://byys-backend.onrender.com/auth/otp/me', {
+      const response = await fetch('http://localhost:8080/auth/otp/me', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -100,10 +103,56 @@ const UserDashboard = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchUserPhoto = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch('http://localhost:8080/auth/otp/user/photo', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+          }
+        });
+
+        if (response.status === 200) {
+          // Create object URL from blob data
+          const blob = await response.blob();
+          const imageUrl = URL.createObjectURL(blob);
+          setPhotoData(imageUrl);
+        } else if (response.status === 404) {
+          setPhotoData(null); // No photo available
+        }
+      } catch (err) {
+        if (err.response?.status === 401) {
+          setError('Authentication required. Please log in.');
+        } else if (err.response?.status === 404) {
+          setPhotoData(null); // No photo available
+          setError('Profile photo not found');
+        } else {
+          setError('Failed to load profile photo');
+          console.error('Error fetching user photo:', err);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserPhoto();
+
+    // Cleanup function to revoke object URL
+    return () => {
+      if (photoData) {
+        URL.revokeObjectURL(photoData);
+      }
+    };
+  }, []);
+
   const fetchApplicationStatus = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://byys-backend.onrender.com/api/office-bearer/status', {
+      const response = await fetch('http://localhost:8080/api/office-bearer/status', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -118,16 +167,16 @@ const UserDashboard = () => {
         fetchTasks();
 
         if (userData) {
-        setCertificateData({
-          recipientName: userData.fullName,
-          position: 'Office-Bearer', // Assuming the API returns the position
-          block: 'Block-A',
-          district: userData.district,
-          state: userData.state,
-          regNo: '66/22', // This can be static or dynamic from API
-          dateOfIssue: '2025-08-19', // Set current date
-        });
-      }
+          setCertificateData({
+            recipientName: userData.fullName,
+            position: 'Office-Bearer', // Assuming the API returns the position
+            block: 'Block-A',
+            district: userData.district,
+            state: userData.state,
+            regNo: '66/22', // This can be static or dynamic from API
+            dateOfIssue: '2025-08-19', // Set current date
+          });
+        }
       }
     } catch (error) {
       setError(error.message);
@@ -138,7 +187,7 @@ const UserDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('https://byys-backend.onrender.com/api/office-bearer/get-tasks', {
+      const response = await fetch('http://localhost:8080/api/office-bearer/get-tasks', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -163,7 +212,7 @@ const UserDashboard = () => {
     setIsSubmitting(true);
     setFormError(null);
     try {
-      const response = await fetch('https://byys-backend.onrender.com/api/office-bearer/apply', {
+      const response = await fetch('http://localhost:8080/api/office-bearer/apply', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -187,7 +236,7 @@ const UserDashboard = () => {
   const fetchUserStats = async () => {
     setLoading(true);
     try {
-      const ShareResponse = await fetch('https://byys-backend.onrender.com/referrals/userStats', {
+      const ShareResponse = await fetch('http://localhost:8080/referrals/userStats', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -541,7 +590,7 @@ const UserDashboard = () => {
                     </h2>
                     <div ref={targetRef} className="flex justify-center">
                       {/* The MembershipCard component will be rendered here and used for PDF */}
-                      <IdCard user={userData} />
+                      <IdCard user={userData} photo={photoData} />
                     </div>
                     {/* <div className="mt-6 flex justify-center">
                       <button

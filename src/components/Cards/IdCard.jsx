@@ -3,25 +3,50 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import "./IdCard.css";
 
-export default function IdCard({ user, isAdminApproved = true }) {
+export default function IdCard({ user, photo, isAdminApproved = true }) {
   const cardRef = useRef(null);
 
   const downloadIdCardPDF = async () => {
     const element = cardRef.current;
-    
+
+    // Store original styles
+    const originalStyles = {
+      backgroundColor: element.style.backgroundColor,
+      color: element.style.color
+    };
+
+    // Force styles for capture
+    element.style.backgroundColor = 'white';
+    element.style.color = 'black';
+
+    // Hide download button during capture
+    const downloadBtn = document.querySelector('.download-id-card-btn');
+    if (downloadBtn) downloadBtn.style.visibility = 'hidden';
+
     try {
-      // Create canvas from the ID card element
       const canvas = await html2canvas(element, {
-        scale: 3, // Higher scale for better quality
+        scale: 3,
         useCORS: true,
-        allowTaint: true,
-        backgroundColor: null,
+        backgroundColor: '#ffffff',
         logging: false,
+        onclone: (clonedDoc) => {
+          // Ensure all text elements are visible in the clone
+          const textElements = clonedDoc.querySelectorAll('p, h1, h2, h3, span, div');
+          textElements.forEach(el => {
+            el.style.color = 'black';
+            el.style.opacity = '1';
+            el.style.visibility = 'visible';
+          });
+        }
       });
 
+      // Restore original styles
+      element.style.backgroundColor = originalStyles.backgroundColor;
+      element.style.color = originalStyles.color;
+
       // Get image data
-      const imgData = canvas.toDataURL('image/png');
-      
+      const imgData = canvas.toDataURL('image/png', 1.0);
+
       // Create PDF with custom dimensions for ID card
       const pdf = new jsPDF({
         orientation: 'landscape',
@@ -29,16 +54,27 @@ export default function IdCard({ user, isAdminApproved = true }) {
         format: [85.60, 53.98] // Standard credit card size
       });
 
+      // Calculate aspect ratio and positioning
+      const imgWidth = 85.60;
+      const imgHeight = 53.98;
+
       // Add image to PDF
-      pdf.addImage(imgData, 'PNG', 0, 0, 85.60, 53.98);
-      
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
       // Save the PDF with user's name
       const fileName = `${user.fullName || 'User'}_BYVS_ID_Card.pdf`;
       pdf.save(fileName);
-      
+
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('Failed to generate PDF. Please try again.');
+    } finally {
+      // Restore original styles even if error occurs
+      element.style.backgroundColor = originalStyles.backgroundColor;
+      element.style.color = originalStyles.color;
+
+      // Restore download button visibility
+      if (downloadBtn) downloadBtn.style.visibility = 'visible';
     }
   };
 
@@ -56,7 +92,7 @@ export default function IdCard({ user, isAdminApproved = true }) {
               className="id-card-logo"
             />
           </div>
-          
+
           {/* Reg No under logo */}
           <p className="id-card-reg-no">REG. NO. : 66/22</p>
 
@@ -97,8 +133,8 @@ export default function IdCard({ user, isAdminApproved = true }) {
 
           {/* User Photo */}
           <div className="id-card-photo-placeholder">
-            {user.photo ? (
-              <img src={user.photo} alt="User" className="id-card-photo" />
+            {photo ? (
+              <img src={photo} alt="User" className="id-card-photo" onLoad={() => console.log('Photo loaded successfully')} onError={() => console.error('Error loading photo')} />
             ) : (
               "Photo"
             )}
@@ -121,12 +157,12 @@ export default function IdCard({ user, isAdminApproved = true }) {
       {/* Download Button - Only shows when admin approved */}
       {isAdminApproved && (
         <div className="id-card-download-section">
-          <button 
-            onClick={downloadIdCardPDF} 
+          <button
+            onClick={downloadIdCardPDF}
             className="download-id-card-btn"
           >
             <i className="fas fa-download"></i>
-            Download ID Card (PDF)
+            ⬇️ Download ID Card (PDF)
           </button>
         </div>
       )}

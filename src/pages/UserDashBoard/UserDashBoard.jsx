@@ -90,7 +90,7 @@ const UserDashboard = () => {
   const fetchUserData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp/me`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/auth/otp/me`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -115,7 +115,7 @@ const UserDashboard = () => {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp/user/photo`, {
+        const response = await fetch(`${process.env.VITE_API_BASE_URL}/auth/otp/user/photo`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -158,7 +158,7 @@ const UserDashboard = () => {
   const fetchApplicationStatus = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/office-bearer/status`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/api/office-bearer/status`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -193,7 +193,7 @@ const UserDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/office-bearer/get-tasks`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/api/office-bearer/get-tasks`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -218,7 +218,7 @@ const UserDashboard = () => {
     setIsSubmitting(true);
     setFormError(null);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/office-bearer/apply`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/api/office-bearer/apply`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -242,7 +242,7 @@ const UserDashboard = () => {
   const fetchUserStats = async () => {
     setLoading(true);
     try {
-      const ShareResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/referrals/userStats`, {
+      const ShareResponse = await fetch(`${process.env.VITE_API_BASE_URL}/referrals/userStats`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -371,7 +371,7 @@ const UserDashboard = () => {
     setIsUpdating(true);
     setUpdateError(null);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/auth/otp`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -796,12 +796,12 @@ const UserDashboard = () => {
                         <input
                           type="text"
                           readOnly
-                          value={`${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`}
+                          value={`${process.env.VITE_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`}
                           className="flex-grow px-3 py-2 border border-gray-300 rounded-l-lg focus:outline-none"
                         />
                         <button
                           className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-r-lg"
-                          onClick={() => navigator.clipboard.writeText(`${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`)}
+                          onClick={() => navigator.clipboard.writeText(`${process.env.VITE_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`)}
                         >
                           <i className="fas fa-copy"></i>
                         </button>
@@ -812,7 +812,7 @@ const UserDashboard = () => {
                         <button
                           className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg flex flex-col items-center justify-center transition-colors"
                           onClick={() => {
-                            const message = `Join me on BYVS using my referral link: ${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`;
+                            const message = `Join me on BYVS using my referral link: ${process.env.VITE_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`;
                             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
                           }}
                         >
@@ -824,7 +824,7 @@ const UserDashboard = () => {
                         <button
                           className="bg-blue-800 hover:bg-blue-900 text-white py-2 px-4 rounded-lg flex flex-col items-center justify-center transition-colors"
                           onClick={() => {
-                            const url = `${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`;
+                            const url = `${process.env.VITE_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`;
                             window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
                           }}
                         >
@@ -837,7 +837,7 @@ const UserDashboard = () => {
                           className="bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-lg flex flex-col items-center justify-center transition-colors"
                           onClick={() => {
                             // Instagram doesn't have a direct share API, so we'll copy to clipboard
-                            navigator.clipboard.writeText(`${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`);
+                            navigator.clipboard.writeText(`${process.env.VITE_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`);
                             alert('Referral link copied to clipboard. You can now paste it in your Instagram bio or posts.');
                           }}
                         >

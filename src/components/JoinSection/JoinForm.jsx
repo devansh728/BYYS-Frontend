@@ -263,7 +263,7 @@ const JoinForm = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp`, {
+        const response = await fetch(`${process.env.VITE_API_BASE_URL}/auth/otp`, {
           method: 'POST',
           body: data,  // No headers needed when sending FormData
         });

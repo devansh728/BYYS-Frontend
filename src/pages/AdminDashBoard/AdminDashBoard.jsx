@@ -31,7 +31,7 @@ const AdminDashboard = () => {
   const fetchProfileData = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp/me`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/auth/otp/me`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -52,7 +52,7 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       // Fetch applications
-      const appsResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/admin/office-bearer-applications?approved=false`, {
+      const appsResponse = await fetch(`${process.env.VITE_API_BASE_URL}/api/admin/office-bearer-applications?approved=false`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -64,7 +64,7 @@ const AdminDashboard = () => {
       setApplications(appsData.content);
 
       // Fetch tasks (you'll need to implement this endpoint)
-      const tasksResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/admin/all-tasks`, {
+      const tasksResponse = await fetch(`${process.env.VITE_API_BASE_URL}/api/admin/all-tasks`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
         }
@@ -81,7 +81,7 @@ const AdminDashboard = () => {
 
   const approveApplication = async (id) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/admin/office-bearer-applications/${id}/approve`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/api/admin/office-bearer-applications/${id}/approve`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -102,7 +102,7 @@ const AdminDashboard = () => {
 
   const createTask = async (taskData) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/admin/tasks`, {
+      const response = await fetch(`${process.env.VITE_API_BASE_URL}/api/admin/tasks`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,

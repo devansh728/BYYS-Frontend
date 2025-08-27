@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Logout from '../../pages/logout/logout';
 import './Header.css';
+import { Alert } from 'bootstrap';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -34,6 +36,33 @@ const Header = () => {
     setValidUser(userRole === 'USER');
     setValidAdmin(userRole === 'ADMIN');
   }, []);
+
+  const handleLogout = () => {
+
+    const storedAuthToken = localStorage.getItem('authToken');
+    const storedUserRole = localStorage.getItem('X-User-Role');
+
+    if (storedAuthToken || storedUserRole) {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('X-User-Role');
+      
+      alert("You logged out thanks")
+
+      console.log('Logged out successfully. localStorage cleared.');
+    } else {
+      alert("Already logged in")
+      console.log('Already logged out. localStorage is empty.');
+    }
+
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('X-User-Role');
+
+    console.log('Logged out successfully. localStorage cleared.');
+
+    return (
+      alert("You have been logged out.")
+    );
+  };
 
   return (
     <>
@@ -142,6 +171,11 @@ const Header = () => {
                 >
                   Donate Us
                 </Link>
+              </li>
+              <li>
+                <button onClick={handleLogout}>
+                  Logout
+                </button>
               </li>
             </ul>
           </nav>

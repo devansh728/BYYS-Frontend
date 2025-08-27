@@ -263,7 +263,7 @@ const JoinForm = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.VITE_API_BASE_URL}/auth/otp`, {
+        const response = await fetch('https://byvs.onrender.com/auth/otp', {
           method: 'POST',
           body: data,  // No headers needed when sending FormData
         });

@@ -32,6 +32,8 @@ const JoinForm = () => {
   const [photoPreview, setPhotoPreview] = useState(null);
   const idCardRef = useRef(null);
   const showIdCard = submissionStatus.success;
+  const [referralLocked, setReferralLocked] = useState(false);
+
 
   // Complete state-district data for all 28 states and 8 union territories
   const stateDistrictData = {
@@ -104,6 +106,18 @@ const JoinForm = () => {
 
   const states = Object.keys(stateDistrictData).sort();
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const refCode = queryParams.get('ref');
+    if (refCode) {
+      setFormData(prev => ({
+        ...prev,
+        referralCode: refCode
+      }));
+      setReferralLocked(true);
+    }
+  }, []);
+
   const generateMemberId = () => {
     const date = new Date();
     const year = date.getFullYear();
@@ -112,16 +126,28 @@ const JoinForm = () => {
   };
 
   const handleInputChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
-
     try {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }));
-
-      // Reset district when state changes
+      if (name === 'referralCode' && referralLocked) {
+        return; // Do not allow changes if locked
+      }
+      if (name === 'whatsappNumber' || name === 'phone') {
+        // Only allow numbers and limit to 10 digits
+        if (/^\d{0,10}$/.test(value)) {
+          // Only prepend +91 if the value is exactly 10 digits
+          const formattedValue = value.length === 10 ? `+91${value}` : value;
+          setFormData({
+            ...formData,
+            [name]: formattedValue,
+          });
+        }
+      } else {
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+      }
+      // Reset district and blockName when state changes
       if (name === 'state') {
         setFormData(prev => ({
           ...prev,
@@ -237,7 +263,7 @@ const JoinForm = () => {
       }
 
       try {
-        const response = await fetch('http://localhost:8080/auth/otp', {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp`, {
           method: 'POST',
           body: data,  // No headers needed when sending FormData
         });
@@ -340,8 +366,9 @@ const JoinForm = () => {
                     name="whatsappNumber"
                     value={formData.whatsappNumber}
                     onChange={handleInputChange}
-                    placeholder="Enter WhatsApp number"
+                    placeholder="Enter 10 digit WhatsApp number"
                     required
+                    maxLength={10}
                   />
                 </div>
 
@@ -353,8 +380,9 @@ const JoinForm = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="Enter Phone number"
+                    placeholder="Enter 10 digit Phone number"
                     required
+                    maxLength={10}
                   />
                 </div>
 
@@ -432,15 +460,20 @@ const JoinForm = () => {
 
                 <div className="form-group">
                   <label htmlFor="profession">Profession *</label>
-                  <input
-                    type="text"
+                  <select
                     id="profession"
                     name="profession"
                     value={formData.profession}
                     onChange={handleInputChange}
-                    placeholder="Enter your profession"
                     required
-                  />
+                  >
+                    <option value="">Select your profession</option>
+                    <option value="Student (Undergraduate)">Student (Undergraduate)</option>
+                    <option value="Student (Post Graduate)">Student (Post Graduate)</option>
+                    <option value="Preparing For Job">Preparing For Job</option>
+                    <option value="Doing Job">Doing Job</option>
+                    <option value="Other">Other (Mention Other)</option>
+                  </select>
                 </div>
 
                 <div className="form-group">
@@ -575,31 +608,39 @@ const JoinForm = () => {
                 <i className="fas fa-certificate"></i>
               </div>
               <h4>Official Recognition</h4>
-              <p>Receive official membership certificate and ID card from a registered organization</p>
             </div>
 
             <div className="benefit-card">
               <div className="benefit-icon">
                 <i className="fas fa-hands-helping"></i>
               </div>
-              <h4>Support Network</h4>
-              <p>Get family-like support and guidance whenever you need it</p>
+              <h4>24/7 Family Like Support</h4>
             </div>
 
             <div className="benefit-card">
               <div className="benefit-icon">
                 <i className="fas fa-user-graduate"></i>
               </div>
-              <h4>Career Enhancement</h4>
-              <p>Boost your CV with NGO membership and social service experience</p>
+              <h4>Boost Your Career Profile</h4>
             </div>
 
             <div className="benefit-card">
               <div className="benefit-icon">
                 <i className="fas fa-users"></i>
               </div>
-              <h4>Community Building</h4>
-              <p>Connect with like-minded youth across India and build lasting relationships</p>
+              <h4>Strong Foundation for Social Service & Politics</h4>
+            </div>
+            <div className="benefit-card">
+              <div className="benefit-icon">
+                <i className="fas fa-heart"></i>
+              </div>
+              <h4>Contribute to Society’s Welfare</h4>
+            </div>
+            <div className="benefit-card">
+              <div className="benefit-icon">
+                <i className="fas fa-rocket"></i>
+              </div>
+              <h4>Growth & Opportunities Within BYVS</h4>
             </div>
           </div>
         </div>

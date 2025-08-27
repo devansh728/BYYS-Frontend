@@ -47,6 +47,12 @@ const UserDashboard = () => {
     filename: "byvs_membership_certificate.pdf",
     page: { format: "A4", orientation: "landscape" },
   });
+  // States for Edit Profile Modal
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [profileForm, setProfileForm] = useState({});
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updateError, setUpdateError] = useState(null);
+
 
   const handleDownloadClick = () => {
     toPDF();
@@ -84,7 +90,7 @@ const UserDashboard = () => {
   const fetchUserData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/auth/otp/me', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp/me`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -109,7 +115,7 @@ const UserDashboard = () => {
         setLoading(true);
         setError(null);
 
-        const response = await fetch('http://localhost:8080/auth/otp/user/photo', {
+        const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp/user/photo`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -152,7 +158,7 @@ const UserDashboard = () => {
   const fetchApplicationStatus = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8080/api/office-bearer/status', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/office-bearer/status`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -187,7 +193,7 @@ const UserDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/office-bearer/get-tasks', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/office-bearer/get-tasks`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -212,7 +218,7 @@ const UserDashboard = () => {
     setIsSubmitting(true);
     setFormError(null);
     try {
-      const response = await fetch('http://localhost:8080/api/office-bearer/apply', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/office-bearer/apply`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -236,7 +242,7 @@ const UserDashboard = () => {
   const fetchUserStats = async () => {
     setLoading(true);
     try {
-      const ShareResponse = await fetch('http://localhost:8080/referrals/userStats', {
+      const ShareResponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/referrals/userStats`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -352,6 +358,221 @@ const UserDashboard = () => {
     }
   };
 
+  const handleProfileChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setProfileForm({
+      ...profileForm,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleProfileSubmit = async (e) => {
+    e.preventDefault();
+    setIsUpdating(true);
+    setUpdateError(null);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/auth/otp`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profileForm),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Update failed");
+
+      alert("Profile updated successfully!");
+      setShowEditModal(false);
+      fetchUserData();
+    } catch (err) {
+      setUpdateError(err.message);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  // Modal for Edit Profile
+  const renderEditProfileModal = () => {
+    if (!showEditModal) return null;
+    return (
+      <div className="fixed inset-0 bg-gray-700 bg-opacity-75 flex justify-center items-start z-50">
+        <div
+          className="bg-white w-full max-w-3xl rounded-lg shadow-xl p-6 relative overflow-y-auto max-h-[90vh] mt-4"
+          style={{ marginTop: "120px" }} // Adjust based on header height
+        >
+          <button
+            onClick={() => setShowEditModal(false)}
+            className="absolute top-3 right-3 text-2xl font-bold"
+            aria-label="Close Edit Profile"
+          >
+            &times;
+          </button>
+          <h2 className="text-xl font-bold mb-6">Edit Profile</h2>
+          {updateError && <p className="text-red-500 mb-3">Error: {updateError}</p>}
+          <form onSubmit={handleProfileSubmit} className="grid grid-cols-2 gap-4">
+            <div className="col-span-2">
+              <label htmlFor="fullName">Full Name</label>
+              <input
+                id="fullName"
+                type="text"
+                name="fullName"
+                value={profileForm.fullName}
+                onChange={handleProfileChange}
+                required
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="phone">Phone</label>
+              <input
+                id="phone"
+                type="text"
+                name="phone"
+                value={profileForm.phone}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="age">Age</label>
+              <input
+                id="age"
+                type="number"
+                name="age"
+                value={profileForm.age}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                value={profileForm.email}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="whatsappNumber">WhatsApp Number</label>
+              <input
+                id="whatsappNumber"
+                type="text"
+                name="whatsappNumber"
+                value={profileForm.whatsappNumber}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="villageTownCity">Village/Town/City</label>
+              <input
+                id="villageTownCity"
+                type="text"
+                name="villageTownCity"
+                value={profileForm.villageTownCity}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="blockName">Block Name</label>
+              <input
+                id="blockName"
+                type="text"
+                name="blockName"
+                value={profileForm.blockName}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="district">District</label>
+              <input
+                id="district"
+                type="text"
+                name="district"
+                value={profileForm.district}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="state">State</label>
+              <input
+                id="state"
+                type="text"
+                name="state"
+                value={profileForm.state}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="profession">Profession</label>
+              <input
+                id="profession"
+                type="text"
+                name="profession"
+                value={profileForm.profession}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div className="col-span-2">
+              <label htmlFor="institutionName">Institution Name</label>
+              <input
+                id="institutionName"
+                type="text"
+                name="institutionName"
+                value={profileForm.institutionName}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div className="col-span-2">
+              <label htmlFor="institutionAddress">Institution Address</label>
+              <input
+                id="institutionAddress"
+                type="text"
+                name="institutionAddress"
+                value={profileForm.institutionAddress}
+                onChange={handleProfileChange}
+                className="w-full p-2 border rounded"
+              />
+            </div>
+            <div className="col-span-2">
+              <label className="flex items-center gap-2" htmlFor="deletePhoto">
+                <input
+                  id="deletePhoto"
+                  type="checkbox"
+                  name="deletePhoto"
+                  checked={profileForm.deletePhoto}
+                  onChange={handleProfileChange}
+                />
+                Delete Profile Photo
+              </label>
+            </div>
+            <div className="col-span-2 flex justify-center">
+              <button
+                type="submit"
+                disabled={isUpdating}
+                className="bg-blue-500 hover:bg-blue-700 text-white px-6 py-2 rounded"
+              >
+                {isUpdating ? "Updating..." : "Save Changes"}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+
+
+
   if (loading) {
     return (
       <>
@@ -450,7 +671,18 @@ const UserDashboard = () => {
                   <i className="fas fa-calendar-plus"></i>
                   <strong>Joined:</strong> {formatDate(userData.joinedDate)}
                 </p>
+                <button
+                  onClick={() => setShowEditModal(true)}
+                  className="mt-4 bg-green-600 text-white px-5 py-2 rounded flex items-center gap-2 hover:bg-green-700"
+                >
+                  <i className="fas fa-edit"></i> Edit Profile
+                </button>
+
+                {renderEditProfileModal()}
+
               </section>
+
+
 
               {/* Stats */}
               <section className="stats-section">
@@ -529,6 +761,93 @@ const UserDashboard = () => {
                   <i className="fas fa-user-friends"></i>
                   <span>Referrals Joined: <strong>{userData.verifiedReferrals}</strong> members</span>
                 </div>
+                <div className="flex justify-center mt-4">
+                  <button
+                    className="text-white font-medium py-2 px-6 rounded-lg flex items-center justify-center transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-transform duration-200"
+                    style={{ backgroundColor: '#FF8C00', border: 'none' }}
+                    onMouseOver={(e) => e.target.style.backgroundColor = '#FF6B00'}
+                    onMouseOut={(e) => e.target.style.backgroundColor = '#FF8C00'}
+                    onClick={() => document.getElementById('referral-modal').classList.remove('hidden')}
+                  >
+                    <i className="fas fa-share-alt mr-2"></i>
+                    Share Referral Link
+                  </button>
+                </div>
+
+                {/* Referral Modal */}
+                <div id="referral-modal" className="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                  <div className="bg-white rounded-lg shadow-xl w-full max-w-md overflow-hidden">
+                    {/* Modal Header */}
+                    <div className="bg-blue-600 text-white p-4 flex justify-between items-center">
+                    
+                      <h3 className="text-lg font-semibold">Share Your Referral Link</h3>
+                      <button
+                        onClick={() => document.getElementById('referral-modal').classList.add('hidden')}
+                        className="text-white hover:text-blue-200"
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
+                    </div>
+
+                    {/* Modal Body */}
+                    <div className="p-4">
+                      <p className="text-gray-600 mb-2">Share this link with your friends:</p>
+                      <div className="flex items-center mb-6">
+                        <input
+                          type="text"
+                          readOnly
+                          value={`${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`}
+                          className="flex-grow px-3 py-2 border border-gray-300 rounded-l-lg focus:outline-none"
+                        />
+                        <button
+                          className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-r-lg"
+                          onClick={() => navigator.clipboard.writeText(`${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`)}
+                        >
+                          <i className="fas fa-copy"></i>
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-3">
+                        {/* WhatsApp Share Button */}
+                        <button
+                          className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg flex flex-col items-center justify-center transition-colors"
+                          onClick={() => {
+                            const message = `Join me on BYVS using my referral link: ${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`;
+                            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+                          }}
+                        >
+                          <i className="fab fa-whatsapp text-xl mb-1"></i>
+                          <span className="text-xs">WhatsApp</span>
+                        </button>
+
+                        {/* Facebook Share Button */}
+                        <button
+                          className="bg-blue-800 hover:bg-blue-900 text-white py-2 px-4 rounded-lg flex flex-col items-center justify-center transition-colors"
+                          onClick={() => {
+                            const url = `${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`;
+                            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
+                          }}
+                        >
+                          <i className="fab fa-facebook text-xl mb-1"></i>
+                          <span className="text-xs">Facebook</span>
+                        </button>
+
+                        {/* Instagram Share Button */}
+                        <button
+                          className="bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded-lg flex flex-col items-center justify-center transition-colors"
+                          onClick={() => {
+                            // Instagram doesn't have a direct share API, so we'll copy to clipboard
+                            navigator.clipboard.writeText(`${process.env.REACT_APP_API_BASE_URL_FRONTEND}/join?ref=${userData.referralCode}`);
+                            alert('Referral link copied to clipboard. You can now paste it in your Instagram bio or posts.');
+                          }}
+                        >
+                          <i className="fab fa-instagram text-xl mb-1"></i>
+                          <span className="text-xs">Instagram</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </section>
 
               {/* Downloads */}
@@ -577,32 +896,39 @@ const UserDashboard = () => {
               </section>
 
               {showPreview && (
-                <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
-                  <div className="bg-white p-6 rounded-lg shadow-xl max-w-2xl w-full relative">
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4">
+                  <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-auto relative overflow-hidden">
+                    {/* Close Button - Positioned absolutely at top-right */}
                     <button
-                      className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-2xl font-bold"
+                      className="absolute top-3 right-3 text-gray-700 hover:text-gray-900 text-2xl font-bold z-10"
                       onClick={() => setShowPreview(false)}
                     >
                       &times;
                     </button>
-                    <h2 className="text-xl font-bold mb-4 text-center">
-                      ID Card Preview
-                    </h2>
-                    <div ref={targetRef} className="flex justify-center">
-                      {/* The MembershipCard component will be rendered here and used for PDF */}
-                      <IdCard user={userData} photo={photoData} />
+
+                    {/* Modal Content */}
+                    <div className="p-6">
+                      <h2 className="text-xl font-bold mb-4 text-center">ID Card Preview</h2>
+                      <div className="flex flex-col items-center">
+                        {/* ID Card Preview */}
+                        <div ref={targetRef} className="mb-6">
+                          <IdCard user={userData} photo={photoData} />
+                        </div>
+
+                        {/* Download Button - Centered
+                        <button
+                          onClick={downloadIdCardPDF}
+                          className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-6 py-3 rounded-lg font-semibold hover:from-yellow-500 hover:to-yellow-600 transition-all flex items-center gap-2"
+                        >
+                          <i className="fas fa-download"></i>
+                          Download ID Card (PDF)
+                        </button> */}
+                      </div>
                     </div>
-                    {/* <div className="mt-6 flex justify-center">
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={handleDownloadClick}
-                      >
-                        Download ID Card (PDF)
-                      </button>
-                    </div> */}
                   </div>
                 </div>
               )}
+
 
               {showCertificatePreview && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
@@ -643,34 +969,54 @@ const UserDashboard = () => {
                     <i className="fas fa-user-plus"></i>
                     <span>New Member</span>
                   </div>
-                  <div className="achievement-badge">
-                    <i className="fas fa-share"></i>
-                    <span>First Share</span>
-                  </div>
-                  <div className="achievement-badge">
-                    <i className="fas fa-fire"></i>
-                    <span>On Fire</span>
-                  </div>
-                  <div className="achievement-badge">
-                    <i className="fas fa-star"></i>
-                    <span>Weekly Star</span>
-                  </div>
-                  <div className="achievement-badge">
-                    <i className="fas fa-crown"></i>
+                  { userStats.totalShares > 1 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-share"></i>
+                      <span>First Share</span>
+                    </div>
+                  )}
+                  {/* { userStats.totalPosts > 5 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-fire"></i>
+                      <span>On Fire</span>
+                    </div>
+                  )}
+                  { userStats.totalPosts > 10 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-star"></i>
+                      <span>Weekly Star</span>
+                    </div>
+                  )}
+                  { userStats.totalPosts > 20 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-crown"></i>
                     <span>Champion</span>
                   </div>
-                  <div className="achievement-badge">
-                    <i className="fas fa-trophy"></i>
-                    <span>Top 10</span>
-                  </div>
-                  <div className="achievement-badge">
-                    <i className="fas fa-users"></i>
-                    <span>Team Builder</span>
-                  </div>
-                  <div className="achievement-badge">
-                    <i className="fas fa-gem"></i>
-                    <span>Legend</span>
-                  </div>
+                  )} */}
+                  { userStats.totalShares > 10 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-trophy"></i>
+                      <span>Bronze Trophy</span>
+                    </div>
+                  )}
+                  { userStats.totalShares > 20 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-users"></i>
+                      <span>Silver Member</span>
+                    </div>
+                  )}
+                  { userStats.totalShares > 30 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-users"></i>
+                      <span>Gold Member</span>
+                    </div>
+                  )}
+                  { userStats.totalShares > 50 && (
+                    <div className="achievement-badge">
+                      <i className="fas fa-gem"></i>
+                      <span>Legend</span>
+                    </div>
+                  )}
                 </div>
               </section>
             </>

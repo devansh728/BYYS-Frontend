@@ -79,9 +79,9 @@ export default function IdCard({ user, photo, isAdminApproved = true }) {
   };
 
   return (
-    <div className="id-card-wrapper">
+    <div className="id-card-wrapper flex flex-col items-center">
       {/* ID Card Component */}
-      <div className="id-card-container" ref={cardRef}>
+      <div className="id-card-container mx-auto" ref={cardRef}>
         {/* Top Section */}
         <div className="id-card-top-section">
           {/* Logo */}

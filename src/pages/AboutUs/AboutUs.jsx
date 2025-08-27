@@ -128,8 +128,18 @@ const AboutUs = () => {
         </div>
 
         {/* History Section - Fixed */}
-<section className="history-section section">
-  <div className="container">
+        <section className="history-section section">
+  <div className="container history-container">
+    <div className="history-image-wrapper">
+      <img
+        src="/assests/history.jpg"
+        alt="History of BYVS"
+        className="history-image"
+        onError={(e) => {
+          e.target.style.display = 'none';
+        }}
+      />
+    </div>
     <div className="history-content">
       <h2>History of BYVS</h2>
       <p>
@@ -144,6 +154,7 @@ const AboutUs = () => {
     </div>
   </div>
 </section>
+
 
 
         {/* Inspiration Section */}

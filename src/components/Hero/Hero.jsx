@@ -3,8 +3,16 @@ import './Hero.css';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // 10 slides with actual photo references
+  useEffect(() => {
+    // Update isMobile on resize
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 12 slides with photos and English captions
   const slides = [
     { id: 1, image: "/assests/slide1.jpg", titleEnglish: "Protest to protect religious heritage" },
     { id: 2, image: "/assests/slide2.jpg", titleEnglish: "Covid Mukt Bharat Mission by Team BYVS" },
@@ -15,10 +23,12 @@ const Hero = () => {
     { id: 7, image: "/assests/slide7.jpg", titleEnglish: "BYVS Raid Against Cow Smugglers" },
     { id: 8, image: "/assests/slide8.jpg", titleEnglish: "Food Packet Distribution in Prayagraj" },
     { id: 9, image: "/assests/slide9.jpg", titleEnglish: "BYVS Membership Drive" },
-    { id: 10, image: "/assests/slide10.jpg", titleEnglish: "Diwali Celebration with underprivileged Kids" }
+    { id: 10, image: "/assests/slide10.jpg", titleEnglish: "Diwali Celebration with underprivileged Kids" },
+    // Added slides:
+    { id: 11, image: "/assests/slide11.jpg", titleEnglish: "Memorandum submitted to Circle Officer(CO)" },
+    { id: 12, image: "/assests/slide12.jpg", titleEnglish: "National President's birthday Celebration with underprivileged" }
   ];
 
-  // Auto-change slide every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % slides.length);
@@ -32,6 +42,8 @@ const Hero = () => {
 
   return (
     <section className="hero" id="home">
+      {/* Desktop only: Padding to prevent top crop under header */}
+      {!isMobile && <div className="hero-slider-padding" />}
       <div className="hero-slider">
         {slides.map((slide, index) => (
           <div
@@ -52,7 +64,6 @@ const Hero = () => {
           </div>
         ))}
       </div>
-
       {/* Navigation Controls */}
       <button className="slider-btn prev-btn" onClick={prevSlide}>
         <i className="fas fa-chevron-left"></i>
@@ -60,7 +71,6 @@ const Hero = () => {
       <button className="slider-btn next-btn" onClick={nextSlide}>
         <i className="fas fa-chevron-right"></i>
       </button>
-
       {/* Navigation Dots */}
       <div className="slider-nav">
         {slides.map((_, index) => (
@@ -71,7 +81,6 @@ const Hero = () => {
           ></span>
         ))}
       </div>
-
       {/* Counter */}
       <div className="slide-counter">
         {currentSlide + 1} / {slides.length}

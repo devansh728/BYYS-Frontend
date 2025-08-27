@@ -5,33 +5,33 @@ const WhyJoin = () => {
   const benefits = [
     {
       icon: "fas fa-certificate",
-      title: "Official Recognition",
-      description: "By joining BYVS, you become a member of a fully registered and reputed organization. You will receive an official membership certificate and a membership ID card, giving you authentic recognition as part of a legitimate Youth Club."
+      title: "Official Membership & Recognition",
+      description: "Join BYVS and gain official recognition as a registered member of a prominent youth organization. Receive an authentic membership certificate and ID card that stand as proof of your commitment and affiliation."
     },
     {
       icon: "fas fa-hands-helping",
-      title: "24/7 Support System",
-      description: "BYVS stands by your side 24/7, just like your own family. Whenever you need guidance, help, or support, the organization and its members will back you up wholeheartedly."
+      title: "24/7 Family Like Support",
+      description: "Experience a support system that feels like family. BYVS members and leadership provide unwavering guidance, encouragement, and assistance anytime you need it, ensuring you never walk alone."
     },
     {
       icon: "fas fa-file-alt",
-      title: "CV/Resume Enhancement",
-      description: "Being a member of a registered NGO like BYVS enhances your CV/resume significantly. It shows your commitment to social work, which can give you an edge in private and government job interviews."
+      title: "Boost Your Career Profile",
+      description: "Enhance your resume by being associated with a respected social organization. Demonstrate your dedication to social causes, leadership, and community engagement—qualities highly valued by employers in both private and public sectors."
     },
     {
       icon: "fas fa-graduation-cap",
-      title: "Career Development",
-      description: "If you aspire to build a career in social service or politics, BYVS provides invaluable learning opportunities, mentorship, and practical experience, helping you establish a solid base for your future endeavors."
+      title: "Strong Foundation for Social Service & Politics",
+      description: "Build a solid base for a career in social service or politics through valuable learning experiences, mentorship, and active involvement in impactful community programs facilitated by BYVS."
     },
     {
       icon: "fas fa-heart",
-      title: "Social Impact",
-      description: "Joining BYVS means actively contributing to the betterment of society. Through the organization's programs and initiatives, you can make a real difference in the lives of people around you."
+      title: "Contribute to Society’s Welfare",
+      description: "Make a genuine difference in your community’s well-being. Participate in initiatives that foster social growth, provide aid, and empower disadvantaged groups, creating a positive social impact."
     },
     {
       icon: "fas fa-rocket",
-      title: "Growth Opportunities",
-      description: "If you work with dedication and passion, BYVS offers you opportunities for promotion within the organization. You can also receive funding support for your future social welfare projects, enabling you to expand your impact."
+      title: "Growth & Opportunities Within BYVS",
+      description: "Grow with BYVS through leadership roles, project funding, promotions, and new challenges. Dedicated members have access to resources that support their ideas and extend their social outreach."
     }
   ];
 

@@ -50,7 +50,7 @@ const Header = () => {
 
       console.log('Logged out successfully. localStorage cleared.');
     } else {
-      alert("Already logged in")
+      alert("Already logged out")
       console.log('Already logged out. localStorage is empty.');
     }
 
@@ -173,9 +173,9 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <button onClick={handleLogout}>
+                <Link to="#" onClick={handleLogout}>
                   Logout
-                </button>
+                </Link>
               </li>
             </ul>
           </nav>

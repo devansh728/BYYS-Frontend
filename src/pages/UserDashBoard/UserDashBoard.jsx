@@ -47,7 +47,7 @@ const UserDashboard = () => {
   });
   const [showCertificatePreview, setShowCertificatePreview] = useState(false);
   const certificateRef = useRef();
- const { toPDF: toCertificatePDF, loading: certificatePdfLoading } = usePDF({
+  const { toPDF: toCertificatePDF, loading: certificatePdfLoading } = usePDF({
     filename: "byvs_membership_certificate.pdf",
     page: { format: "A4", orientation: "landscape" },
     targetRef: certificateRef,
@@ -120,7 +120,7 @@ const UserDashboard = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch user data');
       }
-      const data = await response.json(); 
+      const data = await response.json();
       setUserData(data);
       // localStorage.setItem('userName', userData.fullName);
     } catch (error) {
@@ -747,7 +747,7 @@ const UserDashboard = () => {
                     <i className="fas fa-user-plus"></i>
                     <span>New Member</span>
                   </div>
-                  {userStats.totalShares >1 && <div className="achievement-badge">
+                  {userStats.totalShares > 1 && <div className="achievement-badge">
                     <i className="fas fa-share"></i>
                     <span>First Share</span>
                   </div>}
@@ -780,7 +780,7 @@ const UserDashboard = () => {
                     <span>Gold</span>
                   </div>}
                 </div>
-                
+
               </section>
             </>
           )}
@@ -789,119 +789,108 @@ const UserDashboard = () => {
 
         {/* Share Referral Modal */}
         {showShareModal && (
-          <div className="modal-overlay-fixed" onClick={() => setShowShareModal(false)}>
-            <div className="modal-content-fixed share-modal" onClick={(e) => e.stopPropagation()}>
-              <button className="modal-close-btn-fixed" onClick={() => setShowShareModal(false)}>
-                &times;
+          <div className="share-modal-body">
+            <p className="share-description">Share this link with your friends:</p>
+            <div className="referral-link-container">
+              <input
+                type="text"
+                readOnly
+                value={`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`}
+                className="referral-link-input"
+              />
+              <button
+                className="copy-link-btn"
+                onClick={() => {
+                  navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
+                  alert('Link copied to clipboard!');
+                }}
+              >
+                <i className="fas fa-copy"></i>
               </button>
-              <h2 className="share-modal-title">
-                <i className="fas fa-share-alt"></i>
-                Share Your Referral Link
-              </h2>
+            </div>
 
-              {/* Modal Body */}
-              <div className="share-modal-body">
-                <p className="share-description">Share this link with your friends:</p>
-                <div className="referral-link-container">
-                  <input
-                    type="text"
-                    readOnly
-                    value={`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`}
-                    className="referral-link-input"
-                  />
-                  <button
-                    className="copy-link-btn"
-                    onClick={() => {
-                      navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
-                      alert('Link copied to clipboard!');
-                    }}
-                  >
-                    <i className="fas fa-copy"></i>
-                  </button>
-                </div>
+            <div className="social-share-grid">
+              {/* Common Message Text */}
+              const messageText = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
 
-                <div className="social-share-grid">
-                  {/* WhatsApp Share Button */}
-                  <button
-                    className="social-share-btn whatsapp"
-                    onClick={() => {
-                      const message = `Join me on BYVS using my referral link: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
-                      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
-                    }}
-                  >
-                    <i className="fab fa-whatsapp"></i>
-                    <span>WhatsApp</span>
-                  </button>
+              {/* WhatsApp Share Button */}
+              <button
+                className="social-share-btn whatsapp"
+                onClick={() => {
+                  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`, '_blank');
+                }}
+              >
+                <i className="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+              </button>
 
-                  {/* Facebook Share Button */}
-                  <button
-                    className="social-share-btn facebook"
-                    onClick={() => {
-                      const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
-                      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-                    }}
-                  >
-                    <i className="fab fa-facebook"></i>
-                    <span>Facebook</span>
-                  </button>
+              {/* Facebook Share Button */}
+              <button
+                className="social-share-btn facebook"
+                onClick={() => {
+                  const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
+                  const quote = `Join me on BYVS! Get your Digital Membership ID and climb the Leaderboard.`;
+                  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`, '_blank', 'width=600,height=400');
+                }}
+              >
+                <i className="fab fa-facebook"></i>
+                <span>Facebook</span>
+              </button>
 
-                  {/* Instagram Share Button */}
-                  <button
-                    className="social-share-btn instagram"
-                    onClick={() => {
-                      navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
-                      alert('Referral link copied to clipboard. You can now paste it in your Instagram bio or posts.');
-                    }}
-                  >
-                    <i className="fab fa-instagram"></i>
-                    <span>Instagram</span>
-                  </button>
+              {/* Instagram Share Button (remains a copy action) */}
+              <button
+                className="social-share-btn instagram"
+                onClick={() => {
+                  navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
+                  alert('Referral link copied to clipboard. You can now paste it in your Instagram bio or posts.');
+                }}
+              >
+                <i className="fab fa-instagram"></i>
+                <span>Instagram</span>
+              </button>
 
-                  {/* Twitter Share Button */}
-                  <button
-                    className="social-share-btn twitter"
-                    onClick={() => {
-                      const text = `Join me on BYVS and make a difference! Use my referral link:`;
-                      const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
-                      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-                    }}
-                  >
-                    <i className="fab fa-twitter"></i>
-                    <span>Twitter</span>
-                  </button>
+              {/* Twitter Share Button */}
+              <button
+                className="social-share-btn twitter"
+                onClick={() => {
+                  const twitterMessage = `BYVS Membership Drive%0AJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!%0AGet your Digital Membership ID Card instantly ✅%0AShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆%0AJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}%0AReferral Code: ${userData.referralCode}`;
+                  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterMessage)}`, '_blank', 'width=600,height=400');
+                }}
+              >
+                <i className="fab fa-twitter"></i>
+                <span>Twitter</span>
+              </button>
 
-                  {/* LinkedIn Share Button */}
-                  <button
-                    className="social-share-btn linkedin"
-                    onClick={() => {
-                      const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
-                      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-                    }}
-                  >
-                    <i className="fab fa-linkedin"></i>
-                    <span>LinkedIn</span>
-                  </button>
+              {/* LinkedIn Share Button */}
+              <button
+                className="social-share-btn linkedin"
+                onClick={() => {
+                  const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
+                  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
+                }}
+              >
+                <i className="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+              </button>
 
-                  {/* Telegram Share Button */}
-                  <button
-                    className="social-share-btn telegram"
-                    onClick={() => {
-                      const text = `Join me on BYVS using my referral link: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
-                      window.open(`https://t.me/share/url?url=${encodeURIComponent(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`)}&text=${encodeURIComponent('Join me on BYVS!')}`, '_blank');
-                    }}
-                  >
-                    <i className="fab fa-telegram"></i>
-                    <span>Telegram</span>
-                  </button>
-                </div>
+              {/* Telegram Share Button */}
+              <button
+                className="social-share-btn telegram"
+                onClick={() => {
+                  const message = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
+                  window.open(`https://t.me/share/url?url=${encodeURIComponent(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`)}&text=${encodeURIComponent(message)}`, '_blank');
+                }}
+              >
+                <i className="fab fa-telegram"></i>
+                <span>Telegram</span>
+              </button>
+            </div>
 
-                <div className="share-stats">
-                  <p className="stats-text">
-                    <i className="fas fa-chart-line"></i>
-                    You have earned <strong>{userData.verifiedReferrals}</strong> referrals so far!
-                  </p>
-                </div>
-              </div>
+            <div className="share-stats">
+              <p className="stats-text">
+                <i className="fas fa-chart-line"></i>
+                You have earned <strong>{userData.verifiedReferrals}</strong> referrals so far!
+              </p>
             </div>
           </div>
         )}

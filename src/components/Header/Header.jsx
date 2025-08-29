@@ -11,6 +11,7 @@ const Header = () => {
   const [validUser, setValidUser] = useState(false);
   const [validAdmin, setValidAdmin] = useState(false);
   const location = useLocation();
+  const isLoggedIn = !!localStorage.getItem('authToken');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +46,7 @@ const Header = () => {
     if (storedAuthToken || storedUserRole) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('X-User-Role');
-      
+
       alert("You logged out thanks")
 
       console.log('Logged out successfully. localStorage cleared.');
@@ -127,12 +128,15 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/login"
-                  className={isActive('/login') ? 'active' : ''}
-                >
-                  Login Portal
-                </Link>
+                {isLoggedIn ? (
+                  <li>
+                    <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Logout</Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/login" className={isActive('/login') ? 'active' : ''}>Login Portal</Link>
+                  </li>
+                )}
               </li>
               <li>
                 {valid && validUser && (<Link to="/profile" className={isActive('/profile') ? 'active' : ''}>Dashboard</Link>)}

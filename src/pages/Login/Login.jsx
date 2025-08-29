@@ -117,7 +117,7 @@ const Login = () => {
       localStorage.setItem('X-User-Role', userRole);
 
       setStep('success');
-      setTimeout(() => navigate('/home'), 2000);
+      setTimeout(() => navigate('/dashboard'), 2000);
     } catch (err) {
       setError(err.message || 'Failed to verify OTP. Please try again.');
     } finally {

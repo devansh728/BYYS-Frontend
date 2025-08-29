@@ -12,6 +12,7 @@ import Login from './pages/Login/Login';
 import AdminDashboard from './pages/AdminDashBoard/AdminDashBoard';
 import UserDashboard from './pages/UserDashBoard/UserDashBoard'; // ✅ NEW USER DASHBOARD IMPORT
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Logout from './pages/logout/logout';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -35,6 +36,7 @@ function App() {
           <Route path="/donate-us" element={<Donate />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<ProtectedRoute><Logout /></ProtectedRoute>} />
           <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/admin-dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} /> {/* ✅ NEW USER DASHBOARD ROUTE */}

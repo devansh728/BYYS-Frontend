@@ -120,9 +120,9 @@ const UserDashboard = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch user data');
       }
-      const data = await response.json();
+      const data = await response.json(); 
       setUserData(data);
-      localStorage.setItem('userName', userData.fullName);
+      // localStorage.setItem('userName', userData.fullName);
     } catch (error) {
       console.error('Error fetching user profile:', error);
       setError(error.message);

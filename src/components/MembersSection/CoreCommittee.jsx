@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CoreCommittee.css';
 
 const CoreCommittee = () => {
@@ -398,7 +398,7 @@ const CoreCommittee = () => {
                 {error && <p className="error-message">Error: {error}</p>}
 
                 {selectedDistrict && !isLoading && !error && (
-                  <div className="district-committee-display">
+                  <div className="state-committee-display">
                     <h4>Committee for {selectedDistrict}</h4>
                     <div className="committee-grid">
                       {districtCommittee.length > 0 ? (

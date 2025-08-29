@@ -241,13 +241,21 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link
-              to="/login"
-              className={isActive('/login') ? 'active' : ''}
-              onClick={toggleMobileMenu}
-            >
-              Login Portal
-            </Link>
+            {isLoggedIn ? (
+              <li>
+                <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Logout</Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login" className={isActive('/login') ? 'active' : ''}>Login Portal</Link>
+              </li>
+            )}
+          </li>
+          <li>
+            {valid && validUser && (<Link to="/profile" className={isActive('/profile') ? 'active' : ''}>Dashboard</Link>)}
+          </li>
+          <li>
+            {valid && validAdmin && (<Link to="/admin" className={isActive('/admin') ? 'active' : ''}>Dashboard</Link>)}
           </li>
           <li>
             <Link

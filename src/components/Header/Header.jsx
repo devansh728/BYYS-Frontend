@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Logout from '../../pages/logout/logout';
 import './Header.css';
-import { Alert } from 'bootstrap';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -174,11 +172,6 @@ const Header = () => {
                   className={isActive('/donate') || isActive('/donate-us') ? 'active' : ''}
                 >
                   Donate Us
-                </Link>
-              </li>
-              <li>
-                <Link to="#" onClick={handleLogout}>
-                  Logout
                 </Link>
               </li>
             </ul>

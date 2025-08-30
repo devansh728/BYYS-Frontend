@@ -81,7 +81,6 @@ const UserDashboard = () => {
   const handleCertificateDownloadClick = () => {
     if (applicationStatus === 'APPROVED') {
       setShowCertificatePreview(true);
-      toCertificatePDF();
     } else {
       alert("Your Office Bearer application must be APPROVED to download the certificate.");
     }
@@ -100,6 +99,7 @@ const UserDashboard = () => {
 
     fetchUserData();
     fetchUserStats();
+    fetchApplicationStatus();
   }, [navigate]);
 
   useEffect(() => {
@@ -177,6 +177,8 @@ const UserDashboard = () => {
     };
   }, []);
 
+
+
   const fetchApplicationStatus = async () => {
     setLoading(true);
     try {
@@ -198,7 +200,7 @@ const UserDashboard = () => {
           setCertificateData({
             recipientName: userData.fullName,
             position: 'Office-Bearer', // Assuming the API returns the position
-            block: 'Block-A',
+            block: userData.blockName,
             district: userData.district,
             state: userData.state,
             regNo: '66/22', // This can be static or dynamic from API
@@ -212,6 +214,26 @@ const UserDashboard = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (userData) {
+      setEditFormData({
+        fullName: userData.fullName,
+        email: userData.email,
+        phone: userData.phone,
+        age: userData.age,
+        whatsappNumber: userData.whatsappNumber,
+        villageTownCity: userData.villageTownCity,
+        blockName: userData.blockName,
+        district: userData.district,
+        state: userData.state,
+        profession: userData.profession,
+        institutionName: userData.institutionName,
+        institutionAddress: userData.institutionAddress,
+        deletePhoto: false,
+      });
+    }
+  }, [userData]);
 
   const fetchTasks = async () => {
     try {
@@ -458,6 +480,9 @@ const UserDashboard = () => {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Update failed");
+      if(data.token && data.token!=null){
+        localStorage.setItem("authToken", data.token);
+      }
 
       alert("Profile updated successfully!");
       setShowEditModal(false);
@@ -698,7 +723,7 @@ const UserDashboard = () => {
                   My Downloads
                 </h2>
                 <div className="downloads-grid">
-                  <div className="download-item" onClick={() => setShowCertificatePreview(true)}>
+                  <div className="download-item" onClick={() => handleCertificateDownloadClick()}>
                     <i className="fas fa-certificate"></i>
                     <div>
                       <strong>Office bearer appointment Letter</strong>
@@ -789,108 +814,120 @@ const UserDashboard = () => {
 
         {/* Share Referral Modal */}
         {showShareModal && (
-          <div className="share-modal-body">
-            <p className="share-description">Share this link with your friends:</p>
-            <div className="referral-link-container">
-              <input
-                type="text"
-                readOnly
-                value={`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`}
-                className="referral-link-input"
-              />
-              <button
-                className="copy-link-btn"
-                onClick={() => {
-                  navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
-                  alert('Link copied to clipboard!');
-                }}
-              >
-                <i className="fas fa-copy"></i>
+          <div className="modal-overlay-fixed" onClick={() => setShowShareModal(false)}>
+            <div className="modal-content-fixed share-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="modal-close-btn-fixed" onClick={() => setShowShareModal(false)}>
+                &times;
               </button>
-            </div>
+              <h2 className="share-modal-title">
+                <i className="fas fa-share-alt"></i>
+                Share Your Referral Link
+              </h2>
+              <div className="share-modal-body">
+                <p className="share-description">Share this link with your friends:</p>
+                <div className="referral-link-container">
+                  <input
+                    type="text"
+                    readOnly
+                    value={`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`}
+                    className="referral-link-input"
+                  />
+                  <button
+                    className="copy-link-btn"
+                    onClick={() => {
+                      navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
+                      alert('Link copied to clipboard!');
+                    }}
+                  >
+                    <i className="fas fa-copy"></i>
+                  </button>
+                </div>
 
-            <div className="social-share-grid">
-              {/* Common Message Text */}
-              const messageText = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
+                <div className="social-share-grid">
+                  {/* Common Message Text */}
+                  <script>
+                    const messageText = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
+                  </script>
+                  {/* WhatsApp Share Button */}
+                  <button
+                    className="social-share-btn whatsapp"
+                    onClick={() => {
+                      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`, '_blank');
+                    }}
+                  >
+                    <i className="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                  </button>
 
-              {/* WhatsApp Share Button */}
-              <button
-                className="social-share-btn whatsapp"
-                onClick={() => {
-                  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`, '_blank');
-                }}
-              >
-                <i className="fab fa-whatsapp"></i>
-                <span>WhatsApp</span>
-              </button>
+                  {/* Facebook Share Button */}
+                  <button
+                    className="social-share-btn facebook"
+                    onClick={() => {
+                      const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
+                      const quote = `Join me on BYVS! Get your Digital Membership ID and climb the Leaderboard.`;
+                      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`, '_blank', 'width=600,height=400');
+                    }}
+                  >
+                    <i className="fab fa-facebook"></i>
+                    <span>Facebook</span>
+                  </button>
 
-              {/* Facebook Share Button */}
-              <button
-                className="social-share-btn facebook"
-                onClick={() => {
-                  const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
-                  const quote = `Join me on BYVS! Get your Digital Membership ID and climb the Leaderboard.`;
-                  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`, '_blank', 'width=600,height=400');
-                }}
-              >
-                <i className="fab fa-facebook"></i>
-                <span>Facebook</span>
-              </button>
+                  {/* Instagram Share Button (remains a copy action) */}
+                  <button
+                    className="social-share-btn instagram"
+                    onClick={() => {
+                      navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
+                      alert('Referral link copied to clipboard. You can now paste it in your Instagram bio or posts.');
+                    }}
+                  >
+                    <i className="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                  </button>
 
-              {/* Instagram Share Button (remains a copy action) */}
-              <button
-                className="social-share-btn instagram"
-                onClick={() => {
-                  navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
-                  alert('Referral link copied to clipboard. You can now paste it in your Instagram bio or posts.');
-                }}
-              >
-                <i className="fab fa-instagram"></i>
-                <span>Instagram</span>
-              </button>
+                  {/* Twitter Share Button */}
+                  <button
+                    className="social-share-btn twitter"
+                    onClick={() => {
+                      const twitterMessage = `BYVS Membership Drive%0AJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!%0AGet your Digital Membership ID Card instantly ✅%0AShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆%0AJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}%0AReferral Code: ${userData.referralCode}`;
+                      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterMessage)}`, '_blank', 'width=600,height=400');
+                    }}
+                  >
+                    <i className="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                  </button>
 
-              {/* Twitter Share Button */}
-              <button
-                className="social-share-btn twitter"
-                onClick={() => {
-                  const twitterMessage = `BYVS Membership Drive%0AJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!%0AGet your Digital Membership ID Card instantly ✅%0AShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆%0AJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}%0AReferral Code: ${userData.referralCode}`;
-                  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterMessage)}`, '_blank', 'width=600,height=400');
-                }}
-              >
-                <i className="fab fa-twitter"></i>
-                <span>Twitter</span>
-              </button>
+                  {/* LinkedIn Share Button */}
+                  <button
+                    className="social-share-btn linkedin"
+                    onClick={() => {
+                      const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
+                      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
+                    }}
+                  >
+                    <i className="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                  </button>
 
-              {/* LinkedIn Share Button */}
-              <button
-                className="social-share-btn linkedin"
-                onClick={() => {
-                  const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
-                  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
-                }}
-              >
-                <i className="fab fa-linkedin"></i>
-                <span>LinkedIn</span>
-              </button>
+                  {/* Telegram Share Button */}
+                  <button
+                    className="social-share-btn telegram"
+                    onClick={() => {
+                      const message = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
+                      window.open(`https://t.me/share/url?url=${encodeURIComponent(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`)}&text=${encodeURIComponent(message)}`, '_blank');
+                    }}
+                  >
+                    <i className="fab fa-telegram"></i>
+                    <span>Telegram</span>
+                  </button>
+                </div>
 
-              {/* Telegram Share Button */}
-              <button
-                className="social-share-btn telegram"
-                onClick={() => {
-                  const message = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
-                  window.open(`https://t.me/share/url?url=${encodeURIComponent(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`)}&text=${encodeURIComponent(message)}`, '_blank');
-                }}
-              >
-                <i className="fab fa-telegram"></i>
-                <span>Telegram</span>
-              </button>
-            </div>
-
-            <div className="share-stats">
-              <p className="stats-text">
-                <i className="fas fa-chart-line"></i>
-                You have earned <strong>{userData.verifiedReferrals}</strong> referrals so far!
-              </p>
+                <div className="share-stats">
+                  <p className="stats-text">
+                    <i className="fas fa-chart-line"></i>
+                    You have earned <strong>{userData.verifiedReferrals}</strong> referrals so far!
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -934,7 +971,7 @@ const UserDashboard = () => {
                   placeholder="Full Name"
                   minLength={2}
                   maxLength={100}
-                  value={editFormData.fullName}
+                  value={editFormData.fullName || userData.fullName}
                   onChange={handleEditFormChange}
                   required
                 />
@@ -1063,7 +1100,7 @@ const UserDashboard = () => {
                 <IdCard user={userData} photo={photoData} />
               </div>
               {/* FIXED: Only one download button, with loading state */}
-              <div className="modal-actions">
+              {/* <div className="modal-actions">
                 <button
                   onClick={toPDF}
                   disabled={pdfLoading}
@@ -1079,7 +1116,7 @@ const UserDashboard = () => {
                     </>
                   )}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         )}
@@ -1096,7 +1133,7 @@ const UserDashboard = () => {
                 <CertificateComponent data={certificateData} />
               </div>
               {/* FIXED: Only one download button, with loading state */}
-              <div className="modal-actions">
+              {/* <div className="modal-actions">
                 <button
                   onClick={toCertificatePDF}
                   disabled={certificatePdfLoading}
@@ -1112,7 +1149,7 @@ const UserDashboard = () => {
                     </>
                   )}
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         )}

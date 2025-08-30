@@ -237,23 +237,19 @@
   width: 100%;
 }
 
-.download-id-card-btn {
-  background: linear-gradient(145deg, #ffb74d, #ff9800);
+.download-pdf-btn {
+  background: linear-gradient(135deg, var(--maroon), var(--dark-maroon));
   color: white;
   border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 1rem 2rem;
+  border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 220px;
-  justify-content: center;
-  text-decoration: none !important;
+  gap: 0.5rem;
+  font-size: 1rem;
 }
 
 .download-id-card-btn:hover {

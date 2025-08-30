@@ -136,7 +136,7 @@ export default function CertificateComponent({ data, showDownloadButton = true }
         <div className="certificate-download-section">
           <button 
             onClick={downloadCertificatePDF} 
-            className="download-certificate-btn"
+            className="download-pdf-btn"
           >
             <i className="fas fa-download"></i>
             Download Certificate (PDF)

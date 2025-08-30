@@ -845,13 +845,11 @@ const UserDashboard = () => {
 
                 <div className="social-share-grid">
                   {/* Common Message Text */}
-                  <script>
-                    const messageText = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
-                  </script>
                   {/* WhatsApp Share Button */}
                   <button
                     className="social-share-btn whatsapp"
                     onClick={() => {
+                      const messageText = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
                       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`, '_blank');
                     }}
                   >

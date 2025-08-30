@@ -272,8 +272,12 @@ const CoreCommittee = () => {
         return;
       }
 
+
+      // Start loading state
       setIsLoading(true);
       setError(null);
+
+
 
       try {
         const response = await fetch(`https://byvs-backend.onrender.com/api/office-bearer/approved-office-bearers?district=${encodeURIComponent(selectedDistrict)}`);

@@ -77,6 +77,8 @@ const UserDashboard = () => {
   const [showShareModal, setShowShareModal] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [photoPreview, setPhotoPreview] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [updateError, setUpdateError] = useState(null);
 
   const handleCertificateDownloadClick = () => {
     if (applicationStatus === 'APPROVED') {
@@ -1072,10 +1074,10 @@ const UserDashboard = () => {
                   />
                   Remove Current Photo
                 </label>
-                {editFormError && <p className="form-error">{editFormError}</p>}
+                {updateError && <p className="form-error">{updateError}</p>}
                 <div className="form-actions">
-                  <button type="submit" disabled={editIsSubmitting} className="submit-btn">
-                    {editIsSubmitting ? "Saving..." : "Save Changes"}
+                  <button type="submit" disabled={isUpdating} className="submit-btn">
+                    {isUpdating ? "Saving..." : "Save Changes"}
                   </button>
                   <button type="button" className="cancel-btn" onClick={() => setShowEditModal(false)}>
                     Cancel

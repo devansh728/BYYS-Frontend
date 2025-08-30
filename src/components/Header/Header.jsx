@@ -128,7 +128,7 @@ const Header = () => {
               <li>
                 {isLoggedIn ? (
                   <li>
-                    <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Logout</Link>
+                    <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Login Portal</Link>
                   </li>
                 ) : (
                   <li>
@@ -243,7 +243,7 @@ const Header = () => {
           <li>
             {isLoggedIn ? (
               <li>
-                <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Logout</Link>
+                <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Login Portal</Link>
               </li>
             ) : (
               <li>

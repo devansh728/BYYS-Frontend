@@ -463,11 +463,12 @@ const UserDashboard = () => {
     setUpdateError(null);
     try {
       const dataedit = new FormData();
-      for (const key in editFormData) {
-        if (Object.prototype.hasOwnProperty.call(editFormData, key) && editFormData[key] !== null && editFormData[key] !== undefined) {
-          dataedit.append(key, editFormData[key]);
-        }
-      }
+      // for (const key in editFormData) {
+      //   if (Object.prototype.hasOwnProperty.call(editFormData, key) && editFormData[key] !== null && editFormData[key] !== undefined) {
+      //     dataedit.append(key, editFormData[key]);
+      //   }
+      // }
+      dataedit.append("request", JSON.stringify(editFormData));
 
       if (selectedPhoto) {
         dataedit.append("photo", selectedPhoto);

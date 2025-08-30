@@ -205,7 +205,7 @@ const CoreCommittee = () => {
 
 
   const nationalPositions = [
-    { position: 'President', name: 'Raja Saksham Singh Yogi', photo: '/assests/President.jpg' },
+    { position: 'President', name: 'Raja Saksham Singh Yogi', photo: '/assests/founder.jpg' },
     { position: 'General Secretary', name: 'Pt. Bhanu Mishra (Harsh Bhaiya)', photo: '/assests/GeneralSecretary.jpg' },
     { position: 'Vice President', name: 'Aditya Pratap Singh', photo: '/assests/VicePresident.jpg' },
     { position: 'Coordinator', name: 'Raj Shekhar Singh', photo: '/assests/Coordinator.jpg' }

@@ -340,7 +340,7 @@ const CoreCommittee = () => {
               Swami Avimukteshwaranand Saraswati Ji – Current Jagadguru Shankaracharya of Jyotish Peeth, Joshimath, Uttarakhand, is a revered spiritual leader and mentor of Bhartiya Yuva Vidyarthi Sangathan (BYVS). Born in 1969 in Pratapgarh, Uttar Pradesh, he was initiated into spiritual life under the guidance of Swami Karapatri Ji Maharaj and later became a disciple of Swami Swaroopanand Saraswati Ji.
             </p>
             <blockquote className="leader-quote">
-              <p>"Brahman is the only truth, the world is an illusion"</p>
+              <p>“युवा ही राष्ट्र की धरोहर और शक्ति हैं” </p>
             </blockquote>
             <p>
               A scholar of Sanskrit and Vedic texts, he has led movements for the preservation of Hindu culture and social welfare, including advocating for the Ganga's national recognition.

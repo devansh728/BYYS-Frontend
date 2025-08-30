@@ -113,7 +113,7 @@ const UserDashboard = () => {
   const fetchUserData = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://byvs.onrender.com/auth/otp/me', {
+      const response = await fetch('https://byvs-backend.onrender.com/auth/otp/me', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ const UserDashboard = () => {
         setLoading(true);
         setError(null);
 
-        const response = await fetch('https://byvs.onrender.com/auth/otp/user/photo', {
+        const response = await fetch('https://byvs-backend.onrender.com/auth/otp/user/photo', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -184,7 +184,7 @@ const UserDashboard = () => {
   const fetchApplicationStatus = async () => {
     setLoading(true);
     try {
-      const response = await fetch('https://byvs.onrender.com/api/office-bearer/status', {
+      const response = await fetch('https://byvs-backend.onrender.com/api/office-bearer/status', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -239,7 +239,7 @@ const UserDashboard = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('https://byvs.onrender.com/api/office-bearer/get-tasks', {
+      const response = await fetch('https://byvs-backend.onrender.com/api/office-bearer/get-tasks', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -264,7 +264,7 @@ const UserDashboard = () => {
     setIsSubmitting(true);
     setFormError(null);
     try {
-      const response = await fetch('https://byvs.onrender.com/api/office-bearer/apply', {
+      const response = await fetch('https://byvs-backend.onrender.com/api/office-bearer/apply', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -341,7 +341,7 @@ const UserDashboard = () => {
   const fetchUserStats = async () => {
     setLoading(true);
     try {
-      const ShareResponse = await fetch('https://byvs.onrender.com/referrals/userStats', {
+      const ShareResponse = await fetch('https://byvs-backend.onrender.com/referrals/userStats', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
@@ -478,7 +478,7 @@ const UserDashboard = () => {
         dataedit.append("photo", selectedPhoto);
       }
 
-      const response = await fetch('https://byvs.onrender.com/auth/otp', {
+      const response = await fetch('https://byvs-backend.onrender.com/auth/otp', {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`
@@ -836,13 +836,13 @@ const UserDashboard = () => {
                   <input
                     type="text"
                     readOnly
-                    value={`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`}
+                    value={`https://www.byvs.org/join?ref=${userData.referralCode}`}
                     className="referral-link-input"
                   />
                   <button
                     className="copy-link-btn"
                     onClick={() => {
-                      navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
+                      navigator.clipboard.writeText(`https://www.byvs.org/join?ref=${userData.referralCode}`);
                       alert('Link copied to clipboard!');
                     }}
                   >
@@ -856,7 +856,7 @@ const UserDashboard = () => {
                   <button
                     className="social-share-btn whatsapp"
                     onClick={() => {
-                      const messageText = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
+                      const messageText = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://www.byvs.org/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
                       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(messageText)}`, '_blank');
                     }}
                   >
@@ -868,7 +868,7 @@ const UserDashboard = () => {
                   <button
                     className="social-share-btn facebook"
                     onClick={() => {
-                      const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
+                      const url = `https://www.byvs.org/join?ref=${userData.referralCode}`;
                       const quote = `Join me on BYVS! Get your Digital Membership ID and climb the Leaderboard.`;
                       window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(quote)}`, '_blank', 'width=600,height=400');
                     }}
@@ -881,7 +881,7 @@ const UserDashboard = () => {
                   <button
                     className="social-share-btn instagram"
                     onClick={() => {
-                      navigator.clipboard.writeText(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`);
+                      navigator.clipboard.writeText(`https://www.byvs.org/join?ref=${userData.referralCode}`);
                       alert('Referral link copied to clipboard. You can now paste it in your Instagram bio or posts.');
                     }}
                   >
@@ -893,7 +893,7 @@ const UserDashboard = () => {
                   <button
                     className="social-share-btn twitter"
                     onClick={() => {
-                      const twitterMessage = `BYVS Membership Drive%0AJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!%0AGet your Digital Membership ID Card instantly ✅%0AShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆%0AJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}%0AReferral Code: ${userData.referralCode}`;
+                      const twitterMessage = `BYVS Membership Drive%0AJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!%0AGet your Digital Membership ID Card instantly ✅%0AShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆%0AJoin here: https://www.byvs.org/join?ref=${userData.referralCode}%0AReferral Code: ${userData.referralCode}`;
                       window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(twitterMessage)}`, '_blank', 'width=600,height=400');
                     }}
                   >
@@ -905,7 +905,7 @@ const UserDashboard = () => {
                   <button
                     className="social-share-btn linkedin"
                     onClick={() => {
-                      const url = `https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`;
+                      const url = `https://www.byvs.org/join?ref=${userData.referralCode}`;
                       window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'width=600,height=400');
                     }}
                   >
@@ -917,8 +917,8 @@ const UserDashboard = () => {
                   <button
                     className="social-share-btn telegram"
                     onClick={() => {
-                      const message = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://byys-frontend.vercel.app/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
-                      window.open(`https://t.me/share/url?url=${encodeURIComponent(`https://byys-frontend.vercel.app/join?ref=${userData.referralCode}`)}&text=${encodeURIComponent(message)}`, '_blank');
+                      const message = `BYVS Membership Drive\nJoin Bhartiya Yuva Vidyarthi Sangathan (BYVS) today !!\nGet your Digital Membership ID Card instantly ✅\nShare your ID on WhatsApp, invite friends & climb to the top of the Leaderboard to get Rewards 🏆\nJoin here: https://www.byvs.org/join?ref=${userData.referralCode}\nReferral Code: ${userData.referralCode}`;
+                      window.open(`https://t.me/share/url?url=${encodeURIComponent(`https://www.byvs.org/join?ref=${userData.referralCode}`)}&text=${encodeURIComponent(message)}`, '_blank');
                     }}
                   >
                     <i className="fab fa-telegram"></i>

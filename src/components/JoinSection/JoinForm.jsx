@@ -263,7 +263,7 @@ const JoinForm = () => {
       }
 
       try {
-        const response = await fetch('https://byvs.onrender.com/auth/otp', {
+        const response = await fetch('https://byvs-backend.onrender.com/auth/otp', {
           method: 'POST',
           body: data,  // No headers needed when sending FormData
         });

@@ -33,7 +33,7 @@ const Login = () => {
     setIsLoading(true);
     try {
       const phoneNumber = `+91${mobile}`;
-      const checkUserResponse = await fetch(`https://byvs.onrender.com/auth/otp/check-user?phone=${encodeURIComponent(phoneNumber)}`, {
+      const checkUserResponse = await fetch(`https://byvs-backend.onrender.com/auth/otp/check-user?phone=${encodeURIComponent(phoneNumber)}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const Login = () => {
       }
 
       // Then send OTP
-      const otpResponse = await fetch('https://byvs.onrender.com/auth/otp/send', {
+      const otpResponse = await fetch('https://byvs-backend.onrender.com/auth/otp/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const Login = () => {
     try {
       const phoneNumber = `+91${mobile}`;
 
-      const response = await fetch('https://byvs.onrender.com/auth/otp/verify', {
+      const response = await fetch('https://byvs-backend.onrender.com/auth/otp/verify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

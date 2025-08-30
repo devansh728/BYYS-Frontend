@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://byvs.onrender.com';
+const API_BASE_URL = 'https://byvs-backend.onrender.com';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('authToken');
@@ -43,7 +43,7 @@ export const getReferralHistory = async (page = 0, size = 20) => {
   }
 };
 
-export const getShareLink = async (baseUrl = 'https://localhost:5173/register', source) => {
+export const getShareLink = async (baseUrl = 'https://www.byvs.org', source) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/referrals/share-link?baseUrl=${baseUrl}${source ? `&source=${source}` : ''}`, getAuthHeaders());
     return response.data;

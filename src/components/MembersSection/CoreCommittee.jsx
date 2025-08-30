@@ -276,7 +276,7 @@ const CoreCommittee = () => {
       setError(null);
 
       try {
-        const response = await fetch(`https://byvs.onrender.com/api/office-bearer/approved-office-bearers?district=${encodeURIComponent(selectedDistrict)}`);
+        const response = await fetch(`https://byvs-backend.onrender.com/api/office-bearer/approved-office-bearers?district=${encodeURIComponent(selectedDistrict)}`);
 
         if (!response.ok) {
           const errorMessage = await response.text();

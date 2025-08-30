@@ -468,7 +468,11 @@ const UserDashboard = () => {
       //     dataedit.append(key, editFormData[key]);
       //   }
       // }
-      dataedit.append("request", JSON.stringify(editFormData));
+      const profileRequestJson = JSON.stringify(editFormData);
+      const requestBlob = new Blob([profileRequestJson], {
+        type: 'application/json'
+      });
+      dataedit.append("request", requestBlob);
 
       if (selectedPhoto) {
         dataedit.append("photo", selectedPhoto);
@@ -483,7 +487,7 @@ const UserDashboard = () => {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || "Update failed");
-      if(data.token && data.token!=null){
+      if (data.token && data.token != null) {
         localStorage.setItem("authToken", data.token);
       }
 

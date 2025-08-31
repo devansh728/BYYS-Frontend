@@ -85,8 +85,8 @@ const Login = () => {
     e.preventDefault();
     setError('');
 
-    if (otp.length !== 6) {
-      setError('Please enter a valid 6-digit OTP');
+    if (otp.length !== 5) {
+      setError('Please enter a valid 5-digit OTP');
       return;
     }
 

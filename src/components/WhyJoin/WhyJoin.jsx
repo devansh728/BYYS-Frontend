@@ -10,8 +10,8 @@ const WhyJoin = () => {
     },
     {
       icon: "fas fa-hands-helping",
-      title: "24/7 Family Like Support",
-      description: "Experience a support system that feels like family. BYVS members and leadership provide unwavering guidance, encouragement, and assistance anytime you need it, ensuring you never walk alone."
+      title: "24/7 Support",
+      description: "BYVS members and leadership provide unwavering guidance, encouragement, and assistance anytime you need it, ensuring you never walk alone."
     },
     {
       icon: "fas fa-file-alt",
@@ -25,7 +25,7 @@ const WhyJoin = () => {
     },
     {
       icon: "fas fa-heart",
-      title: "Contribute to Society’s Welfare",
+      title: "Contribute to Nation's well being",
       description: "Make a genuine difference in your community’s well-being. Participate in initiatives that foster social growth, provide aid, and empower disadvantaged groups, creating a positive social impact."
     },
     {

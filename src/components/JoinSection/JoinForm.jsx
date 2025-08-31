@@ -23,8 +23,8 @@ const JoinForm = () => {
     district: '', // Changed from city to district
     blockName: '',    // New field added
     profession: '',
-    institutionName: '',
-    institutionAddress: '',
+    institutionName: 'BYVS',
+    institutionAddress: 'BYVS',
     referralCode: '',
     villageTownCity: '' // New field added
   });
@@ -465,7 +465,7 @@ const JoinForm = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="block">Village/Town/City *</label>
+                  <label htmlFor="block">Village/Town/Ward *</label>
                   <input
                     type="text"
                     id="villageTownCity"
@@ -474,6 +474,18 @@ const JoinForm = () => {
                     onChange={handleInputChange}
                     placeholder="Enter your Town"
                     required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="referralCode">Referral Code (if any)</label>
+                  <input
+                    type="text"
+                    id="referralCode"
+                    name="referralCode"
+                    value={formData.referralCode}
+                    onChange={handleInputChange}
+                    placeholder="Enter referral code"
                   />
                 </div>
 
@@ -495,20 +507,42 @@ const JoinForm = () => {
                   </select>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="referralCode">Referral Code (if any)</label>
-                  <input
-                    type="text"
-                    id="referralCode"
-                    name="referralCode"
-                    value={formData.referralCode}
-                    onChange={handleInputChange}
-                    placeholder="Enter referral code"
-                  />
-                </div>
+                {/* Conditionally render these fields */}
+                {formData.profession.includes('Student') && (
+                  <>
+                    <div className="form-group">
+                      <label htmlFor="institutionName">School/College Name(Latest) *</label>
+                      <input
+                        type="text"
+                        id="institutionName"
+                        name="institutionName"
+                        value={formData.institutionName}
+                        onChange={handleInputChange}
+                        placeholder="Enter your school or college name"
+                        required
+                      />
+                    </div>
 
-                <div className="form-group">
-                  <label htmlFor="instituteName">School/College Name *</label>
+                    <div className="form-group full-width">
+                      <label htmlFor="institutionAddress">School/College Address *</label>
+                      <textarea
+                        id="institutionAddress"
+                        name="institutionAddress"
+                        value={formData.institutionAddress}
+                        onChange={handleInputChange}
+                        placeholder="Enter complete school or college address"
+                        rows="3"
+                        required
+                      />
+                    </div>
+                  </>
+                )}
+
+
+                
+
+                {/* <div className="form-group">
+                  <label htmlFor="instituteName">School/College Name (Latest) *</label>
                   <input
                     type="text"
                     id="institutionName"
@@ -531,7 +565,7 @@ const JoinForm = () => {
                     rows="3"
                     required
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="credentials-note">
@@ -633,7 +667,7 @@ const JoinForm = () => {
               <div className="benefit-icon">
                 <i className="fas fa-hands-helping"></i>
               </div>
-              <h4>24/7 Family Like Support</h4>
+              <h4>24/7 Support</h4>
             </div>
 
             <div className="benefit-card">

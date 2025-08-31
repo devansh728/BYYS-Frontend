@@ -499,6 +499,7 @@ const UserDashboard = () => {
       alert("Profile updated successfully!");
       setShowEditModal(false);
       fetchUserData();
+      fetchUserPhoto();
     } catch (err) {
       setUpdateError(err.message);
     } finally {

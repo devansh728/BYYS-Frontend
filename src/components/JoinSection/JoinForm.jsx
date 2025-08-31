@@ -134,11 +134,9 @@ const JoinForm = () => {
       if (name === 'whatsappNumber' || name === 'phone') {
         // Only allow numbers and limit to 10 digits
         if (/^\d{0,10}$/.test(value)) {
-          // Only prepend +91 if the value is exactly 10 digits
-          const formattedValue = value.length === 10 ? `+91${value}` : value;
           setFormData({
             ...formData,
-            [name]: formattedValue,
+            [name]: value,
           });
         }
       } else {
@@ -188,7 +186,7 @@ const JoinForm = () => {
         }));
       };
       reader.readAsDataURL(file);
-    }else{
+    } else {
       return;
     }
   };
@@ -270,11 +268,14 @@ const JoinForm = () => {
       }
 
       const data = new FormData();
-      const registrationRequest = { ...formData }
+      const registrationRequest = {
+        ...formData, whatsappNumber: `+91${formData.whatsappNumber}`,
+        phone: `+91${formData.phone}`,
+      };
       if (registrationRequest.photo) {
         delete registrationRequest.photo;
       }
-      const requestPayload = new Blob([JSON.stringify(formData)], { type: "application/json" });
+      const requestPayload = new Blob([JSON.stringify(registrationRequest)], { type: "application/json" });
       data.append("request", requestPayload);
       if (formData.photo) {
         data.append("photo", formData.photo);

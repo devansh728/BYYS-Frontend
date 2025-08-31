@@ -208,7 +208,10 @@ const CoreCommittee = () => {
     { position: 'President', name: 'Raja Saksham Singh Yogi', photo: '/assests/founder.jpg' },
     { position: 'General Secretary', name: 'Pt. Bhanu Mishra (Harsh Bhaiya)', photo: '/assests/GeneralSecretary.jpg' },
     { position: 'Vice President', name: 'Aditya Pratap Singh', photo: '/assests/VicePresident.jpg' },
-    { position: 'Coordinator', name: 'Raj Shekhar Singh', photo: '/assests/Coordinator.jpg' }
+    { position: 'Coordinator', name: 'Raj Shekhar Singh', photo: '/assests/Coordinator.jpg' },
+    { position: 'National Treasurer' , name:'Rupesh Soni',photo: '/assests/Treasurer.jpg'},
+    { position: 'Media In Charge', name: 'Media In Charge', photo: '/assests/MediaIncharge.jpg' }
+
   ];
 
   const getStatePositions = (stateName) => [

@@ -163,6 +163,22 @@ const JoinForm = () => {
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      const allowedTypes = ['image/jpeg', 'image/jpg'];
+      const maxSizeInBytes = 2 * 1024 * 1024; // 2MB in bytes
+
+      if (!allowedTypes.includes(file.type)) {
+        alert("Please upload a JPG file.");
+        e.target.value = null; // Reset the input field
+        setPhotoPreview(null);
+        return;
+      }
+
+      if (file.size > maxSizeInBytes) {
+        alert("File size exceeds 2MB. Please upload a smaller photo.");
+        e.target.value = null; // Reset the input field
+        setPhotoPreview(null);
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (e) => {
         setPhotoPreview(e.target.result);
@@ -172,6 +188,8 @@ const JoinForm = () => {
         }));
       };
       reader.readAsDataURL(file);
+    }else{
+      return;
     }
   };
 

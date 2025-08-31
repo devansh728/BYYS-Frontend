@@ -264,13 +264,18 @@ const UserDashboard = () => {
     setIsSubmitting(true);
     setFormError(null);
     try {
+
+      const payload = {
+        ...applicationForm,
+        contactDetails: '+91' + applicationForm.contactDetails,
+      };
       const response = await fetch('https://byvs-backend.onrender.com/api/office-bearer/apply', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(applicationForm)
+        body: JSON.stringify(payload)
       });
       const data = await response.json();
       if (!response.ok) {

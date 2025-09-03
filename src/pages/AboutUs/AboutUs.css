@@ -250,7 +250,7 @@ h2::after {
   background: linear-gradient(135deg, #f8f4e6 0%, #fff8dc 50%, #f9f2e7 100%);
   padding: 8rem 0;
   position: relative;
-  margin: 8rem 0;
+  /* margin: 8rem 0; */
 }
 
 .inspiration-section::before {
@@ -338,9 +338,9 @@ h2::after {
 /* Founder's Message Section */
 .founder-message-section {
   background: linear-gradient(135deg, #fff9e6 0%, #f8f4e6 50%, #fff8dc 100%);
-  padding: 8rem 0;
+  padding: 2rem 0;
   position: relative;
-  margin: 8rem 0;
+  /* margin: 4rem 0; */
 }
 
 .founder-content {
@@ -402,7 +402,7 @@ h2::after {
   padding: 8rem 0;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   position: relative;
-  margin: 8rem 0;
+  /* margin: 8rem 0; */
 }
 
 .works-milestones-section::before {
@@ -696,7 +696,7 @@ html {
   text-align: center;
   padding: 3rem 0; /* Reduced from 5rem */
   position: relative;
-  margin: 4rem 0 2rem; /* Reduced margins */
+  /* margin: 4rem 0 2rem; Reduced margins */
   overflow: hidden;
   border-radius: 15px;
 }

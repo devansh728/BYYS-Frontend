@@ -23,8 +23,8 @@ const JoinForm = () => {
     district: '', // Changed from city to district
     blockName: '',    // New field added
     profession: '',
-    institutionName: 'BYVS',
-    institutionAddress: 'BYVS',
+    institutionName: '',
+    institutionAddress: '',
     referralCode: '',
     villageTownCity: '' // New field added
   });
@@ -271,6 +271,8 @@ const JoinForm = () => {
       const registrationRequest = {
         ...formData, whatsappNumber: `+91${formData.whatsappNumber}`,
         phone: `+91${formData.phone}`,
+        institutionName : formData.institutionName === '' ? 'notFilled' : formData.institutionName,
+        institutionAddress : formData.institutionAddress === '' ? 'notFilled' : formData.institutionAddress,
       };
       if (registrationRequest.photo) {
         delete registrationRequest.photo;

@@ -23,44 +23,32 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const isActive = (path) => location.pathname === path;
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     const userRole = localStorage.getItem('X-User-Role');
-
     setValid(!!token);
     setValidUser(userRole === 'USER');
     setValidAdmin(userRole === 'ADMIN');
   }, []);
 
   const handleLogout = () => {
-
     const storedAuthToken = localStorage.getItem('authToken');
     const storedUserRole = localStorage.getItem('X-User-Role');
-
     if (storedAuthToken || storedUserRole) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('X-User-Role');
-
-      alert("You logged out thanks")
-
+      alert("You logged out thanks");
       console.log('Logged out successfully. localStorage cleared.');
     } else {
-      alert("Already logged out")
+      alert("Already logged out");
       console.log('Already logged out. localStorage is empty.');
     }
-
     localStorage.removeItem('authToken');
     localStorage.removeItem('X-User-Role');
-
     console.log('Logged out successfully. localStorage cleared.');
-
-    return (
-      alert("You have been logged out.")
-    );
+    return alert("You have been logged out.");
   };
 
   return (
@@ -127,13 +115,9 @@ const Header = () => {
               </li>
               <li>
                 {isLoggedIn ? (
-                  <li>
-                    <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Login Portal</Link>
-                  </li>
+                  <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Login Portal</Link>
                 ) : (
-                  <li>
-                    <Link to="/login" className={isActive('/login') ? 'active' : ''}>Login Portal</Link>
-                  </li>
+                  <Link to="/login" className={isActive('/login') ? 'active' : ''}>Login Portal</Link>
                 )}
               </li>
               <li>
@@ -191,18 +175,25 @@ const Header = () => {
             </p>
           )}
           {/* Hamburger menu - shown on mobile, hidden on desktop */}
-          {!scrolled && (
-            <button className="hamburger-mobile" onClick={toggleMobileMenu} aria-label="Toggle menu">
-              <span className={`bar ${mobileMenuOpen ? 'active' : ''}`}></span>
-              <span className={`bar ${mobileMenuOpen ? 'active' : ''}`}></span>
-              <span className={`bar ${mobileMenuOpen ? 'active' : ''}`}></span>
-            </button>
-          )}
+          <button className="hamburger-mobile" onClick={toggleMobileMenu} aria-label="Toggle menu">
+  <span className={`bar ${mobileMenuOpen ? 'active' : ''}`}></span>
+  <span className={`bar ${mobileMenuOpen ? 'active' : ''}`}></span>
+  <span className={`bar ${mobileMenuOpen ? 'active' : ''}`}></span>
+</button>
+
         </div>
       </header>
 
       {/* Mobile Navigation Overlay */}
       <nav className={`mobile-nav ${mobileMenuOpen ? 'open' : ''}`}>
+        {/* Cross Button */}
+        <button
+          className="mobile-nav-close"
+          onClick={toggleMobileMenu}
+          aria-label="Close menu"
+        >
+          &times;
+        </button>
         <ul className="mobile-nav-links">
           <li>
             <Link
@@ -242,20 +233,28 @@ const Header = () => {
           </li>
           <li>
             {isLoggedIn ? (
-              <li>
-                <Link to="/logout" className={isActive('/logout') ? 'active' : ''}>Login Portal</Link>
-              </li>
+              <Link to="/logout" className={isActive('/logout') ? 'active' : ''} onClick={toggleMobileMenu}>
+                Login Portal
+              </Link>
             ) : (
-              <li>
-                <Link to="/login" className={isActive('/login') ? 'active' : ''}>Login Portal</Link>
-              </li>
+              <Link to="/login" className={isActive('/login') ? 'active' : ''} onClick={toggleMobileMenu}>
+                Login Portal
+              </Link>
             )}
           </li>
           <li>
-            {valid && validUser && (<Link to="/profile" className={isActive('/profile') ? 'active' : ''}>Dashboard</Link>)}
+            {valid && validUser && (
+              <Link to="/profile" className={isActive('/profile') ? 'active' : ''} onClick={toggleMobileMenu}>
+                Dashboard
+              </Link>
+            )}
           </li>
           <li>
-            {valid && validAdmin && (<Link to="/admin" className={isActive('/admin') ? 'active' : ''}>Dashboard</Link>)}
+            {valid && validAdmin && (
+              <Link to="/admin" className={isActive('/admin') ? 'active' : ''} onClick={toggleMobileMenu}>
+                Dashboard
+              </Link>
+            )}
           </li>
           <li>
             <Link

@@ -26,6 +26,14 @@
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--maroon);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 .card-icon {
     width: 80px;
     height: 80px;

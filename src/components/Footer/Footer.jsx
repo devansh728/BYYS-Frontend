@@ -58,12 +58,15 @@ const Footer = () => {
           <a href="/Leaderboard">Leaderboard</a>
           <a href="/Join">Join Us</a>
           <a href="/Contact">Contact Us</a>
+          <a href="/media-gallery">Media Gallery</a>
+          <a href="/core-committee">Core Committee</a>
         </div>
 
         {/* Contact Info */}
         <div className="footer-section">
           <h3>Contact Info</h3>
           <p><i className="fas fa-envelope"></i> contact@byvs.org</p>
+          <p><i className="fas fa-envelope"></i> bhartiyyuvavidyarthisangathan@gmail.com</p>
           <p><i className="fas fa-phone"></i> +91 89603 84718</p>
           <p><i className="fas fa-map-marker-alt"></i> Pratapgarh, UP</p>
           <a href="/Donate" className="footer-cta">Donate</a>

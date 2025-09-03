@@ -21,6 +21,7 @@ const UserDashboard = () => {
   const [applicationForm, setApplicationForm] = useState({
     district: '',
     state: '',
+    position: '',
     contactDetails: '',
     socialWorkDescription: ''
   });
@@ -230,8 +231,8 @@ const UserDashboard = () => {
         district: userData.district,
         state: userData.state,
         profession: userData.profession,
-        institutionName: userData.institutionName,
-        institutionAddress: userData.institutionAddress,
+        institutionName: userData.institutionName === "notFilled" ? "" : userData.institutionName,
+        institutionAddress: userData.institutionAddress === "notFilled" ? "" : userData.institutionAddress,
         deletePhoto: false,
       });
     }
@@ -393,6 +394,15 @@ const UserDashboard = () => {
                 <label htmlFor="socialWorkDescription"><i className="fas fa-heart"></i> Social Work Description</label>
                 <textarea id="socialWorkDescription" name="socialWorkDescription" value={applicationForm.socialWorkDescription} onChange={handleFormChange} required minLength="50" maxLength="1000" placeholder="Describe your social work experience and why you want to become an office bearer..."></textarea>
               </div>
+              <div className="form-group">
+                <label htmlFor="position"><i className="fas fa-briefcase"></i> Position</label>
+                <select id="position" name="position" value={applicationForm.position} onChange={handleFormChange} required>
+                  <option value="">Select Position</option>
+                  <option value="officeBearer">Office Bearer</option>
+                  <option value="volunteer">Volunteer</option>
+                  <option value="member">Member</option>
+                </select>
+              </div>
               {formError && <p className="error-message"><i className="fas fa-exclamation-triangle"></i> {formError}</p>}
               <button type="submit" disabled={isSubmitting} className="submit-btn">
                 {isSubmitting ? (
@@ -468,12 +478,12 @@ const UserDashboard = () => {
     setUpdateError(null);
     try {
       const dataedit = new FormData();
-      // for (const key in editFormData) {
-      //   if (Object.prototype.hasOwnProperty.call(editFormData, key) && editFormData[key] !== null && editFormData[key] !== undefined) {
-      //     dataedit.append(key, editFormData[key]);
-      //   }
-      // }
-      const profileRequestJson = JSON.stringify(editFormData);
+      const submissionData = {
+        ...editFormData,
+        institutionName: editFormData.institutionName === '' ? "notFilled" : editFormData.institutionName,
+        institutionAddress: editFormData.institutionAddress === '' ? "notFilled" : editFormData.institutionAddress
+      };
+      const profileRequestJson = JSON.stringify(submissionData);
       const requestBlob = new Blob([profileRequestJson], {
         type: 'application/json'
       });

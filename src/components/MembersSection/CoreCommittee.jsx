@@ -209,7 +209,7 @@ const CoreCommittee = () => {
     { position: 'General Secretary', name: 'Pt. Bhanu Mishra (Harsh Bhaiya)', photo: '/assests/GeneralSecretary.jpg' },
     { position: 'Vice President', name: 'Raj Shekhar Singh', photo: '/assests/Coordinator.jpg' },// changed for raj bhaiya
     { position: 'Co-founder & Coordinator', name: 'Yash Pratap Singh', photo: '/assests/Yash.jpg' },
-    { position: 'National Treasurer' , name:'Rupesh Soni',photo: '/assests/Treasurer.jpg'},
+    { position: 'National Treasurer', name: 'Rupesh Soni', photo: '/assests/Treasurer.jpg' },
     { position: 'Media In Charge', name: 'Media In Charge', photo: '/assests/MediaIncharge.jpg' }
 
   ];
@@ -607,17 +607,28 @@ const CoreCommittee = () => {
                 Committee for {selectedDistrict}, {selectedState}
               </h4>
 
-              {/* Add Loading, Error, and Data Display logic here */}
-              {isLoading && <div className="loading-message">Loading...</div>}
-              {error && <div className="error-message">Error: {error}</div>}
-              {!isLoading && !error && districtCommittee.length > 0 ? (
+              {isLoading && (
+                <div className="loading-message">
+                  <div className="loading-spinner"></div>
+                  <p>Loading committee data...</p>
+                </div>
+              )}
+
+              {error && (
+                <div className="error-message">
+                  <i className="fas fa-exclamation-triangle"></i>
+                  <p>Could not load committee data. Showing position structure.</p>
+                </div>
+              )}
+
+              <div className="state-committee-display">
                 <div className="committee-grid">
-                  {districtCommittee.map((member, index) => (
+                  {getDistrictPositions(selectedState, selectedDistrict).map((member, index) => (
                     <div key={index} className="committee-card">
                       <div className="member-image">
                         <img
                           src={member.photo}
-                          alt={member.userData.fullName}
+                          alt={member.name}
                           onError={(e) => {
                             e.target.style.display = 'none';
                             e.target.nextElementSibling.style.display = 'flex';
@@ -628,13 +639,11 @@ const CoreCommittee = () => {
                         </div>
                       </div>
                       <h4>{member.position}</h4>
-                      <p>{member.userData.fullName}</p>
+                      <p>{member.name}</p>
                     </div>
                   ))}
                 </div>
-              ) : (
-                !isLoading && !error && <div className="no-data-message">No committee members found for {selectedDistrict}.</div>
-              )}
+              </div>
             </div>
           )}
         </div>

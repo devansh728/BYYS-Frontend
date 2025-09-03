@@ -274,10 +274,10 @@ const AdminDashboard = () => {
             <div className="admin-profile-section-detailed">
               <div className="section-header">
                 <h2><i className="fas fa-user-shield"></i> Admin Profile</h2>
-                <button className="edit-profile-btn">
+                {/* <button className="edit-profile-btn">
                   <i className="fas fa-edit"></i>
                   Edit Profile
-                </button>
+                </button> */}
               </div>
 
               <div className="profile-details-grid">

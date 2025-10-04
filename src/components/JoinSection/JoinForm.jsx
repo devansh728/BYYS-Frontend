@@ -205,11 +205,6 @@ const JoinForm = () => {
       }
     }
 
-    if (formData.age < 16 || formData.age > 35) {
-      alert('Age must be between 16 and 35 years');
-      return false;
-    }
-
     // Phone number validation (assuming a simple 10-digit number for now based on your UI)
     const phoneRegex = /^(?:\+91\d{10}|\d{10})$/;
     if (!phoneRegex.test(formData.whatsappNumber)) {
